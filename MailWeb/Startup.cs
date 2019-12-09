@@ -13,12 +13,22 @@ namespace MailWeb
 {
     public class Startup
     {
+        #region Properties
+
+        public IConfiguration Configuration { get; }
+
+        #endregion
+
+        #region Constructor
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        #endregion
+
+        #region Methods
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -47,5 +57,7 @@ namespace MailWeb
 
             app.UseMvc();
         }
+
+        #endregion
     }
 }
