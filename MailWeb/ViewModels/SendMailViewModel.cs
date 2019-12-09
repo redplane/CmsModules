@@ -10,11 +10,11 @@ namespace MailWeb.ViewModels
 
         public MailAddressViewModel Sender { get; set; }
 
-        public MailServiceViewModel[] Recipients { get; set; }
+        public MailAddressViewModel[] Recipients { get; set; }
 
-        public MailServiceViewModel[] CarbonCopies { get; set; }
+        public MailAddressViewModel[] CarbonCopies { get; set; }
 
-        public MailServiceViewModel[] BlindCarbonCopies { get; set; }
+        public MailAddressViewModel[] BlindCarbonCopies { get; set; }
 
         public string Subject { get; set; }
 

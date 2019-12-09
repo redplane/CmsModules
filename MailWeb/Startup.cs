@@ -2,6 +2,8 @@
 using MailServices.Models.Interfaces;
 using MailServices.Services.Implementations;
 using MailServices.Services.Interfaces;
+using MailWeb.Models;
+using MailWeb.Models.Interfaces;
 using MailWeb.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,17 +35,25 @@ namespace MailWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var outlookMailServiceSettings = new SmtpMailServiceSetting("Outlook", "Sodakoq profile");
-            outlookMailServiceSettings.Timeout = 180;
-            outlookMailServiceSettings.HostName = "mail.sodakoqdelivery.my";
-            outlookMailServiceSettings.Port = 587;
-            outlookMailServiceSettings.Ssl = true;
-            outlookMailServiceSettings.Username = "info@sodakoqdelivery.my";
-            outlookMailServiceSettings.Password = "Msuk@2020";
+            services.AddHttpClient();
+            
+            var outlookMailServiceSetting = new SmtpMailServiceSetting("Outlook", "Sodakoq profile");
+            outlookMailServiceSetting.Timeout = 180;
+            outlookMailServiceSetting.HostName = "mail.sodakoqdelivery.my";
+            outlookMailServiceSetting.Port = 587;
+            outlookMailServiceSetting.Ssl = false;
+            outlookMailServiceSetting.Username = "info@sodakoqdelivery.my";
+            outlookMailServiceSetting.Password = "Msuk@2020";
 
-            services.AddSingleton<ISmtpMailServiceSetting, SmtpMailServiceSetting>(options => outlookMailServiceSettings);
+            var mailGunServiceSetting = new MailGunServiceSetting("MailGun", "MailGun", 
+                "sandboxe98d1e4fbfe64918ac80cb70af697266.mailgun.org", "key-8ed73db400ce5675db06685ab5265384");
+            mailGunServiceSetting.Timeout = 180;
+
+            services.AddSingleton<ISmtpMailServiceSetting, SmtpMailServiceSetting>(options => outlookMailServiceSetting);
+            services.AddSingleton<IMailGunServiceSetting, MailGunServiceSetting>(options => mailGunServiceSetting);
 
             services.AddScoped<IMailService, OutlookMailService>();
+            services.AddScoped<IMailService, MailGunService>();
             services.AddScoped<IMailManagerService, MailManagerService>();
 
             services.AddMvc()

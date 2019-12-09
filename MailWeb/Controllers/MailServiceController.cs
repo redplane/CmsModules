@@ -50,9 +50,9 @@ namespace MailWeb.Controllers
                 return NotFound();
 
             var mailSender = (IMailAddress) command.Sender;
-            var recipients = (IMailAddress[]) command.Recipients;
-            var carbonCopies = (IMailAddress[]) command.CarbonCopies;
-            var blindCarbonCopies = (IMailAddress[]) command.BlindCarbonCopies;
+            var recipients = command.Recipients?.Select(recipient => (IMailAddress) recipient).ToArray();
+            var carbonCopies = command.CarbonCopies?.Select(carbonCopy => (IMailAddress) carbonCopy).ToArray();
+            var blindCarbonCopies = command.BlindCarbonCopies?.Select(blindCarbonCopy => (IMailAddress) blindCarbonCopy).ToArray();
 
             await mailService
                 .SendMailAsync(mailSender, recipients, carbonCopies, blindCarbonCopies, command.Subject,
