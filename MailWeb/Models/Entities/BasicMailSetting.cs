@@ -22,7 +22,7 @@ namespace MailWeb.Models.Entities
 
         public bool Ssl { get; set; }
 
-        public MailAccountValueObject Credential { get; set; }
+        public SmtpCredentialValueObject Credential { get; set; }
 
         #endregion
 
