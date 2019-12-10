@@ -4,11 +4,9 @@ using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Models.Entities
 {
-    public class BasicMailSetting : IBasicMailSetting
+    public class BasicMailSetting : BaseEntity, IBasicMailSetting
     {
         #region Properties
-
-        public Guid Id { get; }
 
         public string UniqueName { get; }
 
@@ -28,15 +26,13 @@ namespace MailWeb.Models.Entities
 
         #region Constructor
 
-        public BasicMailSetting(Guid id, string uniqueName)
+        public BasicMailSetting(Guid id, string uniqueName) : base(id)
         {
-            Id = id;
             UniqueName = uniqueName;
         }
 
-        public BasicMailSetting(string uniqueName)
+        public BasicMailSetting(string uniqueName) : base(Guid.NewGuid())
         {
-            Id = Guid.NewGuid();
             UniqueName = uniqueName;
         }
 

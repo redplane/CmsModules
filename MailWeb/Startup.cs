@@ -1,15 +1,25 @@
-﻿using MailServices.Models.Implementations;
+﻿using System;
+using System.Reflection;
+using FluentValidation.AspNetCore;
+using MailServices.Models.Implementations;
 using MailServices.Models.Interfaces;
 using MailServices.Services.Implementations;
 using MailServices.Services.Interfaces;
+using MailWeb.Constants;
+using MailWeb.Cqrs;
+using MailWeb.Extensions;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using MailWeb.Services.Implementations;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace MailWeb
 {
@@ -36,7 +46,23 @@ namespace MailWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            
+
+            services.AddScoped<IRequestProfile, RequestProfile>(serviceProvider =>
+            {
+                var httpContextAccessor = serviceProvider.GetService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext;
+                var tenantId = httpContext.GetTenantId();
+
+                return new RequestProfile(tenantId);
+            });
+
+            // Add connection string into system.
+            services
+                .AddDbContext<MailManagementDbContext>(options => options
+                    .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
+
+            services.AddScoped<MailManagementDbContext>();
+
             var outlookMailServiceSetting = new SmtpMailServiceSetting("Outlook", "Sodakoq profile");
             outlookMailServiceSetting.Timeout = 180;
             outlookMailServiceSetting.HostName = "mail.sodakoqdelivery.my";
@@ -54,9 +80,22 @@ namespace MailWeb
 
             services.AddScoped<IMailService, OutlookMailService>();
             services.AddScoped<IMailService, MailGunService>();
-            services.AddScoped<IMailManagerService, MailManagerService>();
+            services.AddScoped<IMailManagerService, MailServiceManager>();
 
-            services.AddMvc()
+            // Add mediatr.
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+
+            // Request validation.
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+            services
+                .AddMvc()
+                .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddJsonOptions(options =>
+                {
+                    var camelCasePropertyNamesContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ContractResolver = camelCasePropertyNamesContractResolver;
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

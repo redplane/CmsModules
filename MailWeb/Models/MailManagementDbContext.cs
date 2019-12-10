@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Models
 {
-    public class MailServiceDbContext : DbContext
+    public class MailManagementDbContext : DbContext
     {
         #region Properties
 
@@ -15,6 +15,10 @@ namespace MailWeb.Models
         #endregion
 
         #region Constructor
+
+        public MailManagementDbContext(DbContextOptions<MailManagementDbContext> options) : base(options)
+        {
+        }
 
         #endregion
 

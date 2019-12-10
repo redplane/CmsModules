@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using MailServices.Models.Interfaces;
 using MailServices.Services.Interfaces;
+using MailWeb.Cqrs.Commands;
 using MailWeb.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MailWeb.Controllers
@@ -15,13 +17,16 @@ namespace MailWeb.Controllers
 
         private readonly IMailManagerService _mailManagerService;
 
+        private readonly IMediator _mediator;
+
         #endregion
 
         #region Constructor
 
-        public MailServiceController(IMailManagerService mailManagerService)
+        public MailServiceController(IMailManagerService mailManagerService, IMediator mediator)
         {
             _mailManagerService = mailManagerService;
+            _mediator = mediator;
         }
 
         #endregion
@@ -40,23 +45,14 @@ namespace MailWeb.Controllers
         }
 
         [HttpPost("mail")]
-        public virtual async Task<ActionResult> SendMailAsync([FromBody] SendMailViewModel command)
+        public virtual async Task<ActionResult> SendMailAsync([FromBody] SendMailCommand command)
         {
-            // Get mail service.
-            var mailService = _mailManagerService
-                .GetMailService(command.ServiceUniqueName);
+            if (command == null)
+                command = new SendMailCommand();
 
-            if (mailService == null)
+            var hasMailSent = await _mediator.Send(command);
+            if (!hasMailSent)
                 return NotFound();
-
-            var mailSender = (IMailAddress) command.Sender;
-            var recipients = command.Recipients?.Select(recipient => (IMailAddress) recipient).ToArray();
-            var carbonCopies = command.CarbonCopies?.Select(carbonCopy => (IMailAddress) carbonCopy).ToArray();
-            var blindCarbonCopies = command.BlindCarbonCopies?.Select(blindCarbonCopy => (IMailAddress) blindCarbonCopy).ToArray();
-
-            await mailService
-                .SendMailAsync(mailSender, recipients, carbonCopies, blindCarbonCopies, command.Subject,
-                    command.Content, command.IsHtml, command.AdditionalSubjectData, command.AdditionalContentData);
 
             return Ok();
         }

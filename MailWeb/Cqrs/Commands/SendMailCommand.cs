@@ -1,12 +1,17 @@
 ﻿using System.Dynamic;
+using System.Threading.Tasks;
+using MailWeb.ViewModels;
+using MediatR;
 
-namespace MailWeb.ViewModels
+namespace MailWeb.Cqrs.Commands
 {
-    public class SendMailViewModel
+    public class SendMailCommand : IRequest<bool>
     {
         #region Properties
 
-        public string ServiceUniqueName { get; set; }
+        public string MailServiceName { get; set; }
+
+        public bool UseMailServiceName { get; set; }
 
         public MailAddressViewModel Sender { get; set; }
 

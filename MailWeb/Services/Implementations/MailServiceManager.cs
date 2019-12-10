@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MailServices.Services.Implementations;
+using MailServices.Services.Interfaces;
+using MailWeb.Models;
+using MailWeb.Models.Interfaces;
+using MailWeb.Models.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+
+namespace MailWeb.Services.Implementations
+{
+    public class MailServiceManager : MailManagerService
+    {
+        #region Properties
+
+        private readonly MailManagementDbContext _dbContext;
+
+        private readonly IRequestProfile _requestProfile;
+
+        #endregion
+
+        #region Constructor
+
+        public MailServiceManager(IEnumerable<IMailService> mailServices,
+            IRequestProfile requestProfile,
+            MailManagementDbContext dbContext) : base(mailServices)
+        {
+            _requestProfile = requestProfile;
+            _dbContext = dbContext;
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override IMailService GetActiveMailService()
+        {
+            // Find the client settings.
+            var tenantId = _requestProfile.TenantId;
+
+            // Find the client setting.
+            var clientSetting = _dbContext.ClientSettings
+                .FirstOrDefault(x => x.Id == tenantId);
+
+            if (clientSetting == null)
+                return _mailServices.FirstOrDefault();
+
+            var mailServiceType = Type.GetType(clientSetting.ActiveMailService.Type) ??
+                                         throw new InvalidOperationException();
+
+            var mailService = _mailServices
+                .FirstOrDefault(x => x.GetType() == mailServiceType);
+
+            return mailService;
+        }
+
+        public override void SetActiveMailService(string uniqueName)
+        {
+            // Find the client settings.
+            var tenantId = _requestProfile.TenantId;
+
+            // Find the client setting.
+            var clientSetting = _dbContext.ClientSettings
+                .FirstOrDefault(x => x.Id == tenantId);
+
+            if (clientSetting == null)
+                return;
+
+            // Find the mail service.
+            var mailService = GetMailService(uniqueName);
+            if (mailService == null)
+                return;
+
+            clientSetting.ActiveMailService = new MailServiceValueObject(uniqueName, mailService.GetType());
+            _dbContext.SaveChanges();
+        }
+
+        #endregion
+    }
+}

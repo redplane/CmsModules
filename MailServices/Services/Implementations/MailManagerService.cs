@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MailServices.Services.Interfaces;
 
@@ -8,7 +9,10 @@ namespace MailServices.Services.Implementations
     {
         #region Properties
 
-        private readonly IMailService[] _mailServices;
+        // ReSharper disable once InconsistentNaming
+        protected readonly IMailService[] _mailServices;
+
+        private IMailService _selectedMailService;
 
         #endregion
 
@@ -17,6 +21,7 @@ namespace MailServices.Services.Implementations
         public MailManagerService(IEnumerable<IMailService> mailServices)
         {
             _mailServices = mailServices.ToArray();
+            _selectedMailService = _mailServices.FirstOrDefault();
         }
 
         #endregion
@@ -36,12 +41,16 @@ namespace MailServices.Services.Implementations
 
         public virtual IMailService GetActiveMailService()
         {
-            throw new System.NotImplementedException();
+            return _selectedMailService;
         }
 
         public virtual void SetActiveMailService(string uniqueName)
         {
-            throw new System.NotImplementedException();
+            var mailService = _mailServices.FirstOrDefault(x => x.UniqueName == uniqueName);
+            if (mailService == null)
+                throw new Exception($"Mail service whose name {uniqueName} cannot be found");
+
+            _selectedMailService = mailService;
         }
 
         #endregion

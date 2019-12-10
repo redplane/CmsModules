@@ -1,4 +1,6 @@
-﻿namespace MailWeb.Models.ValueObjects
+﻿using System;
+
+namespace MailWeb.Models.ValueObjects
 {
     public class MailServiceValueObject
     {
@@ -16,6 +18,12 @@
         {
             Name = name;
             Type = type;
+        }
+
+        public MailServiceValueObject(string name, Type type)
+        {
+            Name = name;
+            Type = type.FullName;
         }
 
         #endregion
