@@ -8,13 +8,13 @@ namespace MailServices.Services.Interfaces
     public interface IMailService
     {
         #region Properties
-        
+
         string UniqueName { get; }
-        
+
         string DisplayName { get; }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace MailServices.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, 
+            IMailAddress[] blindCarbonCopies,
             string templateName,
             ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null,
@@ -43,7 +43,7 @@ namespace MailServices.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, string templateName, 
+            IMailAddress[] blindCarbonCopies, string templateName,
             ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null,
             CancellationToken cancellationToken = default);
@@ -55,7 +55,7 @@ namespace MailServices.Services.Interfaces
         Task<IMailAddress> GetSenderAsync(string key, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get mail content by template name asynchronously.
+        ///     Get mail content by template name asynchronously.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"></param>

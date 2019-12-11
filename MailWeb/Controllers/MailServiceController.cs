@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using MailServices.Models.Interfaces;
 using MailServices.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
 using MailWeb.ViewModels;
@@ -13,14 +11,6 @@ namespace MailWeb.Controllers
     [Route("api/mail-service")]
     public class MailServiceController : Controller
     {
-        #region Properties
-
-        private readonly IMailManagerService _mailManagerService;
-
-        private readonly IMediator _mediator;
-
-        #endregion
-
         #region Constructor
 
         public MailServiceController(IMailManagerService mailManagerService, IMediator mediator)
@@ -28,6 +18,14 @@ namespace MailWeb.Controllers
             _mailManagerService = mailManagerService;
             _mediator = mediator;
         }
+
+        #endregion
+
+        #region Properties
+
+        private readonly IMailManagerService _mailManagerService;
+
+        private readonly IMediator _mediator;
 
         #endregion
 

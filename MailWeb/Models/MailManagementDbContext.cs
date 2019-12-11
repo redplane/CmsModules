@@ -1,19 +1,16 @@
-﻿using MailWeb.Models.Entities;
+﻿using System;
+using System.Reflection;
+using MailWeb.Models.Entities;
+using MailWeb.Models.Interfaces;
 using MailWeb.Models.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MailWeb.Models
 {
     public class MailManagementDbContext : DbContext
     {
-        #region Properties
-
-        public virtual DbSet<BasicMailSetting> BasicMailSettings { get; set; }
-
-        public virtual DbSet<ClientSetting> ClientSettings { get; set; }
-
-        #endregion
-
         #region Constructor
 
         public MailManagementDbContext(DbContextOptions<MailManagementDbContext> options) : base(options)
@@ -32,6 +29,14 @@ namespace MailWeb.Models
 
         #endregion
 
+        #region Properties
+
+        public virtual DbSet<BasicMailSetting> BasicMailSettings { get; set; }
+
+        public virtual DbSet<ClientSetting> ClientSettings { get; set; }
+
+        #endregion
+
         #region Inner methods
 
         protected virtual void AddBasicMailSettingTable(ModelBuilder modelBuilder)
@@ -46,14 +51,11 @@ namespace MailWeb.Models
                 .IsUnique();
 
             basicMailSetting
-                .OwnsOne(x => x.Credential)
-                .Property(x => x.Username)
-                .HasColumnName(nameof(SmtpCredentialValueObject.Username));
+                .Property(x => x.MailHost)
+                .HasConversion(
+                    x => JsonConvert.SerializeObject(x),
+                    x => HandleIncomingMailHost(x));
 
-            basicMailSetting
-                .OwnsOne(x => x.Credential)
-                .Property(x => x.Password)
-                .HasColumnName(nameof(SmtpCredentialValueObject.Password));
         }
 
         protected virtual void AddClientSettingTable(ModelBuilder modelBuilder)
@@ -74,6 +76,14 @@ namespace MailWeb.Models
             clientSetting.OwnsOne(x => x.ActiveMailService)
                 .Property(x => x.Type)
                 .HasColumnName("ActiveMailServiceType");
+        }
+
+        protected virtual IMailHost HandleIncomingMailHost(string x)
+        {
+            var node = JObject.Parse(x);
+            var nodeType = node.GetValue(nameof(IMailHost.Type));
+            var szNodeType = nodeType.Value<string>();
+            return (IMailHost) JsonConvert.DeserializeObject(x, Type.GetType(szNodeType));
         }
 
         #endregion

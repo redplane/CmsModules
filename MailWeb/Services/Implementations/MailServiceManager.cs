@@ -1,35 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using MailServices.Services.Implementations;
 using MailServices.Services.Interfaces;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using MailWeb.Models.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Services.Implementations
 {
-    public class MailServiceManager : MailManagerService
+    public class BaseMailServiceManager : BaseMailManagerService
     {
-        #region Properties
-
-        private readonly MailManagementDbContext _dbContext;
-
-        private readonly IRequestProfile _requestProfile;
-
-        #endregion
-
         #region Constructor
 
-        public MailServiceManager(IEnumerable<IMailService> mailServices,
+        public BaseMailServiceManager(IEnumerable<IMailService> mailServices,
             IRequestProfile requestProfile,
             MailManagementDbContext dbContext) : base(mailServices)
         {
             _requestProfile = requestProfile;
             _dbContext = dbContext;
         }
+
+        #endregion
+
+        #region Properties
+
+        private readonly MailManagementDbContext _dbContext;
+
+        private readonly IRequestProfile _requestProfile;
 
         #endregion
 
@@ -48,7 +46,7 @@ namespace MailWeb.Services.Implementations
                 return _mailServices.FirstOrDefault();
 
             var mailServiceType = Type.GetType(clientSetting.ActiveMailService.Type) ??
-                                         throw new InvalidOperationException();
+                                  throw new InvalidOperationException();
 
             var mailService = _mailServices
                 .FirstOrDefault(x => x.GetType() == mailServiceType);

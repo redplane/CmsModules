@@ -7,9 +7,9 @@ namespace MailWeb.Models.Interfaces
         #region Properties
 
         string Domain { get; }
-        
+
         string ApiKey { get; }
-        
+
         #endregion
     }
 }

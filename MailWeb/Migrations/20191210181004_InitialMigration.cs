@@ -12,14 +12,13 @@ namespace MailWeb.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    Availability = table.Column<int>(nullable: false),
+                    CreatedTime = table.Column<double>(nullable: false),
+                    LastModifiedTime = table.Column<double>(nullable: true),
                     UniqueName = table.Column<string>(nullable: false),
                     DisplayName = table.Column<string>(nullable: true),
                     Timeout = table.Column<int>(nullable: false),
-                    HostName = table.Column<string>(nullable: true),
-                    Port = table.Column<int>(nullable: false),
-                    Ssl = table.Column<bool>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    MailHost = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

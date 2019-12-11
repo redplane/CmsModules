@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MailServices.Models.Interfaces;
@@ -12,8 +10,17 @@ using MailServices.Services.Interfaces;
 
 namespace MailServices.Services.Implementations
 {
-    public class SmtpMailService : IMailService
+    public class BaseSmtpMailService : IMailService
     {
+        #region Constructor
+
+        public BaseSmtpMailService(ISmtpMailServiceSetting smtpMailServiceSetting)
+        {
+            _smtpMailServiceSetting = smtpMailServiceSetting;
+        }
+
+        #endregion
+
         #region Properties
 
         public virtual string UniqueName => throw new NotImplementedException();
@@ -24,25 +31,18 @@ namespace MailServices.Services.Implementations
 
         #endregion
 
-        #region Constructor
-
-        public SmtpMailService(ISmtpMailServiceSetting smtpMailServiceSetting)
-        {
-            _smtpMailServiceSetting = smtpMailServiceSetting;
-        }
-
-        #endregion
-
         #region Methods
 
-        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
+        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
+            IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
             ExpandoObject additionalSubjectData = null, ExpandoObject additionalContentData = null,
             CancellationToken cancellationToken = default)
         {
             using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, subject, content,
+                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, subject,
+                    content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, isHtmlContent,
                     cancellationToken);
 
@@ -50,7 +50,8 @@ namespace MailServices.Services.Implementations
             }
         }
 
-        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
+        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
+            IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null, CancellationToken cancellationToken = default)
         {
@@ -62,7 +63,8 @@ namespace MailServices.Services.Implementations
 
             using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, mail.Subject, mail.Content,
+                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, mail.Subject,
+                    mail.Content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
                     cancellationToken);
 
@@ -88,7 +90,8 @@ namespace MailServices.Services.Implementations
 
             using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, mailSender, recipients, mail.Subject, mail.Content,
+                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, mailSender, recipients,
+                    mail.Subject, mail.Content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
                     cancellationToken);
 
@@ -98,7 +101,7 @@ namespace MailServices.Services.Implementations
 
         public virtual Task<IMailAddress> GetSenderAsync(string key, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual Task<IMailContent> GetMailContentAsync(string templateName,
@@ -106,7 +109,6 @@ namespace MailServices.Services.Implementations
         {
             throw new NotImplementedException();
         }
-
 
         #endregion
 
@@ -162,12 +164,12 @@ namespace MailServices.Services.Implementations
             // Carbon copies
             foreach (var carbonCopy in clonedCarbonCopies)
                 smtpMail.CC.Add(new MailAddress(carbonCopy.Address, carbonCopy.DisplayName));
-            
+
             // Blind carbon copies.
             foreach (var blindCarbonCopy in clonedBlindCarbonCopies)
                 smtpMail.Bcc.Add(new MailAddress(blindCarbonCopy.Address,
                     blindCarbonCopy.DisplayName));
-            
+
             smtpMail.Subject = await RenderContentAsync(subject, additionalSubjectData);
             smtpMail.Body = await RenderContentAsync(content, additionalContentData);
             smtpMail.IsBodyHtml = isHtml;
@@ -176,7 +178,7 @@ namespace MailServices.Services.Implementations
         }
 
         /// <summary>
-        /// Render content asynchronously.
+        ///     Render content asynchronously.
         /// </summary>
         /// <param name="initialContent"></param>
         /// <param name="additionalInfo"></param>

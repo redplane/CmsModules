@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MailWeb.Cqrs.Commands;
+using MailWeb.Cqrs.Commands.SmtpSettings;
 using MailWeb.Models;
 using MailWeb.ViewModels.BasicMailSettings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Cqrs.CommandHandlers
+namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
 {
-    public class EditBasicMailSettingCommandHandler : IRequestHandler<EditBasicMailSettingCommand, BasicMailSettingViewModel>
+    public class EditSmtpSettingCommandHandler : IRequestHandler<EditSmtpSettingCommand, BasicMailSettingViewModel>
     {
         #region Properties
 
@@ -20,7 +20,7 @@ namespace MailWeb.Cqrs.CommandHandlers
 
         #region Constructor
 
-        public EditBasicMailSettingCommandHandler(MailManagementDbContext dbContext)
+        public EditSmtpSettingCommandHandler(MailManagementDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -29,7 +29,8 @@ namespace MailWeb.Cqrs.CommandHandlers
 
         #region Methods
 
-        public virtual async Task<BasicMailSettingViewModel> Handle(EditBasicMailSettingCommand command, CancellationToken cancellationToken)
+        public virtual async Task<BasicMailSettingViewModel> Handle(EditSmtpSettingCommand command,
+            CancellationToken cancellationToken)
         {
             var hasModified = false;
 
@@ -50,30 +51,6 @@ namespace MailWeb.Cqrs.CommandHandlers
             if (command.Timeout != null && command.Timeout.HasModified)
             {
                 basicMailSetting.Timeout = command.Timeout.Value;
-                hasModified = true;
-            }
-
-            if (command.HostName != null && command.HostName.HasModified)
-            {
-                basicMailSetting.HostName = command.HostName.Value;
-                hasModified = true;
-            }
-
-            if (command.Port != null && command.Port.HasModified)
-            {
-                basicMailSetting.Port = command.Port.Value;
-                hasModified = true;
-            }
-
-            if (command.Ssl != null && command.Ssl.HasModified)
-            {
-                basicMailSetting.Ssl = command.Ssl.Value;
-                hasModified = true;
-            }
-
-            if (command.Credential != null && command.Credential.HasModified)
-            {
-                basicMailSetting.Credential = command.Credential.Value;
                 hasModified = true;
             }
 

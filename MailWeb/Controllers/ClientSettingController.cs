@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MailWeb.Cqrs.Commands;
+using MailWeb.Cqrs.Commands.ClientSettings;
 using MailWeb.Cqrs.Queries;
 using MailWeb.Models.Entities;
 using MediatR;
@@ -41,7 +42,8 @@ namespace MailWeb.Controllers
         }
 
         [HttpPost("mail-service")]
-        public virtual async Task<ActionResult> UpdateMailServiceAsync([FromBody] UpdateActiveMailServiceCommand command)
+        public virtual async Task<ActionResult> UpdateMailServiceAsync(
+            [FromBody] UpdateActiveMailServiceCommand command)
         {
             await _mediator.Send(command);
             return Ok();

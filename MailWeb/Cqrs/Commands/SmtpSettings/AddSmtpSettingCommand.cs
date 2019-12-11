@@ -1,11 +1,10 @@
 ﻿using MailWeb.Models.ValueObjects;
-using MailWeb.ViewModels;
 using MailWeb.ViewModels.BasicMailSettings;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands
+namespace MailWeb.Cqrs.Commands.SmtpSettings
 {
-    public class AddBasicMailSettingCommand : IRequest<BasicMailSettingViewModel>
+    public class AddSmtpSettingCommand : IRequest<BasicMailSettingViewModel>
     {
         #region Properties
 

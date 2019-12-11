@@ -5,24 +5,24 @@ using MailServices.Services.Interfaces;
 
 namespace MailServices.Services.Implementations
 {
-    public class MailManagerService : IMailManagerService
+    public class BaseMailManagerService : IMailManagerService
     {
+        #region Constructor
+
+        public BaseMailManagerService(IEnumerable<IMailService> mailServices)
+        {
+            _mailServices = mailServices.ToArray();
+            _selectedMailService = _mailServices.FirstOrDefault();
+        }
+
+        #endregion
+
         #region Properties
 
         // ReSharper disable once InconsistentNaming
         protected readonly IMailService[] _mailServices;
 
         private IMailService _selectedMailService;
-
-        #endregion
-
-        #region Constructor
-
-        public MailManagerService(IEnumerable<IMailService> mailServices)
-        {
-            _mailServices = mailServices.ToArray();
-            _selectedMailService = _mailServices.FirstOrDefault();
-        }
 
         #endregion
 

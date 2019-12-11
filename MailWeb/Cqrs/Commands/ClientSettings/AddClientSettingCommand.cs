@@ -1,8 +1,7 @@
 ﻿using MailWeb.Models.Entities;
-using MailWeb.Models.ValueObjects;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands
+namespace MailWeb.Cqrs.Commands.ClientSettings
 {
     public class AddClientSettingCommand : IRequest<ClientSetting>
     {

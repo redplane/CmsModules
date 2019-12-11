@@ -1,5 +1,4 @@
 ﻿using System.Dynamic;
-using System.Threading.Tasks;
 using MailWeb.ViewModels;
 using MediatR;
 

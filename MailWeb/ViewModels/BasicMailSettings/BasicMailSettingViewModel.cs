@@ -1,29 +1,24 @@
 ﻿using System;
 using MailWeb.Models.Entities;
+using MailWeb.Models.Interfaces;
 using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.ViewModels.BasicMailSettings
 {
-    public class BasicMailSettingViewModel
+    public class BasicMailSettingViewModel : IBasicMailSetting
     {
         #region Properties
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 
         public string UniqueName { get; }
 
         public string DisplayName { get; set; }
 
         public int Timeout { get; set; }
-
-        public string HostName { get; set; }
-
-        public int Port { get; set; }
-
-        public bool Ssl { get; set; }
-
-        public SmtpCredentialValueObject Credential { get; set; }
-
+        
+        public IMailHost MailHost { get; set; }
+        
         #endregion
 
         #region Constructor
@@ -46,10 +41,7 @@ namespace MailWeb.ViewModels.BasicMailSettings
             UniqueName = model.UniqueName;
             DisplayName = model.DisplayName;
             Timeout = model.Timeout;
-            HostName = model.HostName;
-            Port = model.Port;
-            Ssl = model.Ssl;
-            Credential = model.Credential;
+            MailHost = model.MailHost;
         }
 
         #endregion

@@ -5,6 +5,18 @@ namespace MailWeb.Models
 {
     public class MailGunServiceSetting : IMailGunServiceSetting
     {
+        #region Constructor
+
+        public MailGunServiceSetting(string uniqueName, string displayName, string domain, string apiKey)
+        {
+            UniqueName = uniqueName;
+            DisplayName = displayName;
+            Domain = domain;
+            ApiKey = apiKey;
+        }
+
+        #endregion
+
         #region Properties
 
         public string UniqueName { get; }
@@ -22,18 +34,6 @@ namespace MailWeb.Models
         public string Domain { get; }
 
         public string ApiKey { get; }
-
-        #endregion
-
-        #region Constructor
-
-        public MailGunServiceSetting(string uniqueName, string displayName, string domain, string apiKey)
-        {
-            UniqueName = uniqueName;
-            DisplayName = displayName;
-            Domain = domain;
-            ApiKey = apiKey;
-        }
 
         #endregion
     }

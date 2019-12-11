@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MailWeb.Cqrs.Commands;
+using MailWeb.Cqrs.Commands.ClientSettings;
 
 namespace MailWeb.Cqrs.CommandValidators
 {

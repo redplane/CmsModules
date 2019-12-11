@@ -6,7 +6,7 @@ using MailServices.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandHandlers
+namespace MailWeb.Cqrs.CommandHandlers.MailServices
 {
     public class SendMailCommandHandler : IRequestHandler<SendMailCommand, bool>
     {
@@ -30,20 +30,24 @@ namespace MailWeb.Cqrs.CommandHandlers
         public virtual async Task<bool> Handle(SendMailCommand command, CancellationToken cancellationToken)
         {
             // Get mail service.
-            var mailService = command.UseMailServiceName ? _mailManagerService
-                .GetMailService(command.MailServiceName) : _mailManagerService.GetActiveMailService();
+            var mailService = command.UseMailServiceName
+                ? _mailManagerService
+                    .GetMailService(command.MailServiceName)
+                : _mailManagerService.GetActiveMailService();
 
             if (mailService == null)
                 return false;
 
-            var mailSender = (IMailAddress)command.Sender;
-            var recipients = command.Recipients?.Select(recipient => (IMailAddress)recipient).ToArray();
-            var carbonCopies = command.CarbonCopies?.Select(carbonCopy => (IMailAddress)carbonCopy).ToArray();
-            var blindCarbonCopies = command.BlindCarbonCopies?.Select(blindCarbonCopy => (IMailAddress)blindCarbonCopy).ToArray();
+            var mailSender = (IMailAddress) command.Sender;
+            var recipients = command.Recipients?.Select(recipient => (IMailAddress) recipient).ToArray();
+            var carbonCopies = command.CarbonCopies?.Select(carbonCopy => (IMailAddress) carbonCopy).ToArray();
+            var blindCarbonCopies = command.BlindCarbonCopies?.Select(blindCarbonCopy => (IMailAddress) blindCarbonCopy)
+                .ToArray();
 
             await mailService
                 .SendMailAsync(mailSender, recipients, carbonCopies, blindCarbonCopies, command.Subject,
-                    command.Content, command.IsHtml, command.AdditionalSubjectData, command.AdditionalContentData, cancellationToken);
+                    command.Content, command.IsHtml, command.AdditionalSubjectData, command.AdditionalContentData,
+                    cancellationToken);
 
             return true;
         }

@@ -5,6 +5,15 @@ namespace MailWeb.Models.Entities
 {
     public class ClientSetting
     {
+        #region Constructor
+
+        public ClientSetting(Guid id)
+        {
+            Id = id;
+        }
+
+        #endregion
+
         #region Properties
 
         public Guid Id { get; }
@@ -12,15 +21,6 @@ namespace MailWeb.Models.Entities
         public string Name { get; set; }
 
         public MailServiceValueObject ActiveMailService { get; set; }
-
-        #endregion
-
-        #region Constructor
-
-        public ClientSetting(Guid id)
-        {
-            Id = id;
-        }
 
         #endregion
     }

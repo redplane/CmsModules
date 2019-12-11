@@ -21,13 +21,15 @@ namespace MailWeb.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Availability");
+
+                    b.Property<double>("CreatedTime");
+
                     b.Property<string>("DisplayName");
 
-                    b.Property<string>("HostName");
+                    b.Property<double?>("LastModifiedTime");
 
-                    b.Property<int>("Port");
-
-                    b.Property<bool>("Ssl");
+                    b.Property<string>("MailHost");
 
                     b.Property<int>("Timeout");
 
@@ -56,29 +58,6 @@ namespace MailWeb.Migrations
                         .IsUnique();
 
                     b.ToTable("ClientSettings");
-                });
-
-            modelBuilder.Entity("MailWeb.Models.Entities.BasicMailSetting", b =>
-                {
-                    b.OwnsOne("MailWeb.Models.ValueObjects.SmtpCredentialValueObject", "Credential", b1 =>
-                        {
-                            b1.Property<Guid>("BasicMailSettingId");
-
-                            b1.Property<string>("Password")
-                                .HasColumnName("Password");
-
-                            b1.Property<string>("Username")
-                                .HasColumnName("Username");
-
-                            b1.HasKey("BasicMailSettingId");
-
-                            b1.ToTable("BasicMailSettings");
-
-                            b1.HasOne("MailWeb.Models.Entities.BasicMailSetting")
-                                .WithOne("Credential")
-                                .HasForeignKey("MailWeb.Models.ValueObjects.SmtpCredentialValueObject", "BasicMailSettingId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("MailWeb.Models.Entities.ClientSetting", b =>

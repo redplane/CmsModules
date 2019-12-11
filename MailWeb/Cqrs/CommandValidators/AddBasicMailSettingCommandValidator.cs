@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using MailWeb.Cqrs.Commands;
+using MailWeb.Cqrs.Commands.SmtpSettings;
 
 namespace MailWeb.Cqrs.CommandValidators
 {
-    public class AddBasicMailSettingCommandValidator : AbstractValidator<AddBasicMailSettingCommand>
+    public class AddBasicMailSettingCommandValidator : AbstractValidator<AddSmtpSettingCommand>
     {
         public AddBasicMailSettingCommandValidator()
         {

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using FluentValidation.AspNetCore;
 using MailServices.Models.Implementations;
 using MailServices.Models.Interfaces;
-using MailServices.Services.Implementations;
 using MailServices.Services.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Cqrs;
@@ -25,18 +23,18 @@ namespace MailWeb
 {
     public class Startup
     {
-        #region Properties
-
-        public IConfiguration Configuration { get; }
-
-        #endregion
-
         #region Constructor
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
+        #endregion
+
+        #region Properties
+
+        public IConfiguration Configuration { get; }
 
         #endregion
 
@@ -71,16 +69,17 @@ namespace MailWeb
             outlookMailServiceSetting.Username = "info@sodakoqdelivery.my";
             outlookMailServiceSetting.Password = "Msuk@2020";
 
-            var mailGunServiceSetting = new MailGunServiceSetting("MailGun", "MailGun", 
+            var mailGunServiceSetting = new MailGunServiceSetting("MailGun", "MailGun",
                 "sandboxe98d1e4fbfe64918ac80cb70af697266.mailgun.org", "key-8ed73db400ce5675db06685ab5265384");
             mailGunServiceSetting.Timeout = 180;
 
-            services.AddSingleton<ISmtpMailServiceSetting, SmtpMailServiceSetting>(options => outlookMailServiceSetting);
+            services.AddSingleton<ISmtpMailServiceSetting, SmtpMailServiceSetting>(options =>
+                outlookMailServiceSetting);
             services.AddSingleton<IMailGunServiceSetting, MailGunServiceSetting>(options => mailGunServiceSetting);
 
             services.AddScoped<IMailService, OutlookMailService>();
             services.AddScoped<IMailService, MailGunService>();
-            services.AddScoped<IMailManagerService, MailServiceManager>();
+            services.AddScoped<IMailManagerService, BaseMailServiceManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);

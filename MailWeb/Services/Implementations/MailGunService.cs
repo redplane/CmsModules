@@ -14,18 +14,6 @@ namespace MailWeb.Services.Implementations
 {
     public class MailGunService : IMailService
     {
-        #region Properties
-
-        public string UniqueName => "MailGun";
-
-        public string DisplayName => "MailGun";
-
-        private readonly IMailGunServiceSetting _mailGunServiceSetting;
-
-        private readonly HttpClient _httpClient;
-
-        #endregion
-
         #region Constructor
 
         public MailGunService(IMailGunServiceSetting mailGunServiceSetting, IHttpClientFactory httpClientFactory)
@@ -36,12 +24,24 @@ namespace MailWeb.Services.Implementations
             _httpClient.Timeout = TimeSpan.FromSeconds(_mailGunServiceSetting.Timeout);
 
             _httpClient.BaseAddress =
-                new Uri($"https://api.mailgun.net", UriKind.Absolute);
+                new Uri("https://api.mailgun.net", UriKind.Absolute);
 
             var byteArray = Encoding.ASCII.GetBytes($"api:{mailGunServiceSetting.ApiKey}");
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
         }
+
+        #endregion
+
+        #region Properties
+
+        public string UniqueName => "MailGun";
+
+        public string DisplayName => "MailGun";
+
+        private readonly IMailGunServiceSetting _mailGunServiceSetting;
+
+        private readonly HttpClient _httpClient;
 
         #endregion
 
@@ -55,23 +55,26 @@ namespace MailWeb.Services.Implementations
         {
             var data = new MultipartFormDataContent($"www-{DateTime.Now:yy-MMM-dd}");
             data.Add(new StringContent(ToMailGunAddress(sender), Encoding.UTF8), "from");
-            
+
             data.Add(new StringContent(string.Join(",", recipients.Select(ToMailGunAddress)), Encoding.UTF8), "to");
 
             var clonedCarbonCopies = (carbonCopies ?? new IMailAddress[0])
                 .Concat(_mailGunServiceSetting.CarbonCopies ?? new IMailAddress[0])
                 .ToArray();
-            
+
             if (clonedCarbonCopies.Length > 0)
-                data.Add(new StringContent(string.Join(",", clonedCarbonCopies.Select(ToMailGunAddress)), Encoding.UTF8),
+                data.Add(
+                    new StringContent(string.Join(",", clonedCarbonCopies.Select(ToMailGunAddress)), Encoding.UTF8),
                     "cc");
 
             var clonedBlindCarbonCopies = (blindCarbonCopies ?? new IMailAddress[0])
                 .Concat(_mailGunServiceSetting.BlindCarbonCopies ?? new IMailAddress[0])
                 .ToArray();
-            
+
             if (clonedBlindCarbonCopies.Length > 0)
-                data.Add(new StringContent(string.Join(",", clonedBlindCarbonCopies.Select(ToMailGunAddress)), Encoding.UTF8),
+                data.Add(
+                    new StringContent(string.Join(",", clonedBlindCarbonCopies.Select(ToMailGunAddress)),
+                        Encoding.UTF8),
                     "bcc");
 
             data.Add(new StringContent(await RenderAsync(subject, additionalSubjectData)), "subject");
@@ -79,10 +82,12 @@ namespace MailWeb.Services.Implementations
                 isHtmlContent ? "html" : "text");
 
             await _httpClient
-                .PostAsync(new Uri($"v3/{_mailGunServiceSetting.Domain}/messages", UriKind.Relative), data, cancellationToken);
+                .PostAsync(new Uri($"v3/{_mailGunServiceSetting.Domain}/messages", UriKind.Relative), data,
+                    cancellationToken);
         }
 
-        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
+        public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
+            IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null, CancellationToken cancellationToken = default)
         {
@@ -104,12 +109,12 @@ namespace MailWeb.Services.Implementations
             var mailSender = await GetSenderAsync(sender, cancellationToken);
             if (mailSender == null)
                 throw new Exception($"Mail sender with key {sender} is not found.");
-            
+
             // Find mail content asynchronously.
             var mailContent = await GetMailContentAsync(templateName, cancellationToken);
             if (mailContent == null)
                 throw new Exception($"Template named {templateName} is not found.");
-            
+
             await SendMailAsync(mailSender, recipients, carbonCopies, blindCarbonCopies, mailContent.Subject,
                 mailContent.Content, mailContent.IsHtml,
                 additionalSubjectData, additionalContentData, cancellationToken);
@@ -117,13 +122,13 @@ namespace MailWeb.Services.Implementations
 
         public virtual Task<IMailAddress> GetSenderAsync(string key, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual Task<IMailContent> GetMailContentAsync(string name,
             CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion

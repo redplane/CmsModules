@@ -5,6 +5,5 @@ namespace MailWeb.Cqrs.Queries
 {
     public class GetClientSettingsQuery : IRequest<ClientSetting[]>
     {
-        
     }
 }

@@ -3,7 +3,7 @@ using MailServices.Services.Implementations;
 
 namespace MailWeb.Services.Implementations
 {
-    public class OutlookMailService : SmtpMailService
+    public class OutlookMailService : BaseSmtpMailService
     {
         #region Constructor
 
