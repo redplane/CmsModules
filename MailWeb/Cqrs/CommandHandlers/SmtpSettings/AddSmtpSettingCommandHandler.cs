@@ -6,12 +6,12 @@ using MailWeb.Models;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
 using MailWeb.Models.ValueObjects;
-using MailWeb.ViewModels.BasicMailSettings;
+using MailWeb.ViewModels.MailSettings;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
 {
-    public class AddSmtpSettingCommandHandler : IRequestHandler<AddSmtpSettingCommand, BasicMailSettingViewModel>
+    public class AddSmtpSettingCommandHandler : IRequestHandler<AddSmtpSettingCommand, MailSettingViewModel>
     {
         #region Properties
 
@@ -30,7 +30,7 @@ namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
 
         #region Methods
 
-        public virtual async Task<BasicMailSettingViewModel> Handle(AddSmtpSettingCommand command,
+        public virtual async Task<MailSettingViewModel> Handle(AddSmtpSettingCommand command,
             CancellationToken cancellationToken)
         {
             var basicMailSetting = new BasicMailSetting(Guid.NewGuid(), command.UniqueName);
@@ -50,7 +50,7 @@ namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
                 .Add(basicMailSetting);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return new BasicMailSettingViewModel(basicMailSetting);
+            return new MailSettingViewModel(basicMailSetting);
         }
 
         #endregion

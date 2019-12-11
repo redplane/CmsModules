@@ -4,13 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using MailWeb.Cqrs.Commands.SmtpSettings;
 using MailWeb.Models;
-using MailWeb.ViewModels.BasicMailSettings;
+using MailWeb.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
 {
-    public class EditSmtpSettingCommandHandler : IRequestHandler<EditSmtpSettingCommand, BasicMailSettingViewModel>
+    public class EditSmtpSettingCommandHandler : IRequestHandler<EditSmtpSettingCommand, MailSettingViewModel>
     {
         #region Properties
 
@@ -29,7 +29,7 @@ namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
 
         #region Methods
 
-        public virtual async Task<BasicMailSettingViewModel> Handle(EditSmtpSettingCommand command,
+        public virtual async Task<MailSettingViewModel> Handle(EditSmtpSettingCommand command,
             CancellationToken cancellationToken)
         {
             var hasModified = false;
@@ -55,10 +55,10 @@ namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
             }
 
             if (!hasModified)
-                return new BasicMailSettingViewModel(basicMailSetting);
+                return new MailSettingViewModel(basicMailSetting);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return new BasicMailSettingViewModel(basicMailSetting);
+            return new MailSettingViewModel(basicMailSetting);
         }
 
         #endregion

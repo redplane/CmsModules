@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MailWeb.Cqrs.Commands.SmtpSettings;
 using MailWeb.Models;
-using MailWeb.ViewModels.BasicMailSettings;
+using MailWeb.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +38,7 @@ namespace MailWeb.Controllers
         public virtual async Task<ActionResult> GetBasicMailSettingsAsync()
         {
             var basicMailSettings = await _dbContext.BasicMailSettings
-                .Select(x => new BasicMailSettingViewModel(x))
+                .Select(x => new MailSettingViewModel(x))
                 .ToListAsync();
 
             return Ok(basicMailSettings);

@@ -4,7 +4,7 @@ using MailWeb.Models.Interfaces;
 
 namespace MailWeb.Models.ValueObjects
 {
-    public class MailGunHost : IMailHost
+    public class MailGunHost : MailHost
     {
         #region Constructor
 
@@ -17,8 +17,6 @@ namespace MailWeb.Models.ValueObjects
         
         #region Properties
 
-        public Type Type => typeof(MailGunHost);
-        
         public string ApiKey { get; set; }
         
         public string Domain { get; set; }

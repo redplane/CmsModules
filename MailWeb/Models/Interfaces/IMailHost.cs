@@ -6,7 +6,7 @@ namespace MailWeb.Models.Interfaces
     {
         #region Properties
         
-        Type Type { get; }
+        string Type { get; }
         
         #endregion
     }

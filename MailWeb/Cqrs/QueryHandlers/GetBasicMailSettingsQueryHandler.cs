@@ -3,13 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using MailWeb.Cqrs.Queries;
 using MailWeb.Models;
-using MailWeb.ViewModels.BasicMailSettings;
+using MailWeb.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Cqrs.QueryHandlers
 {
-    public class GetBasicMailSettingsQueryHandler : IRequestHandler<GetBasicMailSettingsQuery, BasicMailSettingViewModel[]>
+    public class GetBasicMailSettingsQueryHandler : IRequestHandler<GetMailSettingsQuery, MailSettingViewModel[]>
     {
         #region Properties
 
@@ -28,11 +28,11 @@ namespace MailWeb.Cqrs.QueryHandlers
         
         #region Methods
 
-        public Task<BasicMailSettingViewModel[]> Handle(GetBasicMailSettingsQuery request, CancellationToken cancellationToken)
+        public Task<MailSettingViewModel[]> Handle(GetMailSettingsQuery request, CancellationToken cancellationToken)
         {
             return _dbContext
                 .BasicMailSettings
-                .Select(x => new BasicMailSettingViewModel(x))
+                .Select(x => new MailSettingViewModel(x))
                 .ToArrayAsync(cancellationToken);
         }
         

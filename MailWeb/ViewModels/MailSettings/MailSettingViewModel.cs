@@ -1,11 +1,10 @@
 ﻿using System;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
-using MailWeb.Models.ValueObjects;
 
-namespace MailWeb.ViewModels.BasicMailSettings
+namespace MailWeb.ViewModels.MailSettings
 {
-    public class BasicMailSettingViewModel : IBasicMailSetting
+    public class MailSettingViewModel : IBasicMailSetting
     {
         #region Properties
 
@@ -23,19 +22,19 @@ namespace MailWeb.ViewModels.BasicMailSettings
 
         #region Constructor
 
-        public BasicMailSettingViewModel(Guid id, string uniqueName)
+        public MailSettingViewModel(Guid id, string uniqueName)
         {
             Id = id;
             UniqueName = uniqueName;
         }
 
-        public BasicMailSettingViewModel(string uniqueName)
+        public MailSettingViewModel(string uniqueName)
         {
             Id = Guid.NewGuid();
             UniqueName = uniqueName;
         }
 
-        public BasicMailSettingViewModel(BasicMailSetting model)
+        public MailSettingViewModel(BasicMailSetting model)
         {
             Id = model.Id;
             UniqueName = model.UniqueName;

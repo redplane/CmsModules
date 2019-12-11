@@ -1,13 +1,8 @@
-﻿using System;
-using MailWeb.Models.Interfaces;
-
-namespace MailWeb.Models.ValueObjects
+﻿namespace MailWeb.Models.ValueObjects
 {
-    public class SmtpHost : IMailHost
+    public class SmtpHost : MailHost
     {
         #region Properties
-
-        public Type Type => typeof(SmtpHost);
 
         public string HostName { get; set; }
 
