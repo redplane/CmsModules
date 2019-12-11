@@ -1,6 +1,6 @@
 ﻿namespace MailServices.Services.Interfaces
 {
-    public interface IMailManagerService
+    public interface IMailServiceFactory
     {
         #region Methods
 

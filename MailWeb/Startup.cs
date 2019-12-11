@@ -79,7 +79,7 @@ namespace MailWeb
 
             services.AddScoped<IMailService, OutlookMailService>();
             services.AddScoped<IMailService, MailGunService>();
-            services.AddScoped<IMailManagerService, BaseMailServiceManager>();
+            services.AddScoped<IMailServiceFactory, MailServiceFactory>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);

@@ -13,9 +13,9 @@ namespace MailWeb.Controllers
     {
         #region Constructor
 
-        public MailServiceController(IMailManagerService mailManagerService, IMediator mediator)
+        public MailServiceController(IMailServiceFactory mailServiceFactory, IMediator mediator)
         {
-            _mailManagerService = mailManagerService;
+            _mailServiceFactory = mailServiceFactory;
             _mediator = mediator;
         }
 
@@ -23,7 +23,7 @@ namespace MailWeb.Controllers
 
         #region Properties
 
-        private readonly IMailManagerService _mailManagerService;
+        private readonly IMailServiceFactory _mailServiceFactory;
 
         private readonly IMediator _mediator;
 
@@ -34,7 +34,7 @@ namespace MailWeb.Controllers
         [HttpGet("")]
         public virtual Task<MailServiceViewModel[]> GetMailServicesAsync()
         {
-            var mailServices = _mailManagerService
+            var mailServices = _mailServiceFactory
                 .GetMailServices()
                 .Select(mailService => new MailServiceViewModel(mailService.UniqueName, mailService.DisplayName))
                 .ToArray();

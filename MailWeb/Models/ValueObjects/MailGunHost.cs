@@ -24,6 +24,5 @@ namespace MailWeb.Models.ValueObjects
         public string Domain { get; set; }
         
         #endregion
-        
     }
 }

@@ -9,11 +9,11 @@ using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Services.Implementations
 {
-    public class BaseMailServiceManager : BaseMailManagerService
+    public class MailServiceFactory : BaseMailServiceFactory
     {
         #region Constructor
 
-        public BaseMailServiceManager(IEnumerable<IMailService> mailServices,
+        public MailServiceFactory(IEnumerable<IMailService> mailServices,
             IRequestProfile requestProfile,
             MailManagementDbContext dbContext) : base(mailServices)
         {

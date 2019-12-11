@@ -20,7 +20,9 @@ namespace MailWeb.Cqrs.Commands.SmtpSettings
 
         public bool Ssl { get; set; }
 
-        public SmtpCredentialValueObject Credential { get; set; }
+        public string Username { get; set; }
+
+        public string Password { get; set; }
 
         #endregion
     }

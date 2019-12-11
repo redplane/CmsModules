@@ -41,8 +41,8 @@ namespace MailWeb.Cqrs.CommandHandlers.SmtpSettings
             smtpHost.Ssl = command.Ssl;
             smtpHost.HostName = command.HostName;
             smtpHost.Port = command.Port;
-            smtpHost.Username = command.Credential.Username;
-            smtpHost.Password = command.Credential.Password;
+            smtpHost.Username = command.Username;
+            smtpHost.Password = command.Password;
 
             basicMailSetting.MailHost = smtpHost;
 

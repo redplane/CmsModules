@@ -15,7 +15,7 @@ namespace MailWeb.Models.Entities
         
         #endregion
 
-        #region Methods
+        #region Properties
         
         public string UniqueName { get; private set; }
         

@@ -12,15 +12,15 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
     {
         #region Properties
 
-        private readonly IMailManagerService _mailManagerService;
+        private readonly IMailServiceFactory _mailServiceFactory;
 
         #endregion
 
         #region Constructor
 
-        public SendMailCommandHandler(IMailManagerService mailManagerService)
+        public SendMailCommandHandler(IMailServiceFactory mailServiceFactory)
         {
-            _mailManagerService = mailManagerService;
+            _mailServiceFactory = mailServiceFactory;
         }
 
         #endregion
@@ -31,9 +31,9 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
         {
             // Get mail service.
             var mailService = command.UseMailServiceName
-                ? _mailManagerService
+                ? _mailServiceFactory
                     .GetMailService(command.MailServiceName)
-                : _mailManagerService.GetActiveMailService();
+                : _mailServiceFactory.GetActiveMailService();
 
             if (mailService == null)
                 return false;

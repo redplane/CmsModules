@@ -5,11 +5,11 @@ using MailServices.Services.Interfaces;
 
 namespace MailServices.Services.Implementations
 {
-    public class BaseMailManagerService : IMailManagerService
+    public class BaseMailServiceFactory : IMailServiceFactory
     {
         #region Constructor
 
-        public BaseMailManagerService(IEnumerable<IMailService> mailServices)
+        public BaseMailServiceFactory(IEnumerable<IMailService> mailServices)
         {
             _mailServices = mailServices.ToArray();
             _selectedMailService = _mailServices.FirstOrDefault();

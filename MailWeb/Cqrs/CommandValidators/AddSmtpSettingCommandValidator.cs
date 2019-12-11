@@ -3,9 +3,9 @@ using MailWeb.Cqrs.Commands.SmtpSettings;
 
 namespace MailWeb.Cqrs.CommandValidators
 {
-    public class AddBasicMailSettingCommandValidator : AbstractValidator<AddSmtpSettingCommand>
+    public class AddSmtpSettingCommandValidator : AbstractValidator<AddSmtpSettingCommand>
     {
-        public AddBasicMailSettingCommandValidator()
+        public AddSmtpSettingCommandValidator()
         {
             RuleFor(command => command.UniqueName)
                 .NotEmpty();
@@ -16,8 +16,11 @@ namespace MailWeb.Cqrs.CommandValidators
             RuleFor(command => command.Timeout)
                 .GreaterThan(-1);
 
-            RuleFor(command => command.Credential)
-                .NotNull();
+            RuleFor(command => command.Username)
+                .NotEmpty();
+
+            RuleFor(command => command.Password)
+                .NotEmpty();
         }
     }
 }

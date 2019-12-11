@@ -22,7 +22,9 @@ namespace MailWeb.Cqrs.Commands.SmtpSettings
 
         public EditableFieldViewModel<bool> Ssl { get; set; }
 
-        public EditableFieldViewModel<SmtpCredentialValueObject> Credential { get; set; }
+        public EditableFieldViewModel<string> Username { get; set; }
+
+        public EditableFieldViewModel<string> Password { get; set; }
 
         #endregion
     }

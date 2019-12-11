@@ -10,15 +10,15 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Properties
 
-        private readonly IMailManagerService _mailManagerService;
+        private readonly IMailServiceFactory _mailServiceFactory;
 
         #endregion
 
         #region Constructor
 
-        public UpdateActiveMailServiceCommandHandler(IMailManagerService mailManagerService)
+        public UpdateActiveMailServiceCommandHandler(IMailServiceFactory mailServiceFactory)
         {
-            _mailManagerService = mailManagerService;
+            _mailServiceFactory = mailServiceFactory;
         }
 
         #endregion
@@ -27,7 +27,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         public virtual Task<bool> Handle(UpdateActiveMailServiceCommand command, CancellationToken cancellationToken)
         {
-            _mailManagerService
+            _mailServiceFactory
                 .SetActiveMailService(command.MailServiceUniqueName);
 
             return Task.FromResult(true);
