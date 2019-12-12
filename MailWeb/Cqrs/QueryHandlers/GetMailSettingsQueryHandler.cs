@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Cqrs.QueryHandlers
 {
-    public class GetBasicMailSettingsQueryHandler : IRequestHandler<GetMailSettingsQuery, MailSettingViewModel[]>
+    public class GetMailSettingsQueryHandler : IRequestHandler<GetMailSettingsQuery, MailSettingViewModel[]>
     {
         #region Properties
 
@@ -19,7 +19,7 @@ namespace MailWeb.Cqrs.QueryHandlers
         
         #region Constructor
         
-        public GetBasicMailSettingsQueryHandler(MailManagementDbContext dbContext)
+        public GetMailSettingsQueryHandler(MailManagementDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -31,7 +31,7 @@ namespace MailWeb.Cqrs.QueryHandlers
         public Task<MailSettingViewModel[]> Handle(GetMailSettingsQuery request, CancellationToken cancellationToken)
         {
             return _dbContext
-                .BasicMailSettings
+                .MailSettings
                 .Select(x => new MailSettingViewModel(x))
                 .ToArrayAsync(cancellationToken);
         }

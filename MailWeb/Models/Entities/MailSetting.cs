@@ -1,14 +1,13 @@
 using System;
 using MailWeb.Models.Interfaces;
-using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Models.Entities
 {
-    public class BasicMailSetting : BaseEntity, IBasicMailSetting
+    public class MailSetting : BaseEntity, IBasicMailSetting
     {
         #region Constructor
         
-        public BasicMailSetting(Guid id, string uniqueName) : base(id)
+        public MailSetting(Guid id, string uniqueName) : base(id)
         {
             UniqueName = uniqueName;
         }

@@ -35,7 +35,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             CancellationToken cancellationToken)
         {
             // Find the mail settings.
-            var mailSetting = await _dbContext.BasicMailSettings
+            var mailSetting = await _dbContext.MailSettings
                 .Where(x => x.Id == command.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -61,7 +61,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             return mailSetting;
         }
 
-        protected virtual void UpdateSmtpIntoMailSetting(BasicMailSetting mailSetting, EditSmtpHostModel editSmtpHost)
+        protected virtual void UpdateSmtpIntoMailSetting(MailSetting mailSetting, EditSmtpHostModel editSmtpHost)
         {
             if (!(mailSetting.MailHost is SmtpHost smtpHost))
                 return;
@@ -84,7 +84,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             mailSetting.MailHost = smtpHost;
         }
 
-        protected virtual void UpdateMailGunIntoMailSetting(BasicMailSetting mailSetting,
+        protected virtual void UpdateMailGunIntoMailSetting(MailSetting mailSetting,
             EditMailGunHostModel editMailGun)
         {
             var mailGunHost = (MailGunHost) mailSetting.MailHost;

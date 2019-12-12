@@ -34,7 +34,7 @@ namespace MailWeb.ViewModels.MailSettings
             UniqueName = uniqueName;
         }
 
-        public MailSettingViewModel(BasicMailSetting model)
+        public MailSettingViewModel(MailSetting model)
         {
             Id = model.Id;
             UniqueName = model.UniqueName;

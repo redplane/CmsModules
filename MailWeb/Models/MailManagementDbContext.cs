@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
-using MailWeb.Models.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,7 +29,7 @@ namespace MailWeb.Models
 
         #region Properties
 
-        public virtual DbSet<BasicMailSetting> BasicMailSettings { get; set; }
+        public virtual DbSet<MailSetting> MailSettings { get; set; }
 
         public virtual DbSet<ClientSetting> ClientSettings { get; set; }
 
@@ -41,7 +39,7 @@ namespace MailWeb.Models
 
         protected virtual void AddBasicMailSettingTable(ModelBuilder modelBuilder)
         {
-            var basicMailSetting = modelBuilder.Entity<BasicMailSetting>();
+            var basicMailSetting = modelBuilder.Entity<MailSetting>();
             basicMailSetting.HasKey(x => x.Id);
 
             basicMailSetting.Property(x => x.UniqueName)
@@ -55,7 +53,6 @@ namespace MailWeb.Models
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => HandleIncomingMailHost(x));
-
         }
 
         protected virtual void AddClientSettingTable(ModelBuilder modelBuilder)
