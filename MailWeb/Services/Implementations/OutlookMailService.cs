@@ -1,9 +1,9 @@
-﻿using MailServices.Models.Interfaces;
-using MailServices.Services.Implementations;
+﻿using MailManager.Models.Interfaces;
+using MailManager.Services.Implementations;
 
 namespace MailWeb.Services.Implementations
 {
-    public class OutlookMailService : BaseSmtpMailService
+    public class OutlookMailService : BaseSmtpMailClient
     {
         #region Constructor
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Services.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
@@ -14,7 +14,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Constructor
 
-        public AddClientSettingCommandHandler(MailManagementDbContext dbContext, IMailServiceFactory mailServiceFactory)
+        public AddClientSettingCommandHandler(MailManagementDbContext dbContext, IMailClientFactory mailServiceFactory)
         {
             _dbContext = dbContext;
             _mailServiceFactory = mailServiceFactory;
@@ -48,7 +48,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         private readonly MailManagementDbContext _dbContext;
 
-        private readonly IMailServiceFactory _mailServiceFactory;
+        private readonly IMailClientFactory _mailServiceFactory;
 
         #endregion
     }

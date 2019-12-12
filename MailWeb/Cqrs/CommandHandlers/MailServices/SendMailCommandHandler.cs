@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Models.Interfaces;
-using MailServices.Services.Interfaces;
+using MailManager.Models.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
 using MediatR;
 
@@ -12,13 +12,13 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
     {
         #region Properties
 
-        private readonly IMailServiceFactory _mailServiceFactory;
+        private readonly IMailClientFactory _mailServiceFactory;
 
         #endregion
 
         #region Constructor
 
-        public SendMailCommandHandler(IMailServiceFactory mailServiceFactory)
+        public SendMailCommandHandler(IMailClientFactory mailServiceFactory)
         {
             _mailServiceFactory = mailServiceFactory;
         }

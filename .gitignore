@@ -4,3 +4,6 @@
 /MailServices/MailServices.csproj.user
 /MailWeb/obj
 /MailWeb/bin
+/MailManager/obj
+/MailManager/bin
+/MailManager/MailManager.csproj.user

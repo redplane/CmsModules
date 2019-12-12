@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using MailWeb.Constants;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using Newtonsoft.Json;
@@ -52,10 +53,10 @@ namespace MailWeb.Converters
         {
             switch (typeName)
             {
-                case "Smtp":
+                case MailHostKindConstants.Smtp:
                     return typeof(EditSmtpHostModel);
 
-                case "MailGun":
+                case MailHostKindConstants.MailGun:
                     return typeof(EditMailGunHostModel);
             }
 

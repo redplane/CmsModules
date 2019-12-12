@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Services.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MediatR;
 
@@ -10,13 +10,13 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Properties
 
-        private readonly IMailServiceFactory _mailServiceFactory;
+        private readonly IMailClientFactory _mailServiceFactory;
 
         #endregion
 
         #region Constructor
 
-        public UpdateActiveMailServiceCommandHandler(IMailServiceFactory mailServiceFactory)
+        public UpdateActiveMailServiceCommandHandler(IMailClientFactory mailServiceFactory)
         {
             _mailServiceFactory = mailServiceFactory;
         }

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MailServices.Services.Interfaces;
+using MailManager.Services.Interfaces;
 
-namespace MailServices.Services.Implementations
+namespace MailManager.Services.Implementations
 {
-    public class BaseMailServiceFactory : IMailServiceFactory
+    public class BaseMailClientFactory : IMailClientFactory
     {
         #region Constructor
 
-        public BaseMailServiceFactory(IEnumerable<IMailService> mailServices)
+        public BaseMailClientFactory(IEnumerable<IMailClient> mailServices)
         {
             _mailServices = mailServices.ToArray();
             _selectedMailService = _mailServices.FirstOrDefault();
@@ -20,26 +20,26 @@ namespace MailServices.Services.Implementations
         #region Properties
 
         // ReSharper disable once InconsistentNaming
-        protected readonly IMailService[] _mailServices;
+        protected readonly IMailClient[] _mailServices;
 
-        private IMailService _selectedMailService;
+        private IMailClient _selectedMailService;
 
         #endregion
 
         #region Methods
 
-        public virtual IMailService[] GetMailServices()
+        public virtual IMailClient[] GetMailServices()
         {
             return _mailServices;
         }
 
-        public virtual IMailService GetMailService(string uniqueName)
+        public virtual IMailClient GetMailService(string uniqueName)
         {
             return _mailServices
                 .FirstOrDefault(mailService => mailService.UniqueName == uniqueName);
         }
 
-        public virtual IMailService GetActiveMailService()
+        public virtual IMailClient GetActiveMailService()
         {
             return _selectedMailService;
         }

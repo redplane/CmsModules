@@ -1,6 +1,6 @@
-﻿namespace MailServices.Services.Interfaces
+﻿namespace MailManager.Services.Interfaces
 {
-    public interface IMailServiceFactory
+    public interface IMailClientFactory
     {
         #region Methods
 
@@ -8,20 +8,20 @@
         ///     Get all registered mail services.
         /// </summary>
         /// <returns></returns>
-        IMailService[] GetMailServices();
+        IMailClient[] GetMailServices();
 
         /// <summary>
         ///     Get a a registered mail service by name.
         /// </summary>
         /// <param name="uniqueName"></param>
         /// <returns></returns>
-        IMailService GetMailService(string uniqueName);
+        IMailClient GetMailService(string uniqueName);
 
         /// <summary>
         ///     Get mail service is selected.
         /// </summary>
         /// <returns></returns>
-        IMailService GetActiveMailService();
+        IMailClient GetActiveMailService();
 
         /// <summary>
         ///     Set mail service as active.

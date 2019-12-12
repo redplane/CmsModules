@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using MailServices.Services.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
 using MailWeb.ViewModels;
 using MediatR;
@@ -13,7 +13,7 @@ namespace MailWeb.Controllers
     {
         #region Constructor
 
-        public MailServiceController(IMailServiceFactory mailServiceFactory, IMediator mediator)
+        public MailServiceController(IMailClientFactory mailServiceFactory, IMediator mediator)
         {
             _mailServiceFactory = mailServiceFactory;
             _mediator = mediator;
@@ -23,7 +23,7 @@ namespace MailWeb.Controllers
 
         #region Properties
 
-        private readonly IMailServiceFactory _mailServiceFactory;
+        private readonly IMailClientFactory _mailServiceFactory;
 
         private readonly IMediator _mediator;
 

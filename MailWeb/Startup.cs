@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using FluentValidation.AspNetCore;
-using MailServices.Models.Implementations;
-using MailServices.Models.Interfaces;
-using MailServices.Services.Interfaces;
+using MailManager.Models.Implementations;
+using MailManager.Models.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Cqrs;
 using MailWeb.Extensions;
@@ -77,9 +77,9 @@ namespace MailWeb
                 outlookMailServiceSetting);
             services.AddSingleton<IMailGunServiceSetting, MailGunServiceSetting>(options => mailGunServiceSetting);
 
-            services.AddScoped<IMailService, OutlookMailService>();
-            services.AddScoped<IMailService, MailGunService>();
-            services.AddScoped<IMailServiceFactory, MailServiceFactory>();
+            services.AddScoped<IMailClient, OutlookMailService>();
+            services.AddScoped<IMailClient, MailGunClient>();
+            services.AddScoped<IMailClientFactory, MailServiceFactory>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);

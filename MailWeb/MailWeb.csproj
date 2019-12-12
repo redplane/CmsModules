@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MailServices\MailServices.csproj" />
+    <ProjectReference Include="..\MailServices\MailManager.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MailServices.Services.Implementations;
-using MailServices.Services.Interfaces;
+using MailManager.Services.Implementations;
+using MailManager.Services.Interfaces;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Services.Implementations
 {
-    public class MailServiceFactory : BaseMailServiceFactory
+    public class MailServiceFactory : BaseMailClientFactory
     {
         #region Constructor
 
-        public MailServiceFactory(IEnumerable<IMailService> mailServices,
+        public MailServiceFactory(IEnumerable<IMailClient> mailServices,
             IRequestProfile requestProfile,
             MailManagementDbContext dbContext) : base(mailServices)
         {
@@ -33,7 +33,7 @@ namespace MailWeb.Services.Implementations
 
         #region Methods
 
-        public override IMailService GetActiveMailService()
+        public override IMailClient GetActiveMailService()
         {
             // Find the client settings.
             var tenantId = _requestProfile.TenantId;

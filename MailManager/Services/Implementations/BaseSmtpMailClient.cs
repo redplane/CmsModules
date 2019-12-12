@@ -5,16 +5,16 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Models.Interfaces;
-using MailServices.Services.Interfaces;
+using MailManager.Models.Interfaces;
+using MailManager.Services.Interfaces;
 
-namespace MailServices.Services.Implementations
+namespace MailManager.Services.Implementations
 {
-    public class BaseSmtpMailService : IMailService
+    public class BaseSmtpMailClient : IMailClient
     {
         #region Constructor
 
-        public BaseSmtpMailService(ISmtpMailServiceSetting smtpMailServiceSetting)
+        public BaseSmtpMailClient(ISmtpMailServiceSetting smtpMailServiceSetting)
         {
             _smtpMailServiceSetting = smtpMailServiceSetting;
         }

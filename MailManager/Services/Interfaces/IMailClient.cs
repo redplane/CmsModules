@@ -1,11 +1,11 @@
 ﻿using System.Dynamic;
 using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Models.Interfaces;
+using MailManager.Models.Interfaces;
 
-namespace MailServices.Services.Interfaces
+namespace MailManager.Services.Interfaces
 {
-    public interface IMailService
+    public interface IMailClient
     {
         #region Properties
 

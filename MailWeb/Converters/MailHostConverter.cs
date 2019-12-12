@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using MailWeb.Constants;
 using MailWeb.Models.Interfaces;
-using MailWeb.Models.ValueObjects;
+using MailWeb.Models.MailHosts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,7 +16,12 @@ namespace MailWeb.Converters
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var mailHost = value as IMailHost;
-            serializer.Serialize(writer, mailHost);
+            var mailHostType = ResolveMailHostType(mailHost?.Type);
+
+            if (mailHostType == null)
+                return;
+
+            serializer.Serialize(writer, mailHost, mailHostType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -26,7 +32,11 @@ namespace MailWeb.Converters
                 return default;
 
             var mailHostTypeName = mailHostTypeToken.Value<string>();
-            var mailHostType = Type.GetType(mailHostTypeName);
+            var mailHostType = ResolveMailHostType(mailHostTypeName);
+
+            if (mailHostType == null)
+                return default;
+
             return ToMailHost(jToken, mailHostType);
         }
 
@@ -47,7 +57,19 @@ namespace MailWeb.Converters
 
         protected virtual Type ResolveMailHostType(string type)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(type))
+                return null;
+
+            switch (type)
+            {
+                case MailHostKindConstants.Smtp:
+                    return typeof(SmtpHost);
+
+                case MailHostKindConstants.MailGun:
+                    return typeof(MailGunHost);
+            }
+
+            return null;
         }
 
         #endregion

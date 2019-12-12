@@ -1,4 +1,4 @@
-﻿namespace MailServices.Models.Interfaces
+﻿namespace MailManager.Models.Interfaces
 {
     public interface IMailContent
     {

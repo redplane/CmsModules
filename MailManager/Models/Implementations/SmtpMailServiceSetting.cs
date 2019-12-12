@@ -1,6 +1,6 @@
-﻿using MailServices.Models.Interfaces;
+﻿using MailManager.Models.Interfaces;
 
-namespace MailServices.Models.Implementations
+namespace MailManager.Models.Implementations
 {
     public class SmtpMailServiceSetting : ISmtpMailServiceSetting
     {

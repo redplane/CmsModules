@@ -6,17 +6,17 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MailServices.Models.Interfaces;
-using MailServices.Services.Interfaces;
+using MailManager.Models.Interfaces;
+using MailManager.Services.Interfaces;
 using MailWeb.Models.Interfaces;
 
 namespace MailWeb.Services.Implementations
 {
-    public class MailGunService : IMailService
+    public class MailGunClient : IMailClient
     {
         #region Constructor
 
-        public MailGunService(IMailGunServiceSetting mailGunServiceSetting, IHttpClientFactory httpClientFactory)
+        public MailGunClient(IMailGunServiceSetting mailGunServiceSetting, IHttpClientFactory httpClientFactory)
         {
             _mailGunServiceSetting = mailGunServiceSetting;
 
