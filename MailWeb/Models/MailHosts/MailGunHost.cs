@@ -1,8 +1,4 @@
-using System;
-using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
-
-namespace MailWeb.Models.ValueObjects
+namespace MailWeb.Models.MailHosts
 {
     public class MailGunHost : MailHost
     {

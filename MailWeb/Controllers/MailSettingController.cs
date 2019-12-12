@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using MailWeb.Cqrs.Commands.MailGunSettings;
 using MailWeb.Cqrs.Commands.MailSettings;
 using MailWeb.Cqrs.Queries;
 using MailWeb.ViewModels.MailSettings;
@@ -53,6 +52,17 @@ namespace MailWeb.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public virtual async Task<ActionResult> EditMailSettingAsync([FromRoute] Guid id,
+            [FromBody] EditMailSettingCommand command)
+        {
+            if (command == null)
+                command = new EditMailSettingCommand();
+            
+            command.Id = id;
+            var mailSetting = await _mediator.Send(command);
+            return Ok(mailSetting);
+        }
         #endregion
     }
 }

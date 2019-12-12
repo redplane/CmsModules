@@ -1,4 +1,4 @@
-﻿namespace MailWeb.Models.ValueObjects
+﻿namespace MailWeb.Models.MailHosts
 {
     public class SmtpHost : MailHost
     {

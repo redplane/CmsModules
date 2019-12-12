@@ -42,8 +42,12 @@ namespace MailWeb.Converters
                 .FirstOrDefault(m => m.Name == "ToObject" && m.GetParameters().Length == 0 && m.IsGenericMethod)
                 ?.MakeGenericMethod(type);
 
-            var a = mi?.Invoke(jToken, null);
-            return (IMailHost) a;
+            return (IMailHost) mi?.Invoke(jToken, null);
+        }
+
+        protected virtual Type ResolveMailHostType(string type)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

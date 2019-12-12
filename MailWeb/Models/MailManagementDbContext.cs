@@ -83,7 +83,8 @@ namespace MailWeb.Models
             var node = JObject.Parse(x);
             var nodeType = node.GetValue(nameof(IMailHost.Type));
             var szNodeType = nodeType.Value<string>();
-            return (IMailHost) JsonConvert.DeserializeObject(x, Type.GetType(szNodeType));
+            var mailHost = JsonConvert.DeserializeObject(x, Type.GetType(szNodeType));
+            return (IMailHost) mailHost;
         }
 
         #endregion
