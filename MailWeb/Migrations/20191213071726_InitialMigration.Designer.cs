@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MailWeb.Migrations
 {
     [DbContext(typeof(MailManagementDbContext))]
-    [Migration("20191210181004_InitialMigration")]
+    [Migration("20191213071726_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,12 +18,34 @@ namespace MailWeb.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("MailWeb.Models.Entities.BasicMailSetting", b =>
+            modelBuilder.Entity("MailWeb.Models.Entities.ClientSetting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ClientSettings");
+                });
+
+            modelBuilder.Entity("MailWeb.Models.Entities.MailClientSetting", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Availability");
+
+                    b.Property<string>("BlindCarbonCopies");
+
+                    b.Property<string>("CarbonCopies");
+
+                    b.Property<Guid>("ClientId");
 
                     b.Property<double>("CreatedTime");
 
@@ -43,23 +65,7 @@ namespace MailWeb.Migrations
                     b.HasIndex("UniqueName")
                         .IsUnique();
 
-                    b.ToTable("BasicMailSettings");
-                });
-
-            modelBuilder.Entity("MailWeb.Models.Entities.ClientSetting", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("ClientSettings");
+                    b.ToTable("MailClientSettings");
                 });
 
             modelBuilder.Entity("MailWeb.Models.Entities.ClientSetting", b =>

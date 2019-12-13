@@ -1,4 +1,5 @@
 ﻿using System;
+using MailManager.Models.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
@@ -23,7 +24,7 @@ namespace MailWeb.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            AddBasicMailSettingTable(modelBuilder);
+            AddMailClientSettingTable(modelBuilder);
             AddClientSettingTable(modelBuilder);
         }
 
@@ -31,7 +32,7 @@ namespace MailWeb.Models
 
         #region Properties
 
-        public virtual DbSet<MailClientSetting> MailSettings { get; set; }
+        public virtual DbSet<MailClientSetting> MailClientSettings { get; set; }
 
         public virtual DbSet<ClientSetting> ClientSettings { get; set; }
 
@@ -39,7 +40,7 @@ namespace MailWeb.Models
 
         #region Inner methods
 
-        protected virtual void AddBasicMailSettingTable(ModelBuilder modelBuilder)
+        protected virtual void AddMailClientSettingTable(ModelBuilder modelBuilder)
         {
             var mailClientSetting = modelBuilder.Entity<MailClientSetting>();
             mailClientSetting.HasKey(x => x.Id);
@@ -55,6 +56,16 @@ namespace MailWeb.Models
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => HandleIncomingMailHost(x));
+
+            mailClientSetting.Property(x => x.CarbonCopies)
+                .HasConversion(
+                    x => JsonConvert.SerializeObject(x),
+                    x => JsonConvert.DeserializeObject<IMailAddress[]>(x));
+
+            mailClientSetting.Property(x => x.BlindCarbonCopies)
+                .HasConversion(
+                    x => JsonConvert.SerializeObject(x),
+                    x => JsonConvert.DeserializeObject<IMailAddress[]>(x));
         }
 
         protected virtual void AddClientSettingTable(ModelBuilder modelBuilder)

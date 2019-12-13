@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using MailManager.Models.Interfaces;
 using MailManager.Services.Interfaces;
 using MailWeb.Models.Interfaces;
+using MailWeb.Models.MailHosts;
 
 namespace MailWeb.Services.Implementations
 {
@@ -16,17 +17,20 @@ namespace MailWeb.Services.Implementations
     {
         #region Constructor
 
-        public MailGunClient(IMailGunClientSetting mailGunClientSetting, IHttpClientFactory httpClientFactory)
+        public MailGunClient(IMailClientSetting mailGunClientSetting, IHttpClientFactory httpClientFactory)
         {
-            _mailGunClientSetting = mailGunClientSetting;
+            _mailClientSetting = mailGunClientSetting;
+
+            // Get mail gun host info.
+            var mailGunHost = (MailGunHost) mailGunClientSetting.MailHost;
 
             _httpClient = httpClientFactory.CreateClient();
-            _httpClient.Timeout = TimeSpan.FromSeconds(_mailGunClientSetting.Timeout);
+            _httpClient.Timeout = TimeSpan.FromSeconds(mailGunClientSetting.Timeout);
 
             _httpClient.BaseAddress =
                 new Uri("https://api.mailgun.net", UriKind.Absolute);
 
-            var byteArray = Encoding.ASCII.GetBytes($"api:{mailGunClientSetting.ApiKey}");
+            var byteArray = Encoding.ASCII.GetBytes($"api:{mailGunHost.ApiKey}");
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
         }
@@ -39,7 +43,7 @@ namespace MailWeb.Services.Implementations
 
         public string DisplayName => "MailGun";
 
-        private readonly IMailGunClientSetting _mailGunClientSetting;
+        private readonly IMailClientSetting _mailClientSetting;
 
         private readonly HttpClient _httpClient;
 
@@ -59,7 +63,7 @@ namespace MailWeb.Services.Implementations
             data.Add(new StringContent(string.Join(",", recipients.Select(ToMailGunAddress)), Encoding.UTF8), "to");
 
             var clonedCarbonCopies = (carbonCopies ?? new IMailAddress[0])
-                .Concat(_mailGunClientSetting.CarbonCopies ?? new IMailAddress[0])
+                .Concat(_mailClientSetting.CarbonCopies ?? new IMailAddress[0])
                 .ToArray();
 
             if (clonedCarbonCopies.Length > 0)
@@ -68,7 +72,7 @@ namespace MailWeb.Services.Implementations
                     "cc");
 
             var clonedBlindCarbonCopies = (blindCarbonCopies ?? new IMailAddress[0])
-                .Concat(_mailGunClientSetting.BlindCarbonCopies ?? new IMailAddress[0])
+                .Concat(_mailClientSetting.BlindCarbonCopies ?? new IMailAddress[0])
                 .ToArray();
 
             if (clonedBlindCarbonCopies.Length > 0)

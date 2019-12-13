@@ -8,7 +8,7 @@
 
         string DisplayName { get; }
 
-        string Type { get; }
+        IMailHost MailHost { get; set; }
 
         int Timeout { get; set; }
 

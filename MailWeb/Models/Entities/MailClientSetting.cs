@@ -8,24 +8,20 @@ namespace MailWeb.Models.Entities
     {
         #region Constructor
         
-        public MailClientSetting(Guid id, Guid clientId, string uniqueName, string type) : base(id)
+        public MailClientSetting(Guid id, string uniqueName) : base(id)
         {
-            ClientId = clientId;
             UniqueName = uniqueName;
-            Type = type;
         }
         
         #endregion
 
         #region Properties
         
-        public Guid ClientId { get; }
+        public Guid ClientId { get; set; }
         
         public string UniqueName { get; private set; }
         
         public string DisplayName { get; set; }
-        
-        public string Type { get; }
 
         public int Timeout { get; set; }
         

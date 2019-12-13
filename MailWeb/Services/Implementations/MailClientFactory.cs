@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using MailManager.Models.Interfaces;
 using MailManager.Services.Implementations;
 using MailManager.Services.Interfaces;
+using MailWeb.Constants;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
+using MailWeb.Models.MailHosts;
 using MailWeb.Models.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Services.Implementations
 {
@@ -14,11 +19,12 @@ namespace MailWeb.Services.Implementations
         #region Constructor
 
         public MailClientFactory(IEnumerable<IMailClient> mailServices,
-            IRequestProfile requestProfile,
+            IRequestProfile requestProfile, IHttpClientFactory httpClientFactory,
             MailManagementDbContext dbContext) : base(mailServices)
         {
             _requestProfile = requestProfile;
             _dbContext = dbContext;
+            _httpClientFactory = httpClientFactory;
         }
 
         #endregion
@@ -29,11 +35,13 @@ namespace MailWeb.Services.Implementations
 
         private readonly IRequestProfile _requestProfile;
 
+        private readonly IHttpClientFactory _httpClientFactory;
+
         #endregion
 
         #region Methods
 
-        public override IMailClient GetActiveMailService()
+        public override IMailClient GetActiveMailClient()
         {
             // Find the client settings.
             var tenantId = _requestProfile.TenantId;
@@ -45,11 +53,26 @@ namespace MailWeb.Services.Implementations
             if (clientSetting == null)
                 return null;
 
-            var mailSettingUniqueName = clientSetting.ActiveMailService.Name;
+            var mailClientSettingUniqueName = clientSetting.ActiveMailService.Name;
+            var mailClientSetting = _dbContext.MailClientSettings
+                .FirstOrDefault(x => x.UniqueName == mailClientSettingUniqueName);
+
+            if (mailClientSetting == null)
+                return null;
+
+            if (mailClientSetting.MailHost == null)
+                return null;
+
+            if (mailClientSetting.MailHost is SmtpHost)
+                return new OutlookMailClient(mailClientSetting);
+
+            if (mailClientSetting.MailHost is MailGunHost)
+                return new MailGunClient(mailClientSetting, _httpClientFactory);
+
             throw new NotImplementedException();
         }
 
-        public override void SetActiveMailService(string uniqueName)
+        public override void SetActiveMailClient(string uniqueName)
         {
             // Find the client settings.
             var tenantId = _requestProfile.TenantId;

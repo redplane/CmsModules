@@ -1,4 +1,5 @@
-﻿using MailWeb.Models.Interfaces;
+﻿using MailManager.Models.Interfaces;
+using MailWeb.Models.Interfaces;
 
 namespace MailWeb.Models.MailHosts
 {

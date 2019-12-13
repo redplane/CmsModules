@@ -33,7 +33,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
             var mailService = command.UseMailServiceName
                 ? _mailServiceFactory
                     .GetMailService(command.MailServiceName)
-                : _mailServiceFactory.GetActiveMailService();
+                : _mailServiceFactory.GetActiveMailClient();
 
             if (mailService == null)
                 return false;

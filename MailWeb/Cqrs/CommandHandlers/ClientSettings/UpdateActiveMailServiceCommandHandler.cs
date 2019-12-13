@@ -28,7 +28,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
         public virtual Task<bool> Handle(UpdateActiveMailServiceCommand command, CancellationToken cancellationToken)
         {
             _mailServiceFactory
-                .SetActiveMailService(command.MailServiceUniqueName);
+                .SetActiveMailClient(command.MailServiceUniqueName);
 
             return Task.FromResult(true);
         }

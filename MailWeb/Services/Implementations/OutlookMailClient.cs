@@ -11,9 +11,9 @@ namespace MailWeb.Services.Implementations
     {
         #region Constructor
 
-        public OutlookMailClient(IMailClientSetting smtpMailSetting, IMailHost mailHost) : base(smtpMailSetting)
+        public OutlookMailClient(IMailClientSetting smtpMailSetting) : base(smtpMailSetting)
         {
-            _mailHost = (SmtpHost) mailHost;
+            _mailHost = (SmtpHost)smtpMailSetting.MailHost;
         }
 
         #endregion

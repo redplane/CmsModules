@@ -39,12 +39,12 @@ namespace MailManager.Services.Implementations
                 .FirstOrDefault(mailService => mailService.UniqueName == uniqueName);
         }
 
-        public virtual IMailClient GetActiveMailService()
+        public virtual IMailClient GetActiveMailClient()
         {
             return _selectedMailService;
         }
 
-        public virtual void SetActiveMailService(string uniqueName)
+        public virtual void SetActiveMailClient(string uniqueName)
         {
             var mailService = _mailServices.FirstOrDefault(x => x.UniqueName == uniqueName);
             if (mailService == null)

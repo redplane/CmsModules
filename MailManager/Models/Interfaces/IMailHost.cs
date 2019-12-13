@@ -1,6 +1,4 @@
-using System;
-
-namespace MailWeb.Models.Interfaces
+namespace MailManager.Models.Interfaces
 {
     public interface IMailHost
     {

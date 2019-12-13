@@ -21,13 +21,13 @@
         ///     Get mail service is selected.
         /// </summary>
         /// <returns></returns>
-        IMailClient GetActiveMailService();
+        IMailClient GetActiveMailClient();
 
         /// <summary>
         ///     Set mail service as active.
         /// </summary>
         /// <param name="uniqueName"></param>
-        void SetActiveMailService(string uniqueName);
+        void SetActiveMailClient(string uniqueName);
 
         #endregion
     }

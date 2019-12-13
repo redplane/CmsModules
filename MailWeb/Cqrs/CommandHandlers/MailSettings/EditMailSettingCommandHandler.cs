@@ -35,7 +35,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             CancellationToken cancellationToken)
         {
             // Find the mail settings.
-            var mailSetting = await _dbContext.MailSettings
+            var mailSetting = await _dbContext.MailClientSettings
                 .Where(x => x.Id == command.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 

@@ -16,14 +16,17 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
         #region Properties
 
         private readonly MailManagementDbContext _dbContext;
+
+        private readonly IRequestProfile _profile;
         
         #endregion
         
         #region Constructor
 
-        public AddMailSettingCommandHandler(MailManagementDbContext dbContext)
+        public AddMailSettingCommandHandler(MailManagementDbContext dbContext, IRequestProfile profile)
         {
             _dbContext = dbContext;
+            _profile = profile;
         }
 
         #endregion
@@ -32,7 +35,8 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
         
         public virtual async Task<MailClientSetting> Handle(AddMailSettingCommand command, CancellationToken cancellationToken)
         {
-            var mailSetting = new MailClientSetting(Guid.NewGuid(), Guid.NewGuid(), command.UniqueName, "");
+            var mailSetting = new MailClientSetting(Guid.NewGuid(), command.UniqueName);
+            mailSetting.ClientId = _profile.TenantId;
             mailSetting.DisplayName = command.DisplayName;
             mailSetting.Timeout = command.Timeout;
 
@@ -42,7 +46,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             else if (mailHost is MailGunHost mailGunHost)
                 mailSetting.MailHost = mailGunHost;
 
-            _dbContext.MailSettings
+            _dbContext.MailClientSettings
                 .Add(mailSetting);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
