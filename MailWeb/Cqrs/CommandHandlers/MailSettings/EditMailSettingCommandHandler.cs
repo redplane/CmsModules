@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Cqrs.CommandHandlers.MailSettings
 {
-    public class EditMailSettingCommandHandler : IRequestHandler<EditMailSettingCommand, IBasicMailSetting>
+    public class EditMailSettingCommandHandler : IRequestHandler<EditMailSettingCommand, MailClientSetting>
     {
         #region Properties
 
@@ -31,7 +31,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
 
         #region Methods
 
-        public virtual async Task<IBasicMailSetting> Handle(EditMailSettingCommand command,
+        public virtual async Task<MailClientSetting> Handle(EditMailSettingCommand command,
             CancellationToken cancellationToken)
         {
             // Find the mail settings.
@@ -61,9 +61,9 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             return mailSetting;
         }
 
-        protected virtual void UpdateSmtpIntoMailSetting(MailSetting mailSetting, EditSmtpHostModel editSmtpHost)
+        protected virtual void UpdateSmtpIntoMailSetting(MailClientSetting mailClientSetting, EditSmtpHostModel editSmtpHost)
         {
-            if (!(mailSetting.MailHost is SmtpHost smtpHost))
+            if (!(mailClientSetting.MailHost is SmtpHost smtpHost))
                 return;
 
             if (editSmtpHost.HostName != null && editSmtpHost.HostName.HasModified)
@@ -81,13 +81,13 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             if (editSmtpHost.Ssl != null && editSmtpHost.Ssl.HasModified)
                 smtpHost.Ssl = editSmtpHost.Ssl.Value;
 
-            mailSetting.MailHost = smtpHost;
+            mailClientSetting.MailHost = smtpHost;
         }
 
-        protected virtual void UpdateMailGunIntoMailSetting(MailSetting mailSetting,
+        protected virtual void UpdateMailGunIntoMailSetting(MailClientSetting mailClientSetting,
             EditMailGunHostModel editMailGun)
         {
-            var mailGunHost = (MailGunHost) mailSetting.MailHost;
+            var mailGunHost = (MailGunHost) mailClientSetting.MailHost;
 
             if (editMailGun.Domain != null && editMailGun.Domain.HasModified)
                 mailGunHost.Domain = editMailGun.Domain.Value;
@@ -95,7 +95,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             if (editMailGun.ApiKey != null && editMailGun.ApiKey.HasModified)
                 mailGunHost.ApiKey = editMailGun.ApiKey.Value;
 
-            mailSetting.MailHost = mailGunHost;
+            mailClientSetting.MailHost = mailGunHost;
         }
 
         #endregion

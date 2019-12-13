@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using FluentValidation.AspNetCore;
-using MailManager.Models.Implementations;
 using MailManager.Models.Interfaces;
 using MailManager.Services.Interfaces;
 using MailWeb.Constants;
@@ -8,6 +9,7 @@ using MailWeb.Cqrs;
 using MailWeb.Extensions;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
+using MailWeb.Models.MailHosts;
 using MailWeb.Services.Implementations;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -60,26 +62,9 @@ namespace MailWeb
                     .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
 
             services.AddScoped<MailManagementDbContext>();
-
-            var outlookMailServiceSetting = new SmtpMailServiceSetting("Outlook", "Sodakoq profile");
-            outlookMailServiceSetting.Timeout = 180;
-            outlookMailServiceSetting.HostName = "mail.sodakoqdelivery.my";
-            outlookMailServiceSetting.Port = 587;
-            outlookMailServiceSetting.Ssl = false;
-            outlookMailServiceSetting.Username = "info@sodakoqdelivery.my";
-            outlookMailServiceSetting.Password = "Msuk@2020";
-
-            var mailGunServiceSetting = new MailGunServiceSetting("MailGun", "MailGun",
-                "sandboxe98d1e4fbfe64918ac80cb70af697266.mailgun.org", "key-8ed73db400ce5675db06685ab5265384");
-            mailGunServiceSetting.Timeout = 180;
-
-            services.AddSingleton<ISmtpMailServiceSetting, SmtpMailServiceSetting>(options =>
-                outlookMailServiceSetting);
-            services.AddSingleton<IMailGunServiceSetting, MailGunServiceSetting>(options => mailGunServiceSetting);
-
-            services.AddScoped<IMailClient, OutlookMailService>();
+            services.AddScoped<IMailClient, OutlookMailClient>();
             services.AddScoped<IMailClient, MailGunClient>();
-            services.AddScoped<IMailClientFactory, MailServiceFactory>();
+            services.AddScoped<IMailClientFactory, MailClientFactory>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);

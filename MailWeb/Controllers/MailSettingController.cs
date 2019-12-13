@@ -48,8 +48,8 @@ namespace MailWeb.Controllers
             if (command == null)
                 command = new AddMailSettingCommand();
 
-            await _mediator.Send(command);
-            return Ok();
+            var addedMailSetting = await _mediator.Send(command);
+            return Ok(addedMailSetting);
         }
 
         [HttpPut("{id}")]

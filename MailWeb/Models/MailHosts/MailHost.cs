@@ -2,8 +2,8 @@
 
 namespace MailWeb.Models.MailHosts
 {
-    public class MailHost : IMailHost
+    public abstract class MailHost : IMailHost
     {
-        public string Type => GetType().FullName;
+        public abstract string Type { get; }
     }
 }

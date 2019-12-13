@@ -9,11 +9,11 @@ using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Services.Implementations
 {
-    public class MailServiceFactory : BaseMailClientFactory
+    public class MailClientFactory : BaseMailClientFactory
     {
         #region Constructor
 
-        public MailServiceFactory(IEnumerable<IMailClient> mailServices,
+        public MailClientFactory(IEnumerable<IMailClient> mailServices,
             IRequestProfile requestProfile,
             MailManagementDbContext dbContext) : base(mailServices)
         {
@@ -43,15 +43,10 @@ namespace MailWeb.Services.Implementations
                 .FirstOrDefault(x => x.Id == tenantId);
 
             if (clientSetting == null)
-                return _mailServices.FirstOrDefault();
+                return null;
 
-            var mailServiceType = Type.GetType(clientSetting.ActiveMailService.Type) ??
-                                  throw new InvalidOperationException();
-
-            var mailService = _mailServices
-                .FirstOrDefault(x => x.GetType() == mailServiceType);
-
-            return mailService;
+            var mailSettingUniqueName = clientSetting.ActiveMailService.Name;
+            throw new NotImplementedException();
         }
 
         public override void SetActiveMailService(string uniqueName)

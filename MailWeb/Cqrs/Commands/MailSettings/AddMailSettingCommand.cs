@@ -1,12 +1,13 @@
 ﻿using System.Security;
 using MailWeb.Converters;
+using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
 
 namespace MailWeb.Cqrs.Commands.MailSettings
 {
-    public class AddMailSettingCommand : IRequest<IBasicMailSetting>
+    public class AddMailSettingCommand : IRequest<MailClientSetting>
     {
         #region Properties
 

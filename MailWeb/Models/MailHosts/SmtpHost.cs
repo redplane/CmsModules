@@ -1,4 +1,6 @@
-﻿namespace MailWeb.Models.MailHosts
+﻿using MailWeb.Constants;
+
+namespace MailWeb.Models.MailHosts
 {
     public class SmtpHost : MailHost
     {
@@ -14,11 +16,13 @@
         
         public string Password { get; set; }
 
+        public override string Type => MailHostKindConstants.Smtp;
+
         #endregion
 
         #region Constructor
 
-        
+
 
         #endregion
     }

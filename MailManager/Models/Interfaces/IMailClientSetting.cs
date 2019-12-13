@@ -1,6 +1,6 @@
 ﻿namespace MailManager.Models.Interfaces
 {
-    public interface IMailServiceSetting
+    public interface IMailClientSetting
     {
         #region Properties
 

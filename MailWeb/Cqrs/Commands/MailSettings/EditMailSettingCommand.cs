@@ -1,5 +1,6 @@
 using System;
 using MailWeb.Converters;
+using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
 using MailWeb.ViewModels;
 using MediatR;
@@ -7,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace MailWeb.Cqrs.Commands.MailSettings
 {
-    public class EditMailSettingCommand : IRequest<IBasicMailSetting>
+    public class EditMailSettingCommand : IRequest<MailClientSetting>
     {
         #region Properties
         

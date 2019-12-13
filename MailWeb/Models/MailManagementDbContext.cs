@@ -1,6 +1,8 @@
 ﻿using System;
+using MailWeb.Constants;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
+using MailWeb.Models.MailHosts;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -29,7 +31,7 @@ namespace MailWeb.Models
 
         #region Properties
 
-        public virtual DbSet<MailSetting> MailSettings { get; set; }
+        public virtual DbSet<MailClientSetting> MailSettings { get; set; }
 
         public virtual DbSet<ClientSetting> ClientSettings { get; set; }
 
@@ -39,16 +41,16 @@ namespace MailWeb.Models
 
         protected virtual void AddBasicMailSettingTable(ModelBuilder modelBuilder)
         {
-            var basicMailSetting = modelBuilder.Entity<MailSetting>();
-            basicMailSetting.HasKey(x => x.Id);
+            var mailClientSetting = modelBuilder.Entity<MailClientSetting>();
+            mailClientSetting.HasKey(x => x.Id);
 
-            basicMailSetting.Property(x => x.UniqueName)
+            mailClientSetting.Property(x => x.UniqueName)
                 .IsRequired();
 
-            basicMailSetting.HasIndex(x => x.UniqueName)
+            mailClientSetting.HasIndex(x => x.UniqueName)
                 .IsUnique();
 
-            basicMailSetting
+            mailClientSetting
                 .Property(x => x.MailHost)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
@@ -78,10 +80,22 @@ namespace MailWeb.Models
         protected virtual IMailHost HandleIncomingMailHost(string x)
         {
             var node = JObject.Parse(x);
-            var nodeType = node.GetValue(nameof(IMailHost.Type));
-            var szNodeType = nodeType.Value<string>();
-            var mailHost = JsonConvert.DeserializeObject(x, Type.GetType(szNodeType));
-            return (IMailHost) mailHost;
+            var jNodeTypeToken = node.GetValue(nameof(IMailHost.Type));
+            var nodeTypeName = jNodeTypeToken.Value<string>();
+
+            Type mailHostType = null;
+            if (MailHostKindConstants.Smtp.Equals(nodeTypeName, StringComparison.InvariantCultureIgnoreCase))
+                mailHostType = typeof(SmtpHost);
+            else if (MailHostKindConstants.MailGun.Equals(nodeTypeName, StringComparison.InvariantCultureIgnoreCase))
+                mailHostType = typeof(MailGunHost);
+
+            if (mailHostType != null)
+            {
+                var mailHost = JsonConvert.DeserializeObject(x, mailHostType);
+                return (IMailHost) mailHost;
+            }
+
+            return default;
         }
 
         #endregion

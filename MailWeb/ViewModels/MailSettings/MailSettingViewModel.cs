@@ -1,10 +1,11 @@
 ﻿using System;
+using MailManager.Models.Interfaces;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
 
 namespace MailWeb.ViewModels.MailSettings
 {
-    public class MailSettingViewModel : IBasicMailSetting
+    public class MailSettingViewModel : IMailClientSetting
     {
         #region Properties
 
@@ -13,9 +14,15 @@ namespace MailWeb.ViewModels.MailSettings
         public string UniqueName { get; }
 
         public string DisplayName { get; set; }
+        
+        public string Type { get; set; }
 
         public int Timeout { get; set; }
         
+        public IMailAddress[] CarbonCopies { get; set; }
+        
+        public IMailAddress[] BlindCarbonCopies { get; set; }
+
         public IMailHost MailHost { get; set; }
         
         #endregion
@@ -34,7 +41,7 @@ namespace MailWeb.ViewModels.MailSettings
             UniqueName = uniqueName;
         }
 
-        public MailSettingViewModel(MailSetting model)
+        public MailSettingViewModel(MailClientSetting model)
         {
             Id = model.Id;
             UniqueName = model.UniqueName;

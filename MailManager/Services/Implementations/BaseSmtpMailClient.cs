@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Dynamic;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,13 +9,13 @@ using MailManager.Services.Interfaces;
 
 namespace MailManager.Services.Implementations
 {
-    public class BaseSmtpMailClient : IMailClient
+    public abstract class BaseSmtpMailClient : IMailClient
     {
         #region Constructor
 
-        public BaseSmtpMailClient(ISmtpMailServiceSetting smtpMailServiceSetting)
+        public BaseSmtpMailClient(IMailClientSetting mailClientSetting)
         {
-            _smtpMailServiceSetting = smtpMailServiceSetting;
+            _mailClientSetting = mailClientSetting;
         }
 
         #endregion
@@ -27,7 +26,7 @@ namespace MailManager.Services.Implementations
 
         public virtual string DisplayName => throw new NotImplementedException();
 
-        private readonly ISmtpMailServiceSetting _smtpMailServiceSetting;
+        protected readonly IMailClientSetting _mailClientSetting;
 
         #endregion
 
@@ -39,9 +38,9 @@ namespace MailManager.Services.Implementations
             ExpandoObject additionalSubjectData = null, ExpandoObject additionalContentData = null,
             CancellationToken cancellationToken = default)
         {
-            using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
+            using (var smtpClient = GetSmtpClient(_mailClientSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, subject,
+                var mailMessage = await BuildMailMessageAsync(_mailClientSetting, sender, recipients, subject,
                     content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, isHtmlContent,
                     cancellationToken);
@@ -61,9 +60,9 @@ namespace MailManager.Services.Implementations
             if (mail == null)
                 throw new Exception($"Mail content whose name is {templateName} is not found.");
 
-            using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
+            using (var smtpClient = GetSmtpClient(_mailClientSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, sender, recipients, mail.Subject,
+                var mailMessage = await BuildMailMessageAsync(_mailClientSetting, sender, recipients, mail.Subject,
                     mail.Content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
                     cancellationToken);
@@ -88,9 +87,9 @@ namespace MailManager.Services.Implementations
             if (mail == null)
                 throw new Exception($"Mail content whose name is {templateName} is not found.");
 
-            using (var smtpClient = GetSmtpClient(_smtpMailServiceSetting))
+            using (var smtpClient = GetSmtpClient(_mailClientSetting))
             {
-                var mailMessage = await BuildMailMessageAsync(_smtpMailServiceSetting, mailSender, recipients,
+                var mailMessage = await BuildMailMessageAsync(_mailClientSetting, mailSender, recipients,
                     mail.Subject, mail.Content,
                     additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
                     cancellationToken);
@@ -114,22 +113,14 @@ namespace MailManager.Services.Implementations
 
         #region Internal methods
 
-        protected virtual SmtpClient GetSmtpClient(ISmtpMailServiceSetting mailSetting)
-        {
-            var smtpClient = new SmtpClient(mailSetting.HostName, mailSetting.Port);
-            smtpClient.EnableSsl = mailSetting.Ssl;
-            smtpClient.Timeout = smtpClient.Timeout;
-            smtpClient.Credentials = new NetworkCredential(mailSetting.Username, mailSetting.Password);
-
-            return smtpClient;
-        }
+        protected abstract SmtpClient GetSmtpClient(IMailClientSetting mailClientSetting);
 
         /// <summary>
         ///     Build email using specific settings.
         /// </summary>
         /// <returns></returns>
         protected virtual async Task<MailMessage> BuildMailMessageAsync(
-            IMailServiceSetting mailServiceSetting,
+            IMailClientSetting mailClientSetting,
             IMailAddress sender, IMailAddress[] recipients,
             string subject, string content,
             ExpandoObject additionalSubjectData = null,
@@ -154,11 +145,11 @@ namespace MailManager.Services.Implementations
                 smtpMail.To.Add(new MailAddress(recipient.Address, recipient.DisplayName));
 
             var clonedCarbonCopies = (carbonCopies ?? new IMailAddress[0])
-                .Concat(mailServiceSetting?.CarbonCopies ?? new IMailAddress[0])
+                .Concat(mailClientSetting?.CarbonCopies ?? new IMailAddress[0])
                 .ToArray();
 
             var clonedBlindCarbonCopies = (blindCarbonCopies ?? new IMailAddress[0])
-                .Concat(mailServiceSetting?.BlindCarbonCopies ?? new IMailAddress[0])
+                .Concat(mailClientSetting?.BlindCarbonCopies ?? new IMailAddress[0])
                 .ToArray();
 
             // Carbon copies

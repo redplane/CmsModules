@@ -2,7 +2,7 @@ using MailManager.Models.Interfaces;
 
 namespace MailWeb.Models.Interfaces
 {
-    public interface IMailGunServiceSetting : IMailServiceSetting
+    public interface IMailGunClientSetting : IMailClientSetting
     {
         #region Properties
 

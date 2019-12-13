@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailManager", "MailManager\MailManager.csproj", "{E992C6D5-A29E-4C37-86FD-7942509BAB3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailWeb", "MailWeb\MailWeb.csproj", "{68D16DBD-4593-4845-A579-6F6EEA4D6F04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailWeb", "MailWeb\MailWeb.csproj", "{F43AC261-98D1-4824-B3A8-F622B6D94296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E992C6D5-A29E-4C37-86FD-7942509BAB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E992C6D5-A29E-4C37-86FD-7942509BAB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E992C6D5-A29E-4C37-86FD-7942509BAB3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68D16DBD-4593-4845-A579-6F6EEA4D6F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68D16DBD-4593-4845-A579-6F6EEA4D6F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68D16DBD-4593-4845-A579-6F6EEA4D6F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68D16DBD-4593-4845-A579-6F6EEA4D6F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F43AC261-98D1-4824-B3A8-F622B6D94296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F43AC261-98D1-4824-B3A8-F622B6D94296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F43AC261-98D1-4824-B3A8-F622B6D94296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F43AC261-98D1-4824-B3A8-F622B6D94296}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

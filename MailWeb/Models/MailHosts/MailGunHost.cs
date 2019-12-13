@@ -1,3 +1,5 @@
+using MailWeb.Constants;
+
 namespace MailWeb.Models.MailHosts
 {
     public class MailGunHost : MailHost
@@ -16,7 +18,9 @@ namespace MailWeb.Models.MailHosts
         public string ApiKey { get; set; }
         
         public string Domain { get; set; }
-        
+
+        public override string Type => MailHostKindConstants.MailGun;
+
         #endregion
     }
 }
