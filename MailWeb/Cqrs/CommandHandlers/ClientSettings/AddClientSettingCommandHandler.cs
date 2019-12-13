@@ -5,7 +5,6 @@ using MailManager.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
-using MailWeb.Models.ValueObjects;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
@@ -33,8 +32,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
             var clientSetting = new ClientSetting(Guid.NewGuid());
             clientSetting.Name = command.Name;
-            clientSetting.ActiveMailService =
-                new MailServiceValueObject(activeMailService.UniqueName, activeMailService.GetType().FullName);
+            clientSetting.ActiveMailClient = activeMailService.UniqueName;
 
             _dbContext.Add(clientSetting);
             await _dbContext.SaveChangesAsync(cancellationToken);

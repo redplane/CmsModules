@@ -1,7 +1,6 @@
 ﻿using System;
 using MailManager.Models.Interfaces;
 using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
 
 namespace MailWeb.ViewModels.MailSettings
 {
@@ -14,17 +13,17 @@ namespace MailWeb.ViewModels.MailSettings
         public string UniqueName { get; }
 
         public string DisplayName { get; set; }
-        
+
         public string Type { get; set; }
 
         public int Timeout { get; set; }
-        
+
         public IMailAddress[] CarbonCopies { get; set; }
-        
+
         public IMailAddress[] BlindCarbonCopies { get; set; }
 
         public IMailHost MailHost { get; set; }
-        
+
         #endregion
 
         #region Constructor

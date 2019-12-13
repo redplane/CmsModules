@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MailWeb.Controllers
 {
-    [Route("api/mail-setting")]
-    public class MailSettingController : Controller
+    [Route("api/mail-client-setting")]
+    public class MailClientSettingController : Controller
     {
         #region Properties
 
@@ -19,7 +19,7 @@ namespace MailWeb.Controllers
 
         #region Constructor
 
-        public MailSettingController(IMediator mediator)
+        public MailClientSettingController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -29,7 +29,7 @@ namespace MailWeb.Controllers
         #region Methods
 
         [HttpGet]
-        public virtual Task<MailSettingViewModel[]> GetMailSettingsAsync()
+        public virtual Task<MailSettingViewModel[]> GetMailClientSettingsAsync()
         {
             var loadMailSettingsQuery = new GetMailSettingsQuery();
             return _mediator.Send(loadMailSettingsQuery);
@@ -43,7 +43,7 @@ namespace MailWeb.Controllers
         }
 
         [HttpPost("")]
-        public virtual async Task<ActionResult> AddMailSettingAsync([FromBody] AddMailSettingCommand command)
+        public virtual async Task<ActionResult> AddMailClientSettingAsync([FromBody] AddMailSettingCommand command)
         {
             if (command == null)
                 command = new AddMailSettingCommand();
@@ -53,16 +53,17 @@ namespace MailWeb.Controllers
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<ActionResult> EditMailSettingAsync([FromRoute] Guid id,
+        public virtual async Task<ActionResult> EditMailClientSettingAsync([FromRoute] Guid id,
             [FromBody] EditMailSettingCommand command)
         {
             if (command == null)
                 command = new EditMailSettingCommand();
-            
+
             command.Id = id;
             var mailSetting = await _mediator.Send(command);
             return Ok(mailSetting);
         }
+
         #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using MailWeb.Models.ValueObjects;
 
 namespace MailWeb.Models.Entities
 {
@@ -20,7 +19,7 @@ namespace MailWeb.Models.Entities
 
         public string Name { get; set; }
 
-        public MailServiceValueObject ActiveMailService { get; set; }
+        public string ActiveMailClient { get; set; }
 
         #endregion
     }

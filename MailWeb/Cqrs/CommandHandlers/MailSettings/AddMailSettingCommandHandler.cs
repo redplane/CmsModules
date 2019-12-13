@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
 using MailWeb.Cqrs.Commands.MailSettings;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
@@ -13,14 +12,6 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
 {
     public class AddMailSettingCommandHandler : IRequestHandler<AddMailSettingCommand, MailClientSetting>
     {
-        #region Properties
-
-        private readonly MailManagementDbContext _dbContext;
-
-        private readonly IRequestProfile _profile;
-        
-        #endregion
-        
         #region Constructor
 
         public AddMailSettingCommandHandler(MailManagementDbContext dbContext, IRequestProfile profile)
@@ -30,10 +21,11 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
         }
 
         #endregion
-        
+
         #region Methods
-        
-        public virtual async Task<MailClientSetting> Handle(AddMailSettingCommand command, CancellationToken cancellationToken)
+
+        public virtual async Task<MailClientSetting> Handle(AddMailSettingCommand command,
+            CancellationToken cancellationToken)
         {
             var mailSetting = new MailClientSetting(Guid.NewGuid(), command.UniqueName);
             mailSetting.ClientId = _profile.TenantId;
@@ -52,7 +44,15 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             await _dbContext.SaveChangesAsync(cancellationToken);
             return mailSetting;
         }
-        
+
+        #endregion
+
+        #region Properties
+
+        private readonly MailManagementDbContext _dbContext;
+
+        private readonly IRequestProfile _profile;
+
         #endregion
     }
 }

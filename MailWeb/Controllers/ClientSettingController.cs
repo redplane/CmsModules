@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using MailWeb.Cqrs.Commands;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MailWeb.Cqrs.Queries;
 using MailWeb.Models.Entities;

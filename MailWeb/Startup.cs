@@ -1,15 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using FluentValidation.AspNetCore;
-using MailManager.Models.Interfaces;
 using MailManager.Services.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Cqrs;
 using MailWeb.Extensions;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
-using MailWeb.Models.MailHosts;
 using MailWeb.Services.Implementations;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

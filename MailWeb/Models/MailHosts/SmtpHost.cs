@@ -11,9 +11,9 @@ namespace MailWeb.Models.MailHosts
         public int Port { get; set; }
 
         public bool Ssl { get; set; }
-        
+
         public string Username { get; set; }
-        
+
         public string Password { get; set; }
 
         public override string Type => MailHostKindConstants.Smtp;
@@ -21,8 +21,6 @@ namespace MailWeb.Models.MailHosts
         #endregion
 
         #region Constructor
-
-
 
         #endregion
     }

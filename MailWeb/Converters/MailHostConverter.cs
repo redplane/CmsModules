@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using MailManager.Models.Interfaces;
 using MailWeb.Constants;
-using MailWeb.Models.Interfaces;
 using MailWeb.Models.MailHosts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,11 +24,12 @@ namespace MailWeb.Converters
             serializer.Serialize(writer, mailHost, mailHostType);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             var jToken = JToken.ReadFrom(reader);
             var mailHostTypeToken = jToken.SelectToken("type");
-            if (mailHostTypeToken == null) 
+            if (mailHostTypeToken == null)
                 return default;
 
             var mailHostTypeName = mailHostTypeToken.Value<string>();

@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MailManager.Models.Interfaces;
 using MailManager.Services.Interfaces;
-using MailWeb.Models.Interfaces;
 using MailWeb.Models.MailHosts;
 
 namespace MailWeb.Services.Implementations
@@ -17,9 +16,11 @@ namespace MailWeb.Services.Implementations
     {
         #region Constructor
 
-        public MailGunClient(IMailClientSetting mailGunClientSetting, IHttpClientFactory httpClientFactory)
+        public MailGunClient(IMailClientSetting mailGunClientSetting,
+            IHttpClientFactory httpClientFactory)
         {
             _mailClientSetting = mailGunClientSetting;
+            _mailGunHost = (MailGunHost) _mailClientSetting.MailHost;
 
             // Get mail gun host info.
             var mailGunHost = (MailGunHost) mailGunClientSetting.MailHost;
@@ -44,6 +45,8 @@ namespace MailWeb.Services.Implementations
         public string DisplayName => "MailGun";
 
         private readonly IMailClientSetting _mailClientSetting;
+
+        private readonly MailGunHost _mailGunHost;
 
         private readonly HttpClient _httpClient;
 
@@ -86,7 +89,7 @@ namespace MailWeb.Services.Implementations
                 isHtmlContent ? "html" : "text");
 
             await _httpClient
-                .PostAsync(new Uri($"v3/{_mailGunClientSetting.Domain}/messages", UriKind.Relative), data,
+                .PostAsync(new Uri($"v3/{_mailGunHost.Domain}/messages", UriKind.Relative), data,
                     cancellationToken);
         }
 

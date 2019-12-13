@@ -8,11 +8,11 @@ namespace MailWeb.Models
         #region Properties
 
         public string Type { get; set; }
-        
+
         public EditableFieldViewModel<string> ApiKey { get; set; }
-        
+
         public EditableFieldViewModel<string> Domain { get; set; }
-        
+
         #endregion
     }
 }

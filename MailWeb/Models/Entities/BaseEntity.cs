@@ -17,7 +17,7 @@ namespace MailWeb.Models.Entities
 
         #region Properties
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 
         public MasterItemAvailabilities Availability { get; set; }
 

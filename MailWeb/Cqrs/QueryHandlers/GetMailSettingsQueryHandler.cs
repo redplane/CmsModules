@@ -14,18 +14,18 @@ namespace MailWeb.Cqrs.QueryHandlers
         #region Properties
 
         private readonly MailManagementDbContext _dbContext;
-        
+
         #endregion
-        
+
         #region Constructor
-        
+
         public GetMailSettingsQueryHandler(MailManagementDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        
+
         #endregion
-        
+
         #region Methods
 
         public Task<MailSettingViewModel[]> Handle(GetMailSettingsQuery request, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace MailWeb.Cqrs.QueryHandlers
                 .Select(x => new MailSettingViewModel(x))
                 .ToArrayAsync(cancellationToken);
         }
-        
+
         #endregion
     }
 }

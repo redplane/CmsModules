@@ -2,7 +2,6 @@
 using MailManager.Models.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
 using MailWeb.Models.MailHosts;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -78,14 +77,6 @@ namespace MailWeb.Models
 
             clientSetting.HasIndex(x => x.Name)
                 .IsUnique();
-
-            clientSetting.OwnsOne(x => x.ActiveMailService)
-                .Property(x => x.Name)
-                .HasColumnName("ActiveMailServiceName");
-
-            clientSetting.OwnsOne(x => x.ActiveMailService)
-                .Property(x => x.Type)
-                .HasColumnName("ActiveMailServiceType");
         }
 
         protected virtual IMailHost HandleIncomingMailHost(string x)

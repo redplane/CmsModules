@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MailWeb.Cqrs.Commands.MailSettings;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
 using MailWeb.Models.MailHosts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +60,8 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
             return mailSetting;
         }
 
-        protected virtual void UpdateSmtpIntoMailSetting(MailClientSetting mailClientSetting, EditSmtpHostModel editSmtpHost)
+        protected virtual void UpdateSmtpIntoMailSetting(MailClientSetting mailClientSetting,
+            EditSmtpHostModel editSmtpHost)
         {
             if (!(mailClientSetting.MailHost is SmtpHost smtpHost))
                 return;

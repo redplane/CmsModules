@@ -2,7 +2,6 @@
 using System.Net.Mail;
 using MailManager.Models.Interfaces;
 using MailManager.Services.Implementations;
-using MailWeb.Models.Interfaces;
 using MailWeb.Models.MailHosts;
 
 namespace MailWeb.Services.Implementations
@@ -13,19 +12,9 @@ namespace MailWeb.Services.Implementations
 
         public OutlookMailClient(IMailClientSetting smtpMailSetting) : base(smtpMailSetting)
         {
-            _mailHost = (SmtpHost)smtpMailSetting.MailHost;
+            _mailHost = (SmtpHost) smtpMailSetting.MailHost;
         }
 
-        #endregion
-
-        #region Properties
-
-        private readonly SmtpHost _mailHost;
-
-        public override string UniqueName => "Outlook";
-
-        public override string DisplayName => "Outlook mail service";
-        
         #endregion
 
         #region Methods
@@ -41,6 +30,16 @@ namespace MailWeb.Services.Implementations
 
             return smtpClient;
         }
+
+        #endregion
+
+        #region Properties
+
+        private readonly SmtpHost _mailHost;
+
+        public override string UniqueName => _mailClientSetting.UniqueName;
+
+        public override string DisplayName => _mailClientSetting.DisplayName;
 
         #endregion
     }

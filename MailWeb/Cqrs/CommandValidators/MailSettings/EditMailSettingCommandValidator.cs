@@ -1,6 +1,4 @@
-using System;
 using FluentValidation;
-using FluentValidation.Validators;
 using MailWeb.Cqrs.Commands.MailSettings;
 using MailWeb.Models;
 
@@ -27,7 +25,6 @@ namespace MailWeb.Cqrs.CommandValidators.MailSettings
             RuleFor(command => (EditMailGunHostModel) command.MailHost)
                 .SetValidator(editMailGunHostCommandValidator)
                 .When(command => command.MailHost is EditMailGunHostModel);
-
         }
     }
 }
