@@ -22,9 +22,9 @@ namespace MailManager.Services.Implementations
 
         #region Properties
 
-        public virtual string UniqueName => throw new NotImplementedException();
+        public abstract string UniqueName { get; }
 
-        public virtual string DisplayName => throw new NotImplementedException();
+        public abstract string DisplayName { get; }
 
         protected readonly IMailClientSetting _mailClientSetting;
 
@@ -36,13 +36,16 @@ namespace MailManager.Services.Implementations
             IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
             ExpandoObject additionalSubjectData = null, ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
             using (var smtpClient = GetSmtpClient(_mailClientSetting))
             {
                 var mailMessage = await BuildMailMessageAsync(_mailClientSetting, sender, recipients, subject,
                     content,
-                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, isHtmlContent,
+                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies,
+                    attachments,
+                    isHtmlContent,
                     cancellationToken);
 
                 await smtpClient.SendMailAsync(mailMessage);
@@ -52,7 +55,9 @@ namespace MailManager.Services.Implementations
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
             IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null, CancellationToken cancellationToken = default)
+            ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
+            CancellationToken cancellationToken = default)
         {
             // Find mail template.
             var mail = await GetMailContentAsync(templateName, cancellationToken);
@@ -64,7 +69,9 @@ namespace MailManager.Services.Implementations
             {
                 var mailMessage = await BuildMailMessageAsync(_mailClientSetting, sender, recipients, mail.Subject,
                     mail.Content,
-                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
+                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies,
+                    attachments,
+                    mail.IsHtml,
                     cancellationToken);
 
                 await smtpClient.SendMailAsync(mailMessage);
@@ -73,7 +80,9 @@ namespace MailManager.Services.Implementations
 
         public virtual async Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null, CancellationToken cancellationToken = default)
+            ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
+            CancellationToken cancellationToken = default)
         {
             // Find mail sender.
             var mailSender = await GetSenderAsync(sender, cancellationToken);
@@ -91,7 +100,9 @@ namespace MailManager.Services.Implementations
             {
                 var mailMessage = await BuildMailMessageAsync(_mailClientSetting, mailSender, recipients,
                     mail.Subject, mail.Content,
-                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies, mail.IsHtml,
+                    additionalSubjectData, additionalContentData, carbonCopies, blindCarbonCopies,
+                    attachments,
+                    mail.IsHtml,
                     cancellationToken);
 
                 await smtpClient.SendMailAsync(mailMessage);
@@ -127,6 +138,7 @@ namespace MailManager.Services.Implementations
             ExpandoObject additionalContentData = null,
             IMailAddress[] carbonCopies = null,
             IMailAddress[] blindCarbonCopies = null,
+            Attachment[] attachments = default,
             bool isHtml = default,
             CancellationToken cancellationToken = default)
         {
@@ -164,6 +176,10 @@ namespace MailManager.Services.Implementations
             smtpMail.Subject = await RenderContentAsync(subject, additionalSubjectData);
             smtpMail.Body = await RenderContentAsync(content, additionalContentData);
             smtpMail.IsBodyHtml = isHtml;
+
+            if (attachments != null && attachments.Length > 0)
+                foreach (var attachment in attachments)
+                    smtpMail.Attachments.Add(attachment);
 
             return smtpMail;
         }

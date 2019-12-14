@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MailManager.Services.Interfaces;
 
 namespace MailManager.Services.Implementations
@@ -28,29 +30,33 @@ namespace MailManager.Services.Implementations
 
         #region Methods
 
-        public virtual IMailClient[] GetMailServices()
+        public virtual Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default)
         {
-            return _mailServices;
+            return Task.FromResult(_mailServices);
         }
 
-        public virtual IMailClient GetMailService(string uniqueName)
+        public virtual Task<IMailClient> GetMailServiceAsync(string uniqueName,
+            CancellationToken cancellationToken = default)
         {
-            return _mailServices
-                .FirstOrDefault(mailService => mailService.UniqueName == uniqueName);
+            var mailService = _mailServices
+                .FirstOrDefault(x => x.UniqueName == uniqueName);
+
+            return Task.FromResult(mailService);
         }
 
-        public virtual IMailClient GetActiveMailClient()
+        public virtual Task<IMailClient> GetActiveMailClientAsync(CancellationToken cancellationToken = default)
         {
-            return _selectedMailService;
+            return Task.FromResult(_selectedMailService);
         }
 
-        public virtual void SetActiveMailClient(string uniqueName)
+        public virtual Task SetActiveMailClientAsync(string uniqueName, CancellationToken cancellationToken = default)
         {
             var mailService = _mailServices.FirstOrDefault(x => x.UniqueName == uniqueName);
             if (mailService == null)
                 throw new Exception($"Mail service whose name {uniqueName} cannot be found");
 
             _selectedMailService = mailService;
+            return Task.CompletedTask;
         }
 
         #endregion

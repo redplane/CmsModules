@@ -1,4 +1,5 @@
 ﻿using System.Dynamic;
+using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using MailManager.Models.Interfaces;
@@ -25,6 +26,7 @@ namespace MailManager.Services.Interfaces
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
             ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -36,6 +38,7 @@ namespace MailManager.Services.Interfaces
             string templateName,
             ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -46,6 +49,7 @@ namespace MailManager.Services.Interfaces
             IMailAddress[] blindCarbonCopies, string templateName,
             ExpandoObject additionalSubjectData = null,
             ExpandoObject additionalContentData = null,
+            Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
         /// <summary>

@@ -1,4 +1,7 @@
-﻿namespace MailManager.Services.Interfaces
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace MailManager.Services.Interfaces
 {
     public interface IMailClientFactory
     {
@@ -8,26 +11,24 @@
         ///     Get all registered mail services.
         /// </summary>
         /// <returns></returns>
-        IMailClient[] GetMailServices();
+        Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Get a a registered mail service by name.
         /// </summary>
-        /// <param name="uniqueName"></param>
         /// <returns></returns>
-        IMailClient GetMailService(string uniqueName);
+        Task<IMailClient> GetMailServiceAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Get mail service is selected.
         /// </summary>
         /// <returns></returns>
-        IMailClient GetActiveMailClient();
+        Task<IMailClient> GetActiveMailClientAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Set mail service as active.
         /// </summary>
-        /// <param name="uniqueName"></param>
-        void SetActiveMailClient(string uniqueName);
+        Task SetActiveMailClientAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         #endregion
     }
