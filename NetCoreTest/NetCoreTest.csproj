@@ -21,7 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AspNetWebShared\AspNetWebShared.csproj" />
-      <ProjectReference Include="..\MailManager\MailManager.csproj" />
+      <ProjectReference Include="..\MailManager\MailClients.csproj" />
     </ItemGroup>
 
 </Project>

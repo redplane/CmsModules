@@ -1,4 +1,4 @@
-﻿using MailManager.Models.Interfaces;
+﻿using MailClients.Models.Interfaces;
 
 namespace NetCoreTest.Models
 {

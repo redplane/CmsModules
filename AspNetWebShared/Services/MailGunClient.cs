@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetWebShared.Models.MailHosts;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Interfaces;
+using MailClients.Models.Interfaces;
+using MailClients.Services.Interfaces;
 
 namespace AspNetWebShared.Services
 {

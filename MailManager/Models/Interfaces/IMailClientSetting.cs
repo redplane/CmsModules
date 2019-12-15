@@ -1,4 +1,4 @@
-﻿namespace MailManager.Models.Interfaces
+﻿namespace MailClients.Models.Interfaces
 {
     public interface IMailClientSetting
     {

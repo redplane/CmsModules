@@ -1,4 +1,4 @@
-﻿using MailManager.Models.Interfaces;
+﻿using MailClients.Models.Interfaces;
 using MailWeb.Converters;
 using MailWeb.Models.Entities;
 using MediatR;

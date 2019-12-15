@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Services.Interfaces;
+using MailClients.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MediatR;
 

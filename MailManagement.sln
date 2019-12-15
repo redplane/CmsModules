@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailManager", "MailManager\MailManager.csproj", "{E992C6D5-A29E-4C37-86FD-7942509BAB3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailClients", "MailManager\MailClients.csproj", "{E992C6D5-A29E-4C37-86FD-7942509BAB3C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWeb", "AspNetCoreWeb\AspNetCoreWeb.csproj", "{F43AC261-98D1-4824-B3A8-F622B6D94296}"
 EndProject

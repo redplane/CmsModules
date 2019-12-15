@@ -1,5 +1,4 @@
 ﻿using System;
-using MailManager.Models.Interfaces;
 using MailWeb.Converters;
 using MailWeb.Enums;
 using Newtonsoft.Json;

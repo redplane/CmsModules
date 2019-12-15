@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Interfaces;
+using MailClients.Models.Interfaces;
+using MailClients.Services.Interfaces;
 
-namespace MailManager.Services.Implementations
+namespace MailClients.Services.Implementations
 {
     public abstract class BaseSmtpMailClient : IMailClient
     {

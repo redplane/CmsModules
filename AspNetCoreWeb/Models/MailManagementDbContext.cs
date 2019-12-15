@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AspNetWebShared.Constants;
 using AspNetWebShared.Models.MailHosts;
-using MailManager.Models.Interfaces;
+using MailClients.Models.Interfaces;
 using MailWeb.Converters;
 using MailWeb.Models.Entities;
 using MailWeb.ViewModels;
