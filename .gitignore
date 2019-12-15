@@ -1,0 +1,17 @@
+/.vs
+/MailServices/obj
+/MailServices/bin
+/MailServices/MailServices.csproj.user
+/MailWeb/obj
+/MailWeb/bin
+/MailManager/obj
+/MailManager/bin
+/MailManager/MailManager.csproj.user
+/packages
+/AspNetCoreWeb/bin
+/AspNetCoreWeb/obj
+/AspNetWebShared/obj
+/AspNetWebShared/bin
+/NetCoreTest/obj
+/NetCoreTest/bin
+/AspNetCoreWeb/MailWeb.csproj.user
