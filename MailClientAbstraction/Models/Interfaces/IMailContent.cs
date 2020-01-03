@@ -1,4 +1,4 @@
-﻿namespace MailManager.Models.Interfaces
+﻿namespace MailClientAbstraction.Models.Interfaces
 {
     public interface IMailContent
     {

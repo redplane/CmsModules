@@ -1,5 +1,5 @@
 using System;
-using MailManager.Models.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
 
 namespace MailWeb.Models.Entities
 {

@@ -1,10 +1,9 @@
-﻿using System.Dynamic;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
 
-namespace MailManager.Services.Interfaces
+namespace MailClientAbstraction.Services.Interfaces
 {
     public interface IMailClient
     {
@@ -24,8 +23,8 @@ namespace MailManager.Services.Interfaces
         /// <returns></returns>
         Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
@@ -36,8 +35,8 @@ namespace MailManager.Services.Interfaces
         Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies,
             string templateName,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
@@ -47,8 +46,8 @@ namespace MailManager.Services.Interfaces
         /// <returns></returns>
         Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 

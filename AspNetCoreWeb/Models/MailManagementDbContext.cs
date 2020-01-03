@@ -1,7 +1,7 @@
 ﻿using System;
 using AspNetWebShared.Constants;
 using AspNetWebShared.Models.MailHosts;
-using MailManager.Models.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Models.Entities;
 using Microsoft.EntityFrameworkCore;

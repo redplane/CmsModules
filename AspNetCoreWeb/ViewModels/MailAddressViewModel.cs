@@ -1,4 +1,4 @@
-﻿using MailManager.Models.Interfaces;
+﻿using MailClientAbstraction.Models.Interfaces;
 
 namespace MailWeb.ViewModels
 {

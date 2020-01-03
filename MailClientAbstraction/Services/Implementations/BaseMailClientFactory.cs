@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Services.Interfaces;
+using MailClientAbstraction.Services.Interfaces;
 
-namespace MailManager.Services.Implementations
+namespace MailClientAbstraction.Services.Implementations
 {
     public class BaseMailClientFactory : IMailClientFactory
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using AspNetWebShared.Constants;
 using AspNetWebShared.Models.MailHosts;
-using MailManager.Models.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
 using MailWeb.Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace MailManager.Services.Interfaces
+namespace MailClientAbstraction.Services.Interfaces
 {
     public interface IMailClientFactory
     {

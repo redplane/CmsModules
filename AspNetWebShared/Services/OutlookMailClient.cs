@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Net.Mail;
 using AspNetWebShared.Models.MailHosts;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Implementations;
+using MailClientAbstraction.Models.Interfaces;
+using MailClientAbstraction.Services.Implementations;
 
 namespace AspNetWebShared.Services
 {

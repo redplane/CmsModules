@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
+using MailClientAbstraction.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
 using MediatR;
 

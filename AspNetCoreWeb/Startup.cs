@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using FluentValidation.AspNetCore;
-using MailManager.Services.Interfaces;
+using MailClientAbstraction.Services.Interfaces;
 using MailWeb.Constants;
 using MailWeb.Cqrs;
 using MailWeb.Extensions;

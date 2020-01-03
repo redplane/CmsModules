@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Dynamic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Interfaces;
+using MailClientAbstraction.Models.Interfaces;
+using MailClientAbstraction.Services.Interfaces;
 
-namespace MailManager.Services.Implementations
+namespace MailClientAbstraction.Services.Implementations
 {
     public abstract class BaseSmtpMailClient : IMailClient
     {
@@ -35,7 +34,7 @@ namespace MailManager.Services.Implementations
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
             IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
-            ExpandoObject additionalSubjectData = null, ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null, object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -54,8 +53,8 @@ namespace MailManager.Services.Implementations
 
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
             IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            IMailAddress[] blindCarbonCopies, string templateName, object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -79,8 +78,8 @@ namespace MailManager.Services.Implementations
         }
 
         public virtual async Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            IMailAddress[] blindCarbonCopies, string templateName, object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -134,8 +133,8 @@ namespace MailManager.Services.Implementations
             IMailClientSetting mailClientSetting,
             IMailAddress sender, IMailAddress[] recipients,
             string subject, string content,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             IMailAddress[] carbonCopies = null,
             IMailAddress[] blindCarbonCopies = null,
             Attachment[] attachments = default,
@@ -190,7 +189,7 @@ namespace MailManager.Services.Implementations
         /// <param name="initialContent"></param>
         /// <param name="additionalInfo"></param>
         /// <returns></returns>
-        protected virtual Task<string> RenderContentAsync(string initialContent, ExpandoObject additionalInfo)
+        protected virtual Task<string> RenderContentAsync(string initialContent, object additionalInfo)
         {
             return Task.FromResult(initialContent);
         }

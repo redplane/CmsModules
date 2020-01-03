@@ -7,9 +7,9 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MailManager.Models.Interfaces;
-using MailManager.Services.Interfaces;
 using AspNetWebShared.Models.MailHosts;
+using MailClientAbstraction.Models.Interfaces;
+using MailClientAbstraction.Services.Interfaces;
 
 namespace AspNetWebShared.Services
 {
@@ -58,7 +58,7 @@ namespace AspNetWebShared.Services
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
             IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
-            ExpandoObject additionalSubjectData = null, ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null, object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -97,8 +97,8 @@ namespace AspNetWebShared.Services
 
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
             IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            IMailAddress[] blindCarbonCopies, string templateName, object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -115,8 +115,8 @@ namespace AspNetWebShared.Services
         }
 
         public virtual async Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
-            IMailAddress[] blindCarbonCopies, string templateName, ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            IMailAddress[] blindCarbonCopies, string templateName, object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
@@ -155,7 +155,7 @@ namespace AspNetWebShared.Services
             return $"{mailAddress.DisplayName} <{mailAddress.Address}>";
         }
 
-        protected virtual Task<string> RenderAsync(string initialContent, ExpandoObject additionalData)
+        protected virtual Task<string> RenderAsync(string initialContent, object additionalData)
         {
             return Task.FromResult(initialContent);
         }
