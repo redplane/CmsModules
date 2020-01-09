@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MailModule.Services.Interfaces
 {
-    public interface IMailClientFactory
+    public interface IMailClientsManager
     {
         #region Methods
 
@@ -11,13 +11,13 @@ namespace MailModule.Services.Interfaces
         ///     Get all registered mail services.
         /// </summary>
         /// <returns></returns>
-        Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default);
+        Task<IMailClient[]> GetMailClientsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Get a a registered mail service by name.
         /// </summary>
         /// <returns></returns>
-        Task<IMailClient> GetMailServiceAsync(string uniqueName, CancellationToken cancellationToken = default);
+        Task<IMailClient> GetMailClientsAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Get mail service is selected.

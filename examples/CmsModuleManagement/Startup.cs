@@ -58,7 +58,7 @@ namespace MailWeb
                     .UseInMemoryDatabase("default"));
 
             services.AddScoped<MailManagementDbContext>();
-            services.AddScoped<IMailClientFactory, MailClientFactory>();
+            services.AddScoped<IMailClientsManager, MailClientFactory>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
@@ -68,6 +68,7 @@ namespace MailWeb
 
             services.AddCors(options => options.AddPolicy("", builder =>
             {
+                builder.
             }))
 
             services
