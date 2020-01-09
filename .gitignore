@@ -15,3 +15,13 @@
 /NetCoreTest/obj
 /NetCoreTest/bin
 /AspNetCoreWeb/MailWeb.csproj.user
+/examples/CmsModuleManagement/obj
+/examples/CmsModuleManagement/bin
+/unit-tests/ModulesTests/obj
+/unit-tests/ModulesTests/bin
+/examples/CmsModuleShared/obj
+/examples/CmsModuleShared/bin
+/libs/MailModule/obj
+/libs/MailModule/bin
+/libs/CorsModule/obj
+/libs/CorsModule/bin
