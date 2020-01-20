@@ -7,3 +7,13 @@
 /MailManager/obj
 /MailManager/bin
 /MailManager/MailManager.csproj.user
+/unit-tests/ModulesTests/obj
+/unit-tests/ModulesTests/bin
+/libs/MailModule/obj
+/libs/MailModule/bin
+/libs/LanguageModule/obj
+/libs/LanguageModule/bin
+/examples/CmsModulesShared/obj
+/examples/CmsModulesShared/bin
+/examples/CmsModulesManagement/obj
+/examples/CmsModulesManagement/bin

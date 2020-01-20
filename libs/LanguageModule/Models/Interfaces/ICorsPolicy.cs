@@ -1,0 +1,24 @@
+﻿namespace CorsModule.Models.Interfaces
+{
+    public interface ICorsPolicy
+    {
+        #region Properties
+
+        /// <summary>
+        /// Name of policy.
+        /// </summary>
+        string Name { get; set; }
+
+        string[] AllowedHeaders { get; set; }
+
+        string[] AllowedOrigins { get; set; }
+
+        string[] AllowedMethods { get; set; }
+
+        string[] AllowedExposedHeaders { get; set; }
+
+        bool AllowCredential { get; set; }
+
+        #endregion
+    }
+}

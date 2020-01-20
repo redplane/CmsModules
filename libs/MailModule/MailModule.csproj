@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.0.0-Preview-001</PackageVersion>
+    <Authors>Linh Nguyen</Authors>
+    <Description>A small library which abstracts mail client interfaces.</Description>
+    <PackageProjectUrl>https://github.com/redplane/MailClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/redplane/MailClient</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Implementations\**" />
+    <EmbeddedResource Remove="Models\Implementations\**" />
+    <None Remove="Models\Implementations\**" />
+  </ItemGroup>
+
+</Project>
