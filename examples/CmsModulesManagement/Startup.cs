@@ -55,10 +55,10 @@ namespace MailWeb
 
             // Add connection string into system.
             services
-                .AddDbContext<MailManagementDbContext>(options => options
+                .AddDbContext<SiteDbContext>(options => options
                     .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
 
-            services.AddScoped<MailManagementDbContext>();
+            services.AddScoped<SiteDbContext>();
             services.AddScoped<IMailClientsManager, MailClientsManager>();
 
             // Add mediatr.

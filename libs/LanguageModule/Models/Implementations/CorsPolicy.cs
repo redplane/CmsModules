@@ -4,8 +4,6 @@ namespace CorsModule.Models.Implementations
 {
     public class CorsPolicy : ICorsPolicy
     {
-        #region Properties
-
         public string Name { get; set; }
 
         public string[] AllowedHeaders { get; set; }
@@ -17,7 +15,5 @@ namespace CorsModule.Models.Implementations
         public string[] AllowedExposedHeaders { get; set; }
 
         public bool AllowCredential { get; set; }
-
-        #endregion
     }
 }

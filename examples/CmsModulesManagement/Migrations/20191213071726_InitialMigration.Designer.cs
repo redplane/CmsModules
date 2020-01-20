@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MailWeb.Migrations
 {
-    [DbContext(typeof(MailManagementDbContext))]
+    [DbContext(typeof(SiteDbContext))]
     [Migration("20191213071726_InitialMigration")]
     partial class InitialMigration
     {

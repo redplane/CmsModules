@@ -13,7 +13,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Constructor
 
-        public AddClientSettingCommandHandler(MailManagementDbContext dbContext, IMailClientsManager mailClientsManager)
+        public AddClientSettingCommandHandler(SiteDbContext dbContext, IMailClientsManager mailClientsManager)
         {
             _dbContext = dbContext;
             _mailClientsManager = mailClientsManager;
@@ -45,7 +45,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         #region Properties
 
-        private readonly MailManagementDbContext _dbContext;
+        private readonly SiteDbContext _dbContext;
 
         private readonly IMailClientsManager _mailClientsManager;
 

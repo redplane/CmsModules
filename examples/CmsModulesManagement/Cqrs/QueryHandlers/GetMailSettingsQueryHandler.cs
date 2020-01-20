@@ -13,13 +13,13 @@ namespace MailWeb.Cqrs.QueryHandlers
     {
         #region Properties
 
-        private readonly MailManagementDbContext _dbContext;
+        private readonly SiteDbContext _dbContext;
 
         #endregion
 
         #region Constructor
 
-        public GetMailSettingsQueryHandler(MailManagementDbContext dbContext)
+        public GetMailSettingsQueryHandler(SiteDbContext dbContext)
         {
             _dbContext = dbContext;
         }

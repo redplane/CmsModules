@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MailWeb.Migrations
 {
-    [DbContext(typeof(MailManagementDbContext))]
+    [DbContext(typeof(SiteDbContext))]
     internal class MailManagementDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

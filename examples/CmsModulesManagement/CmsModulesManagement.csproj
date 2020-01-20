@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\libs\LanguageModule\CorsModule.csproj" />
     <ProjectReference Include="..\..\libs\MailModule\MailModule.csproj" />
     <ProjectReference Include="..\CmsModulesShared\CmsModulesShared.csproj" />
   </ItemGroup>
