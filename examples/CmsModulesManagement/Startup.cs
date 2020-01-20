@@ -59,14 +59,13 @@ namespace MailWeb
                     .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
 
             services.AddScoped<MailManagementDbContext>();
-            services.AddScoped<IMailClientFactory, MailClientFactory>();
+            services.AddScoped<IMailClientsManager, MailClientsManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-
 
             services
                 .AddMvc()

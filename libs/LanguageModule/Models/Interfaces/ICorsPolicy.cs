@@ -4,9 +4,6 @@
     {
         #region Properties
 
-        /// <summary>
-        /// Name of policy.
-        /// </summary>
         string Name { get; set; }
 
         string[] AllowedHeaders { get; set; }

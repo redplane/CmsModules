@@ -8,11 +8,11 @@ using MailModule.Services.Interfaces;
 
 namespace MailModule.Services.Implementations
 {
-    public abstract class BaseSmtpMailClient : IMailClient
+    public abstract class DefaultSmtpMailClient : IMailClient
     {
         #region Constructor
 
-        public BaseSmtpMailClient(IMailClientSetting mailClientSetting)
+        public DefaultSmtpMailClient(IMailClientSetting mailClientSetting)
         {
             _mailClientSetting = mailClientSetting;
         }

@@ -10,7 +10,7 @@ using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 
-namespace CmsModulesShared.Services
+namespace MailWeb.Services.Implementations
 {
     public class MailGunClient : IMailClient
     {
@@ -58,7 +58,6 @@ namespace CmsModulesShared.Services
 
         public event OnMailSentEventHandler OnMailSent;
 
-
         #endregion
 
         #region Methods
@@ -98,9 +97,11 @@ namespace CmsModulesShared.Services
             data.Add(new StringContent(await RenderAsync(content, additionalContentData)),
                 isHtmlContent ? "html" : "text");
 
-            await _httpClient
+            var httpResponseMessage = await _httpClient
                 .PostAsync(new Uri($"v3/{_mailGunHost.Domain}/messages", UriKind.Relative), data,
                     cancellationToken);
+
+            OnMailSent?.Invoke(httpResponseMessage);
         }
 
         public virtual async Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients,
@@ -154,10 +155,6 @@ namespace CmsModulesShared.Services
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Internal methods
-
         protected virtual string ToMailGunAddress(IMailAddress mailAddress)
         {
             return $"{mailAddress.DisplayName} <{mailAddress.Address}>";
@@ -167,6 +164,7 @@ namespace CmsModulesShared.Services
         {
             return Task.FromResult(initialContent);
         }
+
 
         #endregion
     }

@@ -10,15 +10,15 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Properties
 
-        private readonly IMailClientFactory _mailServiceFactory;
+        private readonly IMailClientsManager _mailClientsManager;
 
         #endregion
 
         #region Constructor
 
-        public UpdateActiveMailClientCommandHandler(IMailClientFactory mailServiceFactory)
+        public UpdateActiveMailClientCommandHandler(IMailClientsManager mailClientsManager)
         {
-            _mailServiceFactory = mailServiceFactory;
+            _mailClientsManager = mailClientsManager;
         }
 
         #endregion
@@ -28,8 +28,8 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
         public virtual async Task<bool> Handle(UpdateActiveMailServiceCommand command,
             CancellationToken cancellationToken)
         {
-            await _mailServiceFactory
-                .SetActiveMailClientAsync(command.MailServiceUniqueName, cancellationToken);
+            await _mailClientsManager
+                .MarkMailClientAsActiveAsync(command.MailServiceUniqueName, cancellationToken);
 
             return true;
         }

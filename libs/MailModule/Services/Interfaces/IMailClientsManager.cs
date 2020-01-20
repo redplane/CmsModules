@@ -17,7 +17,7 @@ namespace MailModule.Services.Interfaces
         ///     Get a a registered mail service by name.
         /// </summary>
         /// <returns></returns>
-        Task<IMailClient> GetMailClientsAsync(string uniqueName, CancellationToken cancellationToken = default);
+        Task<IMailClient> GetMailClientAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         /// <summary>
         ///     Get mail service is selected.
@@ -28,7 +28,7 @@ namespace MailModule.Services.Interfaces
         /// <summary>
         ///     Set mail service as active.
         /// </summary>
-        Task SetActiveMailClientAsync(string uniqueName, CancellationToken cancellationToken = default);
+        Task MarkMailClientAsActiveAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         #endregion
     }

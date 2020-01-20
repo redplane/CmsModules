@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Implementations\" />
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implementations\" />
+    <Compile Remove="Services\Implementations\**" />
+    <EmbeddedResource Remove="Services\Implementations\**" />
+    <None Remove="Services\Implementations\**" />
   </ItemGroup>
 
 </Project>

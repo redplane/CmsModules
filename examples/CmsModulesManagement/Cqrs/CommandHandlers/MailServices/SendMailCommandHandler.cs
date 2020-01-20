@@ -12,15 +12,15 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
     {
         #region Properties
 
-        private readonly IMailClientFactory _mailServiceFactory;
+        private readonly IMailClientsManager _mailClientsManager;
 
         #endregion
 
         #region Constructor
 
-        public SendMailCommandHandler(IMailClientFactory mailServiceFactory)
+        public SendMailCommandHandler(IMailClientsManager mailClientsManager)
         {
-            _mailServiceFactory = mailServiceFactory;
+            _mailClientsManager = mailClientsManager;
         }
 
         #endregion
@@ -33,9 +33,9 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
             IMailClient mailClient = null;
 
             if (command.UseMailServiceName)
-                mailClient = await _mailServiceFactory.GetMailServiceAsync(command.MailServiceName, cancellationToken);
+                mailClient = await _mailClientsManager.GetMailClientAsync(command.MailServiceName, cancellationToken);
             else
-                mailClient = await _mailServiceFactory.GetActiveMailClientAsync(cancellationToken);
+                mailClient = await _mailClientsManager.GetActiveMailClientAsync(cancellationToken);
 
             if (mailClient == null)
                 return false;

@@ -4,9 +4,9 @@ using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Implementations;
 
-namespace CmsModulesShared.Services
+namespace MailWeb.Services.Implementations
 {
-    public class OutlookMailClient : BaseSmtpMailClient
+    public class OutlookMailClient : DefaultSmtpMailClient
     {
         #region Constructor
 
