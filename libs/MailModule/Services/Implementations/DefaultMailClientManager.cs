@@ -7,11 +7,11 @@ using MailModule.Services.Interfaces;
 
 namespace MailModule.Services.Implementations
 {
-    public class BaseMailClientFactory : IMailClientFactory
+    public class DefaultMailClientManager : IMailClientsManager
     {
         #region Constructor
 
-        public BaseMailClientFactory(IEnumerable<IMailClient> mailServices)
+        public DefaultMailClientManager(IEnumerable<IMailClient> mailServices)
         {
             _mailServices = mailServices.ToArray();
             _selectedMailService = _mailServices.FirstOrDefault();
@@ -30,13 +30,12 @@ namespace MailModule.Services.Implementations
 
         #region Methods
 
-        public virtual Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default)
+        public Task<IMailClient[]> GetMailClientsAsync(CancellationToken cancellationToken = default)
         {
             return Task.FromResult(_mailServices);
         }
 
-        public virtual Task<IMailClient> GetMailServiceAsync(string uniqueName,
-            CancellationToken cancellationToken = default)
+        public Task<IMailClient> GetMailClientAsync(string uniqueName, CancellationToken cancellationToken = default)
         {
             var mailService = _mailServices
                 .FirstOrDefault(x => x.UniqueName == uniqueName);
@@ -49,7 +48,7 @@ namespace MailModule.Services.Implementations
             return Task.FromResult(_selectedMailService);
         }
 
-        public virtual Task SetActiveMailClientAsync(string uniqueName, CancellationToken cancellationToken = default)
+        public virtual Task MarkMailClientAsActiveAsync(string uniqueName, CancellationToken cancellationToken = default)
         {
             var mailService = _mailServices.FirstOrDefault(x => x.UniqueName == uniqueName);
             if (mailService == null)

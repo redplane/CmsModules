@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CmsModulesShared.Models.MailHosts;
-using CmsModulesShared.Services;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 using MailWeb.Models;
@@ -12,11 +11,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Services.Implementations
 {
-    public class MailClientFactory : IMailClientFactory
+    public class MailClientsManager : IMailClientsManager
     {
         #region Constructor
 
-        public MailClientFactory(
+        public MailClientsManager(
             IRequestProfile requestProfile, IHttpClientFactory httpClientFactory,
             MailManagementDbContext dbContext)
         {
@@ -39,7 +38,7 @@ namespace MailWeb.Services.Implementations
 
         #region Methods
 
-        public virtual async Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<IMailClient[]> GetMailClientsAsync(CancellationToken cancellationToken = default)
         {
             var mailClients = await _dbContext.MailClientSettings
                 .ToListAsync(cancellationToken);
@@ -47,8 +46,7 @@ namespace MailWeb.Services.Implementations
             return mailClients.Select(ToMailClient).ToArray();
         }
 
-        public virtual async Task<IMailClient> GetMailServiceAsync(string uniqueName,
-            CancellationToken cancellationToken = default)
+        public virtual async Task<IMailClient> GetMailClientAsync(string uniqueName, CancellationToken cancellationToken = default)
         {
             var mailClients = _dbContext.MailClientSettings
                 .Where(x => x.UniqueName == uniqueName);
@@ -84,7 +82,7 @@ namespace MailWeb.Services.Implementations
             return ToMailClient(mailClientSetting);
         }
 
-        public virtual async Task SetActiveMailClientAsync(string uniqueName,
+        public virtual async Task MarkMailClientAsActiveAsync(string uniqueName,
             CancellationToken cancellationToken = default)
         {
             // Find the client settings.
@@ -98,7 +96,7 @@ namespace MailWeb.Services.Implementations
                 return;
 
             // Find the mail service.
-            var mailService = await GetMailServiceAsync(uniqueName, cancellationToken);
+            var mailService = await GetMailClientAsync(uniqueName, cancellationToken);
             if (mailService == null)
                 return;
 

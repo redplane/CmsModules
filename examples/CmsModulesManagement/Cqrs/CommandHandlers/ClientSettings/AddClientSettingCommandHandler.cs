@@ -13,10 +13,10 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Constructor
 
-        public AddClientSettingCommandHandler(MailManagementDbContext dbContext, IMailClientFactory mailServiceFactory)
+        public AddClientSettingCommandHandler(MailManagementDbContext dbContext, IMailClientsManager mailClientsManager)
         {
             _dbContext = dbContext;
-            _mailServiceFactory = mailServiceFactory;
+            _mailClientsManager = mailClientsManager;
         }
 
         #endregion
@@ -27,7 +27,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
             CancellationToken cancellationToken)
         {
             var activeMailService =
-                await _mailServiceFactory.GetMailServiceAsync(command.UniqueName, cancellationToken);
+                await _mailClientsManager.GetMailClientAsync(command.UniqueName, cancellationToken);
             if (activeMailService == null)
                 throw new Exception($"Mails service named {command.UniqueName} is not found");
 
@@ -47,7 +47,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         private readonly MailManagementDbContext _dbContext;
 
-        private readonly IMailClientFactory _mailServiceFactory;
+        private readonly IMailClientsManager _mailClientsManager;
 
         #endregion
     }
