@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{563D3067-27BF-477C-9F8A-1BDEF6FAA277}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailModule", "libs\MailModule\MailModule.csproj", "{82569763-0C4B-41E1-9EC9-CC048607AED9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", "{821DD67B-DA31-480A-97FD-DEF4440D5F69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModulesTests", "unit-tests\ModulesTests\ModulesTests.csproj", "{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesShared", "examples\CmsModulesShared\CmsModulesShared.csproj", "{58EDA8B0-B787-4783-B53B-774CC159340D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesManagement", "examples\CmsModulesManagement\CmsModulesManagement.csproj", "{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsModule", "libs\LanguageModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82569763-0C4B-41E1-9EC9-CC048607AED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82569763-0C4B-41E1-9EC9-CC048607AED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82569763-0C4B-41E1-9EC9-CC048607AED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82569763-0C4B-41E1-9EC9-CC048607AED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58EDA8B0-B787-4783-B53B-774CC159340D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58EDA8B0-B787-4783-B53B-774CC159340D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58EDA8B0-B787-4783-B53B-774CC159340D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58EDA8B0-B787-4783-B53B-774CC159340D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87927845-5F09-4497-B200-9A405A83E3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87927845-5F09-4497-B200-9A405A83E3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87927845-5F09-4497-B200-9A405A83E3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87927845-5F09-4497-B200-9A405A83E3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82569763-0C4B-41E1-9EC9-CC048607AED9} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
+		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC} = {821DD67B-DA31-480A-97FD-DEF4440D5F69}
+		{58EDA8B0-B787-4783-B53B-774CC159340D} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
+		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
+		{87927845-5F09-4497-B200-9A405A83E3E4} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40AD4BA3-5EBD-4455-B116-E6A4F5F66C0D}
+	EndGlobalSection
+EndGlobal

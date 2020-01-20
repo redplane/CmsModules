@@ -7,7 +7,7 @@ using MailModule.Services.Interfaces;
 
 namespace MailModule.Services.Implementations
 {
-    public class BaseMailClientFactory : IMailClientsManager
+    public class BaseMailClientFactory : IMailClientFactory
     {
         #region Constructor
 
@@ -30,12 +30,12 @@ namespace MailModule.Services.Implementations
 
         #region Methods
 
-        public virtual Task<IMailClient[]> GetMailClientsAsync(CancellationToken cancellationToken = default)
+        public virtual Task<IMailClient[]> GetMailServicesAsync(CancellationToken cancellationToken = default)
         {
             return Task.FromResult(_mailServices);
         }
 
-        public virtual Task<IMailClient> GetMailClientsAsync(string uniqueName,
+        public virtual Task<IMailClient> GetMailServiceAsync(string uniqueName,
             CancellationToken cancellationToken = default)
         {
             var mailService = _mailServices

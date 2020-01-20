@@ -1,15 +1,15 @@
 using System;
 using System.Threading;
 using Autofac;
-using CmsModuleShared.Models.MailHosts;
-using CmsModuleShared.Services;
+using CmsModulesShared.Models.MailHosts;
+using CmsModulesShared.Services;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 using Moq;
 using netDumbster.smtp;
 using NUnit.Framework;
 
-namespace ModuleTests.OutlookMailClientTests
+namespace ModulesTests.OutlookMailClientTests
 {
     public class OutlookMailClient_SenderKeyWithMailTemplateTest
     {

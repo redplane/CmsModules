@@ -1,4 +1,4 @@
-﻿namespace ModuleTests.Models
+﻿namespace ModulesTests.Models
 {
     public class MailGunResponse
     {

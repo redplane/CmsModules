@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModuleTests.Models;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,9 +7,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HttpMultipartParser;
+using ModulesTests.Models;
 using Newtonsoft.Json;
 
-namespace ModuleTests.Interceptors
+namespace ModulesTests.Interceptors
 {
     public class MailGunHttpInterceptor : DelegatingHandler
     {

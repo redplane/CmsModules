@@ -1,6 +1,6 @@
 ﻿using MailModule.Models.Interfaces;
 
-namespace ModuleTests.Models
+namespace ModulesTests.Models
 {
     public class MailAddress : IMailAddress
     {

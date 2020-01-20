@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using MailModule.Models.Interfaces;
@@ -24,8 +23,8 @@ namespace MailModule.Services.Interfaces
         /// <returns></returns>
         Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string subject, string content, bool isHtmlContent = false,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
@@ -36,8 +35,8 @@ namespace MailModule.Services.Interfaces
         Task SendMailAsync(IMailAddress sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies,
             string templateName,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
@@ -47,8 +46,8 @@ namespace MailModule.Services.Interfaces
         /// <returns></returns>
         Task SendMailAsync(string sender, IMailAddress[] recipients, IMailAddress[] carbonCopies,
             IMailAddress[] blindCarbonCopies, string templateName,
-            ExpandoObject additionalSubjectData = null,
-            ExpandoObject additionalContentData = null,
+            object additionalSubjectData = null,
+            object additionalContentData = null,
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default);
 
