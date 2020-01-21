@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MailWeb.Controllers
 {
     [Route("api/client-setting")]
-    public class ClientSettingController : Controller
+    public class SiteSettingController : Controller
     {
         #region Properties
 
@@ -18,7 +18,7 @@ namespace MailWeb.Controllers
 
         #region Constructor
 
-        public ClientSettingController(IMediator mediator)
+        public SiteSettingController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -28,13 +28,13 @@ namespace MailWeb.Controllers
         #region Methods
 
         [HttpGet]
-        public virtual Task<ClientSetting[]> GetClientSettingsAsync()
+        public virtual Task<SiteSetting[]> GetClientSettingsAsync()
         {
             return _mediator.Send(new GetClientSettingsQuery());
         }
 
         [HttpPost]
-        public virtual async Task<ClientSetting> AddClientSettingAsync(
+        public virtual async Task<SiteSetting> AddClientSettingAsync(
             [FromBody] AddClientSettingCommand command)
         {
             return await _mediator.Send(command);

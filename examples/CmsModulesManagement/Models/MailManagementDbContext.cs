@@ -34,7 +34,7 @@ namespace MailWeb.Models
 
         public virtual DbSet<MailClientSetting> MailClientSettings { get; set; }
 
-        public virtual DbSet<ClientSetting> ClientSettings { get; set; }
+        public virtual DbSet<SiteSetting> ClientSettings { get; set; }
 
         #endregion
 
@@ -70,7 +70,7 @@ namespace MailWeb.Models
 
         protected virtual void AddClientSettingTable(ModelBuilder modelBuilder)
         {
-            var clientSetting = modelBuilder.Entity<ClientSetting>();
+            var clientSetting = modelBuilder.Entity<SiteSetting>();
             clientSetting.HasKey(x => x.Id);
 
             clientSetting.Property(x => x.Name)

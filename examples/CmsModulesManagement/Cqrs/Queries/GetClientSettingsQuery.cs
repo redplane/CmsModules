@@ -3,7 +3,7 @@ using MediatR;
 
 namespace MailWeb.Cqrs.Queries
 {
-    public class GetClientSettingsQuery : IRequest<ClientSetting[]>
+    public class GetClientSettingsQuery : IRequest<SiteSetting[]>
     {
     }
 }

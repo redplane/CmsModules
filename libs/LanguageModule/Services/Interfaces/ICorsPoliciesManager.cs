@@ -22,15 +22,15 @@ namespace CorsModule.Services.Interfaces
         /// <param name="corsPolicy"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task AddCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default);
+        Task<ICorsPolicy> AddCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete cors policy asynchronously.
         /// </summary>
-        /// <param name="corsPolicy"></param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task DeleteCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default);
+        Task DeleteCorsPolicyAsync(string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get cors policy asynchronously.

@@ -9,7 +9,7 @@ using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 {
-    public class AddClientSettingCommandHandler : IRequestHandler<AddClientSettingCommand, ClientSetting>
+    public class AddClientSettingCommandHandler : IRequestHandler<AddClientSettingCommand, SiteSetting>
     {
         #region Constructor
 
@@ -23,7 +23,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         #region Methods
 
-        public virtual async Task<ClientSetting> Handle(AddClientSettingCommand command,
+        public virtual async Task<SiteSetting> Handle(AddClientSettingCommand command,
             CancellationToken cancellationToken)
         {
             var activeMailService =
@@ -31,7 +31,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
             if (activeMailService == null)
                 throw new Exception($"Mails service named {command.UniqueName} is not found");
 
-            var clientSetting = new ClientSetting(Guid.NewGuid());
+            var clientSetting = new SiteSetting(Guid.NewGuid());
             clientSetting.Name = command.Name;
             clientSetting.ActiveMailClient = activeMailService.UniqueName;
 

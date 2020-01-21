@@ -2,11 +2,11 @@
 
 namespace MailWeb.Models.Entities
 {
-    public class ClientSetting
+    public class SiteSetting
     {
         #region Constructor
 
-        public ClientSetting(Guid id)
+        public SiteSetting(Guid id)
         {
             Id = id;
         }
