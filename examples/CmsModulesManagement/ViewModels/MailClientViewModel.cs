@@ -1,6 +1,6 @@
 ﻿namespace MailWeb.ViewModels
 {
-    public class MailServiceViewModel
+    public class MailClientViewModel
     {
         #region Properties
 
@@ -12,11 +12,11 @@
 
         #region Constructor
 
-        public MailServiceViewModel()
+        public MailClientViewModel()
         {
         }
 
-        public MailServiceViewModel(string uniqueName, string displayName)
+        public MailClientViewModel(string uniqueName, string displayName)
         {
             UniqueName = uniqueName;
             DisplayName = displayName;

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MailWeb.Controllers
 {
-    [Route("api/mail-service")]
+    [Route("api/mail-client")]
     public class MailServiceController : Controller
     {
         #region Constructor
@@ -32,13 +32,13 @@ namespace MailWeb.Controllers
         #region Methods
 
         [HttpGet("")]
-        public virtual async Task<MailServiceViewModel[]> GetMailServicesAsync()
+        public virtual async Task<MailClientViewModel[]> GetMailClientsAsync()
         {
             var mailServices = await _mailClientsManager
                 .GetMailClientsAsync();
 
             return mailServices
-                .Select(mailService => new MailServiceViewModel(mailService.UniqueName, mailService.DisplayName))
+                .Select(mailService => new MailClientViewModel(mailService.UniqueName, mailService.DisplayName))
                 .ToArray();
         }
 

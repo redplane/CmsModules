@@ -7,7 +7,7 @@ using MailWeb.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Cqrs.QueryHandlers
+namespace MailWeb.Cqrs.QueryHandlers.Mails
 {
     public class GetMailSettingsQueryHandler : IRequestHandler<GetMailSettingsQuery, MailSettingViewModel[]>
     {

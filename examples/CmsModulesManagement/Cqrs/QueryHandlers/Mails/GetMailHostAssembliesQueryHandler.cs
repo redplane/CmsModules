@@ -6,7 +6,7 @@ using CmsModulesShared.Models.MailHosts;
 using MailWeb.Cqrs.Queries;
 using MediatR;
 
-namespace MailWeb.Cqrs.QueryHandlers
+namespace MailWeb.Cqrs.QueryHandlers.Mails
 {
     public class GetMailHostAssembliesQueryHandler : IRequestHandler<GetMailHostAssembliesQuery, string[]>
     {

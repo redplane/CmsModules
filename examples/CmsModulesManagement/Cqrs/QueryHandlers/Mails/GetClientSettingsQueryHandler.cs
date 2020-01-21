@@ -6,9 +6,9 @@ using MailWeb.Models.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Cqrs.QueryHandlers
+namespace MailWeb.Cqrs.QueryHandlers.Mails
 {
-    public class GetClientSettingsQueryHandler : IRequestHandler<GetClientSettingsQuery, ClientSetting[]>
+    public class GetClientSettingsQueryHandler : IRequestHandler<GetClientSettingsQuery, SiteSetting[]>
     {
         #region Properties
 
@@ -27,7 +27,7 @@ namespace MailWeb.Cqrs.QueryHandlers
 
         #region Methods
 
-        public virtual Task<ClientSetting[]> Handle(GetClientSettingsQuery query, CancellationToken cancellationToken)
+        public virtual Task<SiteSetting[]> Handle(GetClientSettingsQuery query, CancellationToken cancellationToken)
         {
             return _dbContext
                 .ClientSettings

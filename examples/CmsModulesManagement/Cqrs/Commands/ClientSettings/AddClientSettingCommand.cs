@@ -3,7 +3,7 @@ using MediatR;
 
 namespace MailWeb.Cqrs.Commands.ClientSettings
 {
-    public class AddClientSettingCommand : IRequest<ClientSetting>
+    public class AddClientSettingCommand : IRequest<SiteSetting>
     {
         #region Properties
 
