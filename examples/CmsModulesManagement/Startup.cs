@@ -55,12 +55,23 @@ namespace MailWeb
                 return new RequestProfile(tenantId);
             });
 
+            services.AddScoped<ITenant>(options =>
+            {
+                var httpContextAccessor = options.GetService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext;
+
+                var tenantId = httpContext.GetTenantId();
+                var tenant = new Tenant(tenantId);
+                return tenant;
+            });
+
             // Add connection string into system.
             services
                 .AddDbContext<SiteDbContext>(options => options
                     .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
 
             services.AddScoped<SiteDbContext>();
+
             services.AddScoped<IMailClientsManager, MailClientsManager>();
             services.AddScoped<ICorsPoliciesManager, CorsPoliciesManager>();
 
@@ -69,8 +80,9 @@ namespace MailWeb
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
             services.AddCors();
-                services.AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
+            services.AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
 
             services
                 .AddMvc()

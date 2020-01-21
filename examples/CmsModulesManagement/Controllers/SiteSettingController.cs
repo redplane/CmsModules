@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MailWeb.Cqrs.Commands.ClientSettings;
+using MailWeb.Cqrs.Commands.CorsPolicies;
 using MailWeb.Cqrs.Queries;
 using MailWeb.Models.Entities;
 using MediatR;

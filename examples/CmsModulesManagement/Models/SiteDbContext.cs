@@ -81,10 +81,6 @@ namespace MailWeb.Models
 
             clientSetting.HasIndex(x => x.Name)
                 .IsUnique();
-
-            clientSetting.Property(x => x.InUseCorsPolicies)
-                .HasConversion(v => JsonConvert.SerializeObject(v),
-                v => JsonConvert.DeserializeObject<string[]>(v));
         }
 
         protected virtual void AddCorsPoliciesTable(ModelBuilder modelBuilder)

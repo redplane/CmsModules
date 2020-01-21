@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MailWeb.Constants;
 using Microsoft.AspNetCore.Http;
 
 namespace MailWeb.Extensions
@@ -11,7 +12,7 @@ namespace MailWeb.Extensions
         public static Guid GetTenantId(this HttpContext httpContext)
         {
             var initialSiteId = httpContext.Request
-                .Headers.Where(header => header.Key == "X-Site-Id")
+                .Headers.Where(header => HttpHeaderConstants.SiteId.Equals(header.Key, StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.Value.ToString())
                 .FirstOrDefault();
 

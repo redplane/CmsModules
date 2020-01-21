@@ -21,11 +21,6 @@ namespace MailWeb.Models.Entities
 
         public string ActiveMailClient { get; set; }
 
-        /// <summary>
-        /// List of cors policies that are activated.
-        /// </summary>
-        public string[] InUseCorsPolicies { get; set; }
-
         #endregion
     }
 }

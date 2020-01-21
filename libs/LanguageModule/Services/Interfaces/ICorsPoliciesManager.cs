@@ -36,7 +36,7 @@ namespace CorsModule.Services.Interfaces
         /// Get cors policy asynchronously.
         /// </summary>
         /// <returns></returns>
-        Task<ICorsPolicy> GetActiveCorsPolicyAsync();
+        Task<ICorsPolicy> GetActiveCorsPolicyAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get cors policy by using unique name asynchronously.

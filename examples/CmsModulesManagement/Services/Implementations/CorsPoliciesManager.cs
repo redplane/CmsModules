@@ -7,6 +7,8 @@ using CorsModule.Services.Interfaces;
 using MailWeb.Enums;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
+using MailWeb.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Services.Implementations
@@ -17,13 +19,16 @@ namespace MailWeb.Services.Implementations
 
         private readonly SiteDbContext _dbContext;
 
+        private readonly ITenant _tenant;
+
         #endregion
 
         #region Constructor
 
-        public CorsPoliciesManager(SiteDbContext dbContext)
+        public CorsPoliciesManager(SiteDbContext dbContext, ITenant tenant)
         {
             _dbContext = dbContext;
+            _tenant = tenant;
         }
 
         #endregion
@@ -38,6 +43,8 @@ namespace MailWeb.Services.Implementations
         public virtual async Task<ICorsPolicy> AddCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default)
         {
             var initialCorsPolicy = new CorsPolicy(Guid.NewGuid(), corsPolicy);
+            initialCorsPolicy.SiteId = _tenant.Id;
+
             _dbContext
                 .CorsPolicies
                 .Add(initialCorsPolicy);
@@ -64,9 +71,17 @@ namespace MailWeb.Services.Implementations
                 .SaveChangesAsync(cancellationToken);
         }
 
-        public virtual Task<ICorsPolicy> GetActiveCorsPolicyAsync()
+        public virtual async Task<ICorsPolicy> GetActiveCorsPolicyAsync(CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            var corsPolicies = _dbContext.CorsPolicies
+                .AsQueryable();
+
+            var siteCorsPolicy = await corsPolicies
+                .Where(x => (x.SiteId == _tenant.Id || x.SiteId == null) && x.Availability == MasterItemAvailabilities.Available)
+                .OrderByDescending(x => x.SiteId)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            return siteCorsPolicy;
         }
 
         public virtual async Task<ICorsPolicy> GetCorsPolicyAsync(string uniqueName, CancellationToken cancellationToken = default)
@@ -97,6 +112,7 @@ namespace MailWeb.Services.Implementations
                 .Select(x => (ICorsPolicy)x)
             .ToArray();
         }
+
 
         #endregion
     }

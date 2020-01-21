@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
 using MailWeb.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MailWeb.Services.Implementations
 {
@@ -12,15 +14,15 @@ namespace MailWeb.Services.Implementations
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly IServiceProvider _serviceProvider;
 
         #endregion
 
         #region Constructor
 
-        public SiteCorsPolicyProvider(ICorsPoliciesManager corsPoliciesManager)
+        public SiteCorsPolicyProvider(IServiceProvider serviceProvider)
         {
-            _corsPoliciesManager = corsPoliciesManager;
+            _serviceProvider = serviceProvider;
         }
 
         #endregion
@@ -31,11 +33,17 @@ namespace MailWeb.Services.Implementations
         {
             ICorsPolicy loadedCorsPolicy = null;
 
+            // Find cors policies manager.
+            var corsPoliciesManager = context.RequestServices.GetService<ICorsPoliciesManager>();
+
+            if (corsPoliciesManager == null)
+                throw new ArgumentException($"{nameof(ICorsPoliciesManager)} is not found in service context.");
+
             // Policy name is defined, find the entity.
             if (!string.IsNullOrWhiteSpace(policyName))
-                loadedCorsPolicy = await _corsPoliciesManager.GetCorsPolicyAsync(policyName);
+                loadedCorsPolicy = await corsPoliciesManager.GetCorsPolicyAsync(policyName);
             else
-                loadedCorsPolicy = await _corsPoliciesManager.GetActiveCorsPolicyAsync();
+                loadedCorsPolicy = await corsPoliciesManager.GetActiveCorsPolicyAsync();
 
             if (loadedCorsPolicy == null)
                 return null;
@@ -58,8 +66,10 @@ namespace MailWeb.Services.Implementations
             if (allowedExposedHeaders != null && allowedExposedHeaders.Length > 0)
                 appliedCorsPolicyBuilder = appliedCorsPolicyBuilder.WithExposedHeaders(allowedExposedHeaders);
 
-            return appliedCorsPolicyBuilder
+            var builtPolicy = appliedCorsPolicyBuilder
                 .Build();
+
+            return builtPolicy;
         }
 
         #endregion

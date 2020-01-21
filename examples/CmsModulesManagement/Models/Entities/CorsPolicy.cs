@@ -39,6 +39,11 @@ namespace MailWeb.Models.Entities
 
         public bool AllowCredential { get; set; }
 
+        /// <summary>
+        /// Id of site that cors policy will be applied to.
+        /// </summary>
+        public Guid? SiteId { get; set; }
+
         #endregion
     }
 }
