@@ -1,9 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
-using CorsModule.Models.Implementations;
 using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands.CorsPolicies;
+using MailWeb.Models.Entities;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
@@ -29,7 +30,7 @@ namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
 
         public virtual async Task<ICorsPolicy> Handle(AddCorsPolicyCommand request, CancellationToken cancellationToken)
         {
-            var corsPolicy = new CorsPolicy();
+            var corsPolicy = new CorsPolicy(Guid.NewGuid());
             corsPolicy.Name = request.Name;
             corsPolicy.AllowCredential = request.AllowCredential;
             corsPolicy.AllowedExposedHeaders = request.AllowedExposedHeaders;

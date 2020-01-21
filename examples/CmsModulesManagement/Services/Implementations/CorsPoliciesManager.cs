@@ -71,17 +71,19 @@ namespace MailWeb.Services.Implementations
                 .SaveChangesAsync(cancellationToken);
         }
 
-        public virtual async Task<ICorsPolicy> GetActiveCorsPolicyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<ICorsPolicy[]> GetInUseCorsPoliciesAsync(CancellationToken cancellationToken = default)
         {
             var corsPolicies = _dbContext.CorsPolicies
                 .AsQueryable();
 
-            var siteCorsPolicy = await corsPolicies
+            var siteCorsPolicies = await corsPolicies
                 .Where(x => (x.SiteId == _tenant.Id || x.SiteId == null) && x.Availability == MasterItemAvailabilities.Available)
-                .OrderByDescending(x => x.SiteId)
-                .FirstOrDefaultAsync(cancellationToken);
+                .OrderBy(x => x.SiteId)
+                .ToArrayAsync(cancellationToken);
 
-            return siteCorsPolicy;
+            return siteCorsPolicies
+                .Select(x => (ICorsPolicy)x)
+                .ToArray();
         }
 
         public virtual async Task<ICorsPolicy> GetCorsPolicyAsync(string uniqueName, CancellationToken cancellationToken = default)
