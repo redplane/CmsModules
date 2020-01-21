@@ -66,6 +66,8 @@ namespace MailWeb
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddCors()
+                .AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
 
             services
                 .AddMvc()

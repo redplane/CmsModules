@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MailWeb.Migrations
 {
     [DbContext(typeof(SiteDbContext))]
-    [Migration("20191213071726_InitialMigration")]
+    [Migration("20200121053833_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,10 +18,26 @@ namespace MailWeb.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity("AspNetCoreWeb.Models.Entities.ClientSetting", b =>
+            modelBuilder.Entity("MailWeb.Models.Entities.CorsPolicy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AllowCredential");
+
+                    b.Property<string>("AllowedExposedHeaders");
+
+                    b.Property<string>("AllowedHeaders");
+
+                    b.Property<string>("AllowedMethods");
+
+                    b.Property<string>("AllowedOrigins");
+
+                    b.Property<int>("Availability");
+
+                    b.Property<double>("CreatedTime");
+
+                    b.Property<double?>("LastModifiedTime");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -31,10 +47,10 @@ namespace MailWeb.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("ClientSettings");
+                    b.ToTable("CorsPolicies");
                 });
 
-            modelBuilder.Entity("AspNetCoreWeb.Models.Entities.MailClientSetting", b =>
+            modelBuilder.Entity("MailWeb.Models.Entities.MailClientSetting", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,27 +84,24 @@ namespace MailWeb.Migrations
                     b.ToTable("MailClientSettings");
                 });
 
-            modelBuilder.Entity("AspNetCoreWeb.Models.Entities.ClientSetting", b =>
+            modelBuilder.Entity("MailWeb.Models.Entities.SiteSetting", b =>
                 {
-                    b.OwnsOne("AspNetCoreWeb.Models.ValueObjects.MailServiceValueObject", "ActiveMailService", b1 =>
-                        {
-                            b1.Property<Guid>("ClientSettingId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                            b1.Property<string>("Name")
-                                .HasColumnName("ActiveMailServiceName");
+                    b.Property<string>("ActiveMailClient");
 
-                            b1.Property<string>("Type")
-                                .HasColumnName("ActiveMailServiceType");
+                    b.Property<string>("InUseCorsPolicies");
 
-                            b1.HasKey("ClientSettingId");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                            b1.ToTable("ClientSettings");
+                    b.HasKey("Id");
 
-                            b1.HasOne("AspNetCoreWeb.Models.Entities.ClientSetting")
-                                .WithOne("ActiveMailService")
-                                .HasForeignKey("AspNetCoreWeb.Models.ValueObjects.MailServiceValueObject", "ClientSettingId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ClientSettings");
                 });
 #pragma warning restore 612, 618
         }
