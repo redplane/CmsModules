@@ -53,7 +53,7 @@ namespace CorsModule.Services.Interfaces
         /// <param name="take"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<ICorsPolicy[]> GetCorsPoliciesAsync(int skip, int take, CancellationToken cancellationToken = default);
+        Task<ICorsPolicy[]> GetCorsPoliciesAsync(int skip, int? take, CancellationToken cancellationToken = default);
 
         #endregion
     }

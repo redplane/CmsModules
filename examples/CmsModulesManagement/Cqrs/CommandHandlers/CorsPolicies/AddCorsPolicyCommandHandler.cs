@@ -30,6 +30,7 @@ namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
         public virtual async Task<ICorsPolicy> Handle(AddCorsPolicyCommand request, CancellationToken cancellationToken)
         {
             var corsPolicy = new CorsPolicy();
+            corsPolicy.Name = request.Name;
             corsPolicy.AllowCredential = request.AllowCredential;
             corsPolicy.AllowedExposedHeaders = request.AllowedExposedHeaders;
             corsPolicy.AllowedHeaders = request.AllowedHeaders;

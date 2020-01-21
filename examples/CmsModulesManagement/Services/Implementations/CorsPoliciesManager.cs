@@ -78,18 +78,24 @@ namespace MailWeb.Services.Implementations
             return matchedCorsPolicy;
         }
 
-        public virtual async Task<ICorsPolicy[]> GetCorsPoliciesAsync(int skip, int take,
+        public virtual async Task<ICorsPolicy[]> GetCorsPoliciesAsync(int skip, int? take,
             CancellationToken cancellationToken = default)
         {
-            var corsPolicies = await _dbContext.CorsPolicies
-                .AsQueryable()
-                .Skip(skip)
-                .Take(take)
+            var corsPolicies = _dbContext.CorsPolicies
+                .AsQueryable();
+
+            corsPolicies = corsPolicies
+                .Skip(skip);
+
+            if (take != null && take > 0)
+                corsPolicies = corsPolicies.Take(take.Value);
+
+            var loadedCorsPolicies = await corsPolicies
                 .ToListAsync(cancellationToken);
 
-            return corsPolicies
-                .Select(x => (ICorsPolicy) x)
-                .ToArray();
+            return loadedCorsPolicies
+                .Select(x => (ICorsPolicy)x)
+            .ToArray();
         }
 
         #endregion

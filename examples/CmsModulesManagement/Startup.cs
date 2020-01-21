@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using CorsModule.Services.Interfaces;
 using FluentValidation.AspNetCore;
 using MailModule.Services.Interfaces;
 using MailWeb.Constants;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json.Serialization;
 
 namespace MailWeb
@@ -60,14 +62,15 @@ namespace MailWeb
 
             services.AddScoped<SiteDbContext>();
             services.AddScoped<IMailClientsManager, MailClientsManager>();
+            services.AddScoped<ICorsPoliciesManager, CorsPoliciesManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-            services.AddCors()
-                .AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
+            services.AddCors();
+                services.AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
 
             services
                 .AddMvc()
