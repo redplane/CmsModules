@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MailWeb.Migrations
+namespace CmsModulesManagement.Migrations
 {
     public partial class InitialMigration : Migration
     {
@@ -13,8 +13,7 @@ namespace MailWeb.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    ActiveMailClient = table.Column<string>(nullable: true),
-                    InUseCorsPolicies = table.Column<string>(nullable: true)
+                    ActiveMailClient = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,24 +41,24 @@ namespace MailWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MailClientSettings",
+                name: "SiteMailClientSettings",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Availability = table.Column<int>(nullable: false),
                     CreatedTime = table.Column<double>(nullable: false),
                     LastModifiedTime = table.Column<double>(nullable: true),
-                    ClientId = table.Column<Guid>(nullable: false),
                     UniqueName = table.Column<string>(nullable: false),
                     DisplayName = table.Column<string>(nullable: true),
                     Timeout = table.Column<int>(nullable: false),
                     CarbonCopies = table.Column<string>(nullable: true),
                     BlindCarbonCopies = table.Column<string>(nullable: true),
-                    MailHost = table.Column<string>(nullable: true)
+                    MailHost = table.Column<string>(nullable: true),
+                    TenantId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MailClientSettings", x => x.Id);
+                    table.PrimaryKey("PK_SiteMailClientSettings", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
@@ -75,9 +74,9 @@ namespace MailWeb.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MailClientSettings_UniqueName",
-                table: "MailClientSettings",
-                column: "UniqueName",
+                name: "IX_SiteMailClientSettings_UniqueName_TenantId",
+                table: "SiteMailClientSettings",
+                columns: new[] { "UniqueName", "TenantId" },
                 unique: true);
         }
 
@@ -90,7 +89,7 @@ namespace MailWeb.Migrations
                 name: "CorsPolicies");
 
             migrationBuilder.DropTable(
-                name: "MailClientSettings");
+                name: "SiteMailClientSettings");
         }
     }
 }

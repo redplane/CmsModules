@@ -3,27 +3,28 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.Services.Implementations.MailClients;
+using CmsModulesManagement.Services.Interfaces;
+using CmsModulesManagement.ViewModels;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.Models;
-using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
-using MailWeb.Services.Interfaces;
-using MailWeb.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class SiteMailClientsService : ISiteMailClientsService
     {
         #region Constructor
 
         public SiteMailClientsService(
-            IRequestProfile requestProfile, IHttpClientFactory httpClientFactory,
+            ITenant tenant, IHttpClientFactory httpClientFactory,
             SiteDbContext dbContext)
         {
-            _requestProfile = requestProfile;
+            _tenant = tenant;
             _dbContext = dbContext;
             _httpClientFactory = httpClientFactory;
         }
@@ -34,7 +35,7 @@ namespace MailWeb.Services.Implementations
 
         private readonly SiteDbContext _dbContext;
 
-        private readonly IRequestProfile _requestProfile;
+        private readonly ITenant _tenant;
 
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -67,7 +68,7 @@ namespace MailWeb.Services.Implementations
         public virtual async Task<IMailClient> GetActiveMailClientAsync(CancellationToken cancellationToken = default)
         {
             // Find the client settings.
-            var tenantId = _requestProfile.TenantId;
+            var tenantId = _tenant.Id;
 
             // Find the client setting.
             var clientSetting = await _dbContext.ClientSettings
@@ -90,7 +91,7 @@ namespace MailWeb.Services.Implementations
             CancellationToken cancellationToken = default)
         {
             // Find the client settings.
-            var tenantId = _requestProfile.TenantId;
+            var tenantId = _tenant.Id;
 
             // Find the client setting.
             var clientSetting = _dbContext.ClientSettings
@@ -202,7 +203,7 @@ namespace MailWeb.Services.Implementations
             if (mailClientSetting.MailHost is MailGunHost)
                 return new MailGunClient(mailClientSetting, _httpClientFactory);
 
-            return default;
+            return null;
         }
 
         #endregion

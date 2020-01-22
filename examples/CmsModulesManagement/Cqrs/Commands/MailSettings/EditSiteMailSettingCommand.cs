@@ -1,13 +1,13 @@
 using System;
+using CmsModulesManagement.Converters;
+using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.ViewModels;
 using MailModule.Models.Interfaces;
-using MailWeb.Converters;
-using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
-using MailWeb.ViewModels;
 using MediatR;
 using Newtonsoft.Json;
 
-namespace MailWeb.Cqrs.Commands.MailSettings
+namespace CmsModulesManagement.Cqrs.Commands.MailSettings
 {
     public class EditSiteMailSettingCommand : IRequest<SiteMailClientSetting>
     {

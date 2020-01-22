@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands;
+using CmsModulesManagement.Services.Interfaces;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.Cqrs.Commands;
-using MailWeb.Services.Interfaces;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandHandlers.MailServices
+namespace CmsModulesManagement.Cqrs.CommandHandlers.MailServices
 {
     public class SendMailCommandHandler : IRequestHandler<SendMailCommand, bool>
     {

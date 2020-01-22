@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using MailWeb.Cqrs.Commands.ClientSettings;
+﻿using CmsModulesManagement.Cqrs.Commands.ClientSettings;
+using FluentValidation;
 
-namespace MailWeb.Cqrs.CommandValidators
+namespace CmsModulesManagement.Cqrs.CommandValidators
 {
     public class UpdateActiveMailServiceCommandValidator : AbstractValidator<UpdateActiveMailServiceCommand>
     {

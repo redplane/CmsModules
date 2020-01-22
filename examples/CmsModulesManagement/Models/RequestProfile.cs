@@ -1,7 +1,7 @@
 ﻿using System;
-using MailWeb.Models.Interfaces;
+using CmsModulesManagement.Models.Interfaces;
 
-namespace MailWeb.Models
+namespace CmsModulesManagement.Models
 {
     public class RequestProfile : IRequestProfile
     {

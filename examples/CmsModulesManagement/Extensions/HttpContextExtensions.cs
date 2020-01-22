@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using MailWeb.Constants;
+using CmsModulesManagement.Constants;
 using Microsoft.AspNetCore.Http;
 
-namespace MailWeb.Extensions
+namespace CmsModulesManagement.Extensions
 {
     public static class HttpContextExtensions
     {

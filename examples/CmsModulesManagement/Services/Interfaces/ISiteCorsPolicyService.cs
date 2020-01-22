@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Enums;
+using CmsModulesManagement.ViewModels;
 using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
-using MailWeb.Enums;
-using MailWeb.ViewModels;
 
-namespace MailWeb.Services.Interfaces
+namespace CmsModulesManagement.Services.Interfaces
 {
     public interface ISiteCorsPolicyService : ICorsPoliciesManager
     {

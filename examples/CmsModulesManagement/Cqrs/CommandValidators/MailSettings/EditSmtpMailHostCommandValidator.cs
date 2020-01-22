@@ -1,8 +1,8 @@
+using CmsModulesManagement.Models;
 using CmsModulesShared.Models.MailHosts;
 using FluentValidation;
-using MailWeb.Models;
 
-namespace MailWeb.Cqrs.CommandValidators.MailSettings
+namespace CmsModulesManagement.Cqrs.CommandValidators.MailSettings
 {
     public class EditSmtpMailHostCommandValidator : AbstractValidator<SmtpHost>
     {

@@ -1,8 +1,7 @@
-﻿using CorsModule.Models.Interfaces;
+﻿using CmsModulesManagement.Cqrs.Queries.CorsPolicies;
 using FluentValidation;
-using MailWeb.Cqrs.Queries.CorsPolicies;
 
-namespace MailWeb.Cqrs.QueryValidators.CorsPolicies
+namespace CmsModulesManagement.Cqrs.QueryValidators.CorsPolicies
 {
     public class GetCorsPolicyQueryValidator : AbstractValidator<GetCorsPolicyQuery>
     {

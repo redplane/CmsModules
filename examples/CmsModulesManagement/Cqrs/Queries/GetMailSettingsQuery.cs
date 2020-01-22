@@ -1,7 +1,7 @@
-using MailWeb.ViewModels.MailSettings;
+using CmsModulesManagement.ViewModels.MailSettings;
 using MediatR;
 
-namespace MailWeb.Cqrs.Queries
+namespace CmsModulesManagement.Cqrs.Queries
 {
     public class GetMailSettingsQuery : IRequest<MailSettingViewModel[]>
     {

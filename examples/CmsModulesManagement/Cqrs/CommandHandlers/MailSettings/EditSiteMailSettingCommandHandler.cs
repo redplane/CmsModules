@@ -1,19 +1,15 @@
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CmsModulesShared.Models.MailHosts;
+using CmsModulesManagement.Cqrs.Commands.MailSettings;
+using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.Services.Interfaces;
+using CmsModulesManagement.ViewModels;
 using MailModule.Models.Interfaces;
-using MailWeb.Cqrs.Commands.MailSettings;
-using MailWeb.Models;
-using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
-using MailWeb.Services.Interfaces;
-using MailWeb.ViewModels;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Cqrs.CommandHandlers.MailSettings
+namespace CmsModulesManagement.Cqrs.CommandHandlers.MailSettings
 {
     public class EditSiteMailSettingCommandHandler : IRequestHandler<EditSiteMailSettingCommand, SiteMailClientSetting>
     {

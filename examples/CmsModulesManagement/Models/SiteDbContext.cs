@@ -1,14 +1,14 @@
 ﻿using System;
+using CmsModulesManagement.Models.Entities;
 using CmsModulesShared.Constants;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
-using MailWeb.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MailWeb.Models
+namespace CmsModulesManagement.Models
 {
     public class SiteDbContext : DbContext
     {
@@ -45,27 +45,34 @@ namespace MailWeb.Models
 
         protected virtual void AddMailClientSettingTable(ModelBuilder modelBuilder)
         {
-            var mailClientSetting = modelBuilder.Entity<SiteMailClientSetting>();
-            mailClientSetting.HasKey(x => x.Id);
+            var siteMailClientSetting = modelBuilder.Entity<SiteMailClientSetting>();
+            
+            siteMailClientSetting
+                .HasKey(x => x.Id);
 
-            mailClientSetting.Property(x => x.UniqueName)
+            siteMailClientSetting
+                .Property(x => x.UniqueName)
                 .IsRequired();
 
-            mailClientSetting.HasIndex(x => x.UniqueName)
+            siteMailClientSetting
+                .Property(x => x.TenantId)
+                .IsRequired();
+
+            siteMailClientSetting.HasIndex(x => new { x.UniqueName, x.TenantId})
                 .IsUnique();
 
-            mailClientSetting
+            siteMailClientSetting
                 .Property(x => x.MailHost)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => HandleIncomingMailHost(x));
 
-            mailClientSetting.Property(x => x.CarbonCopies)
+            siteMailClientSetting.Property(x => x.CarbonCopies)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => JsonConvert.DeserializeObject<IMailAddress[]>(x));
 
-            mailClientSetting.Property(x => x.BlindCarbonCopies)
+            siteMailClientSetting.Property(x => x.BlindCarbonCopies)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => JsonConvert.DeserializeObject<IMailAddress[]>(x));

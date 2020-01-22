@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands.CorsPolicies;
+using CmsModulesManagement.Services.Interfaces;
 using CorsModule.Models.Interfaces;
-using MailWeb.Cqrs.Commands.CorsPolicies;
-using MailWeb.Services.Interfaces;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
+namespace CmsModulesManagement.Cqrs.CommandHandlers.CorsPolicies
 {
     public class UpdateCorsPolicyCommandHandler : IRequestHandler<UpdateCorsPolicyCommand, ICorsPolicy>
     {

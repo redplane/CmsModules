@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.ViewModels;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.ViewModels;
 
-namespace MailWeb.Services.Interfaces
+namespace CmsModulesManagement.Services.Interfaces
 {
     public interface ISiteMailClientsService : IMailClientsManager
     {

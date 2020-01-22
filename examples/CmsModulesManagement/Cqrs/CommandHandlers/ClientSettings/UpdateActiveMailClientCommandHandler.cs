@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands.ClientSettings;
+using CmsModulesManagement.Services.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.Cqrs.Commands.ClientSettings;
-using MailWeb.Services.Interfaces;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
+namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
 {
     public class UpdateActiveMailClientCommandHandler : IRequestHandler<UpdateActiveMailServiceCommand, bool>
     {

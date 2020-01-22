@@ -1,4 +1,4 @@
-﻿namespace MailWeb.Constants
+﻿namespace CmsModulesManagement.Constants
 {
     public class ConnectionStringKeyConstants
     {

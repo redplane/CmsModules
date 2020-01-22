@@ -1,11 +1,11 @@
-﻿using MailModule.Models.Interfaces;
-using MailWeb.Converters;
-using MailWeb.Models.Entities;
-using MailWeb.ViewModels;
+﻿using CmsModulesManagement.Converters;
+using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.ViewModels;
+using MailModule.Models.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
 
-namespace MailWeb.Cqrs.Commands.MailSettings
+namespace CmsModulesManagement.Cqrs.Commands.MailSettings
 {
     public class AddSiteMailClientCommand : IRequest<SiteMailClientSetting>
     {
@@ -20,7 +20,7 @@ namespace MailWeb.Cqrs.Commands.MailSettings
         [JsonConverter(typeof(MailHostConverter))]
         public IMailHost MailHost { get; set; }
 
-        public  MailAddressViewModel[] CarbonCopies { get; set; }
+        public MailAddressViewModel[] CarbonCopies { get; set; }
 
         public MailAddressViewModel[] BlindCarbonCopies { get; set; }
 

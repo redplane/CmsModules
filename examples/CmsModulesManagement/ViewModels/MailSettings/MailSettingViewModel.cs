@@ -1,8 +1,8 @@
 ﻿using System;
+using CmsModulesManagement.Models.Entities;
 using MailModule.Models.Interfaces;
-using MailWeb.Models.Entities;
 
-namespace MailWeb.ViewModels.MailSettings
+namespace CmsModulesManagement.ViewModels.MailSettings
 {
     public class MailSettingViewModel : IMailClientSetting
     {

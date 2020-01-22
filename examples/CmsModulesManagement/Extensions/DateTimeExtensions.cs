@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace MailWeb.Extensions
+namespace CmsModulesManagement.Extensions
 {
     public static class DateTimeExtensions
     {

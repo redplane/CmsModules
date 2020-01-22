@@ -1,7 +1,7 @@
 using System;
 using MailModule.Models.Interfaces;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class SiteMailClientSetting : BaseEntity, IMailClientSetting
     {

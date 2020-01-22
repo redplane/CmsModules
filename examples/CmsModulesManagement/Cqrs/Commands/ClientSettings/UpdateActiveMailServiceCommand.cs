@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MailWeb.Cqrs.Commands.ClientSettings
+namespace CmsModulesManagement.Cqrs.Commands.ClientSettings
 {
     public class UpdateActiveMailServiceCommand : IRequest<bool>
     {
