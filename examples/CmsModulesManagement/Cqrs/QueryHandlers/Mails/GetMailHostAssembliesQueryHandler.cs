@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Queries;
 using CmsModulesShared.Models.MailHosts;
-using MailWeb.Cqrs.Queries;
 using MediatR;
 
-namespace MailWeb.Cqrs.QueryHandlers.Mails
+namespace CmsModulesManagement.Cqrs.QueryHandlers.Mails
 {
     public class GetMailHostAssembliesQueryHandler : IRequestHandler<GetMailHostAssembliesQuery, string[]>
     {

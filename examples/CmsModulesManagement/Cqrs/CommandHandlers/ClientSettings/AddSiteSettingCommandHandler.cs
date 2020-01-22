@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands.ClientSettings;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Entities;
 using MailModule.Services.Interfaces;
-using MailWeb.Cqrs.Commands.ClientSettings;
-using MailWeb.Models;
-using MailWeb.Models.Entities;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
+namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
 {
     public class AddSiteSettingCommandHandler : IRequestHandler<AddClientSettingCommand, SiteSetting>
     {

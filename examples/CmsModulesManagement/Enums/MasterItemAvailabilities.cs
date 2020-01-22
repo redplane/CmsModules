@@ -1,4 +1,4 @@
-﻿namespace MailWeb.Enums
+﻿namespace CmsModulesManagement.Enums
 {
     public enum MasterItemAvailabilities
     {

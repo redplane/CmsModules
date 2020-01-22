@@ -10,7 +10,7 @@ using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class MailGunClient : IMailClient
     {

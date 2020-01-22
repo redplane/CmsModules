@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using MailWeb.Cqrs.Commands.MailSettings;
-using MailWeb.Cqrs.Queries;
-using MailWeb.ViewModels.MailSettings;
+using CmsModulesManagement.Cqrs.Commands.MailSettings;
+using CmsModulesManagement.Cqrs.Queries;
+using CmsModulesManagement.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MailWeb.Controllers
+namespace CmsModulesManagement.Controllers
 {
     [Route("api/mail-client-setting")]
     public class MailClientSettingController : Controller

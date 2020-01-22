@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using Autofac;
+using CmsModulesManagement.Services.Implementations;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.Services.Implementations;
 using Moq;
 using netDumbster.smtp;
 using NUnit.Framework;

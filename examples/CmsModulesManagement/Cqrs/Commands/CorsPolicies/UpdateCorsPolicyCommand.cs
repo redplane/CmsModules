@@ -1,10 +1,10 @@
 ﻿using System;
+using CmsModulesManagement.Enums;
+using CmsModulesManagement.ViewModels;
 using CorsModule.Models.Interfaces;
-using MailWeb.Enums;
-using MailWeb.ViewModels;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands.CorsPolicies
+namespace CmsModulesManagement.Cqrs.Commands.CorsPolicies
 {
     public class UpdateCorsPolicyCommand : IRequest<ICorsPolicy>
     {

@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands;
+using CmsModulesManagement.ViewModels;
 using MailModule.Services.Interfaces;
-using MailWeb.Cqrs.Commands;
-using MailWeb.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MailWeb.Controllers
+namespace CmsModulesManagement.Controllers
 {
     [Route("api/mail-client")]
     public class MailServiceController : Controller

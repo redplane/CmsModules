@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MailWeb.Migrations
+namespace CmsModulesManagement.Migrations
 {
     public partial class InitialMigration : Migration
     {

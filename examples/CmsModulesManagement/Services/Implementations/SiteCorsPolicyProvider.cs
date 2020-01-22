@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using CmsModulesManagement.Services.Interfaces;
 using CorsModule.Models.Interfaces;
-using CorsModule.Services.Interfaces;
-using MailWeb.Models;
-using MailWeb.Services.Interfaces;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class SiteCorsPolicyProvider : ICorsPolicyProvider
     {

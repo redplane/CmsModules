@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
-using CorsModule.Services.Interfaces;
+using CmsModulesManagement.Constants;
+using CmsModulesManagement.Cqrs;
+using CmsModulesManagement.Extensions;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.Services.Implementations;
+using CmsModulesManagement.Services.Interfaces;
 using FluentValidation.AspNetCore;
 using MailModule.Services.Interfaces;
-using MailWeb.Constants;
-using MailWeb.Cqrs;
-using MailWeb.Extensions;
-using MailWeb.Models;
-using MailWeb.Models.Interfaces;
-using MailWeb.Services.Implementations;
-using MailWeb.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -18,10 +17,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json.Serialization;
 
-namespace MailWeb
+namespace CmsModulesManagement
 {
     public class Startup
     {

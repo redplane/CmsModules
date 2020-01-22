@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MailWeb.Cqrs.Queries
+namespace CmsModulesManagement.Cqrs.Queries
 {
     public class GetMailHostAssembliesQuery : IRequest<string[]>
     {

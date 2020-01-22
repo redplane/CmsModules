@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Interfaces;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
-using MailWeb.Models;
-using MailWeb.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class MailClientsManager : IMailClientsManager
     {

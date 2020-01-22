@@ -1,7 +1,7 @@
 ﻿using System;
-using MailWeb.Enums;
+using CmsModulesManagement.Enums;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class BaseEntity
     {

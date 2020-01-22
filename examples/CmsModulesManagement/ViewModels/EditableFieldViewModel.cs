@@ -1,4 +1,4 @@
-﻿namespace MailWeb.ViewModels
+﻿namespace CmsModulesManagement.ViewModels
 {
     public class EditableFieldViewModel<T>
     {

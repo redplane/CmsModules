@@ -1,12 +1,12 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MailWeb.Cqrs.Queries;
-using MailWeb.Models;
-using MailWeb.Models.Entities;
+using CmsModulesManagement.Cqrs.Queries;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Cqrs.QueryHandlers.Mails
+namespace CmsModulesManagement.Cqrs.QueryHandlers.Mails
 {
     public class GetClientSettingsQueryHandler : IRequestHandler<GetClientSettingsQuery, SiteSetting[]>
     {

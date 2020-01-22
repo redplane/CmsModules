@@ -1,10 +1,10 @@
-﻿using MailModule.Models.Interfaces;
-using MailWeb.Converters;
-using MailWeb.Models.Entities;
+﻿using CmsModulesManagement.Converters;
+using CmsModulesManagement.Models.Entities;
+using MailModule.Models.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
 
-namespace MailWeb.Cqrs.Commands.MailSettings
+namespace CmsModulesManagement.Cqrs.Commands.MailSettings
 {
     public class AddMailSettingCommand : IRequest<MailClientSetting>
     {

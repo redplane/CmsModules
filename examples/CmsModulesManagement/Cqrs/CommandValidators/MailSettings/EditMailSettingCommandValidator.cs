@@ -1,8 +1,8 @@
+using CmsModulesManagement.Cqrs.Commands.MailSettings;
+using CmsModulesManagement.Models;
 using FluentValidation;
-using MailWeb.Cqrs.Commands.MailSettings;
-using MailWeb.Models;
 
-namespace MailWeb.Cqrs.CommandValidators.MailSettings
+namespace CmsModulesManagement.Cqrs.CommandValidators.MailSettings
 {
     public class EditMailSettingCommandValidator : AbstractValidator<EditMailSettingCommand>
     {

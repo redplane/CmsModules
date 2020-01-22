@@ -1,14 +1,13 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Interfaces;
 using CmsModulesShared.Constants;
-using MailWeb.Constants;
-using MailWeb.Models;
-using MailWeb.Models.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MailWeb.Converters
+namespace CmsModulesManagement.Converters
 {
     public class EditMailHostConverter : JsonConverter
     {

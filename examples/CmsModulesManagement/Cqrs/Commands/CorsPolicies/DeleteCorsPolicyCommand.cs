@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
-namespace MailWeb.Cqrs.Commands.CorsPolicies
+namespace CmsModulesManagement.Cqrs.Commands.CorsPolicies
 {
     public class DeleteCorsPolicyCommand : IRequest<bool>
     {

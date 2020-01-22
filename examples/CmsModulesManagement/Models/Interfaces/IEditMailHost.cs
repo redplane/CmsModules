@@ -1,4 +1,4 @@
-namespace MailWeb.Models.Interfaces
+namespace CmsModulesManagement.Models.Interfaces
 {
     public interface IEditMailHost
     {

@@ -1,7 +1,7 @@
-using MailWeb.Models.Interfaces;
-using MailWeb.ViewModels;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.ViewModels;
 
-namespace MailWeb.Models
+namespace CmsModulesManagement.Models
 {
     public class EditMailGunHostModel : IEditMailHost
     {

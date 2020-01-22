@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class SiteSetting
     {

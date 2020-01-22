@@ -2,18 +2,16 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Enums;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.Services.Interfaces;
+using CmsModulesManagement.ViewModels;
 using CorsModule.Models.Interfaces;
-using CorsModule.Services.Interfaces;
-using MailWeb.Enums;
-using MailWeb.Models;
-using MailWeb.Models.Entities;
-using MailWeb.Models.Interfaces;
-using MailWeb.Services.Interfaces;
-using MailWeb.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class CorsPoliciesManager : ISiteCorsPolicyService
     {

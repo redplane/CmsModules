@@ -1,14 +1,14 @@
 ﻿using System;
+using CmsModulesManagement.Models.Entities;
 using CmsModulesShared.Constants;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
-using MailWeb.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MailWeb.Models
+namespace CmsModulesManagement.Models
 {
     public class SiteDbContext : DbContext
     {

@@ -1,8 +1,8 @@
 ﻿using System.Dynamic;
-using MailWeb.ViewModels;
+using CmsModulesManagement.ViewModels;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands
+namespace CmsModulesManagement.Cqrs.Commands
 {
     public class SendMailCommand : IRequest<bool>
     {

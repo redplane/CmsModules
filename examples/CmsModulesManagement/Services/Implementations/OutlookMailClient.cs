@@ -4,7 +4,7 @@ using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Implementations;
 
-namespace MailWeb.Services.Implementations
+namespace CmsModulesManagement.Services.Implementations
 {
     public class OutlookMailClient : DefaultSmtpMailClient
     {

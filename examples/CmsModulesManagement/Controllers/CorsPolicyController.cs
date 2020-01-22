@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands.CorsPolicies;
+using CmsModulesManagement.Cqrs.Queries.CorsPolicies;
 using CorsModule.Models.Interfaces;
-using MailWeb.Cqrs.Commands.CorsPolicies;
-using MailWeb.Cqrs.Queries.CorsPolicies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MailWeb.Controllers
+namespace CmsModulesManagement.Controllers
 {
     [Route("api/cors-policy")]
     public class CorsPolicyController : Controller

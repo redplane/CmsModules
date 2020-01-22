@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MailWeb.Models.Interfaces
+namespace CmsModulesManagement.Models.Interfaces
 {
     public interface ITenant
     {

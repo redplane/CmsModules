@@ -1,8 +1,8 @@
 ﻿using System;
+using CmsModulesManagement.Enums;
 using CorsModule.Models.Interfaces;
-using MailWeb.Enums;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class SiteCorsPolicy : BaseEntity, ICorsPolicy
     {
