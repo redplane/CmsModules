@@ -30,4 +30,8 @@
     <ProjectReference Include="..\CmsModulesShared\CmsModulesShared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AppData" />
+  </ItemGroup>
+
 </Project>

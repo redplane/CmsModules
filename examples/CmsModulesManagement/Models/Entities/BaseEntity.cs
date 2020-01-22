@@ -1,5 +1,6 @@
 ﻿using System;
 using CmsModulesManagement.Enums;
+using CmsModulesManagement.Extensions;
 
 namespace CmsModulesManagement.Models.Entities
 {
@@ -11,6 +12,7 @@ namespace CmsModulesManagement.Models.Entities
         {
             Id = id;
             Availability = MasterItemAvailabilities.Available;
+            CreatedTime = DateTime.UtcNow.ToUnixTime();
         }
 
         #endregion

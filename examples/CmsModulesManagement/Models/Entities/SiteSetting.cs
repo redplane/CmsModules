@@ -19,8 +19,6 @@ namespace CmsModulesManagement.Models.Entities
 
         public string Name { get; set; }
 
-        public string ActiveMailClient { get; set; }
-
         #endregion
     }
 }

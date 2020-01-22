@@ -8,7 +8,7 @@ using CmsModulesManagement.Services.Interfaces;
 using MailModule.Models.Interfaces;
 using MediatR;
 
-namespace CmsModulesManagement.Cqrs.CommandHandlers.MailSettings
+namespace CmsModulesManagement.Cqrs.CommandHandlers.MailClients
 {
     public class AddSiteMailClientCommandHandler : IRequestHandler<AddSiteMailClientCommand, SiteMailClientSetting>
     {

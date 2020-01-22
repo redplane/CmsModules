@@ -24,6 +24,8 @@ namespace CmsModulesManagement.ViewModels.MailSettings
 
         public IMailHost MailHost { get; set; }
 
+        public Guid TenantId { get; set; }
+        
         #endregion
 
         #region Constructor
@@ -47,6 +49,7 @@ namespace CmsModulesManagement.ViewModels.MailSettings
             DisplayName = model.DisplayName;
             Timeout = model.Timeout;
             MailHost = model.MailHost;
+            TenantId = model.TenantId;
         }
 
         #endregion

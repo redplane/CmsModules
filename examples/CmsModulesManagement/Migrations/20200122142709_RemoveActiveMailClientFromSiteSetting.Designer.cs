@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CmsModulesManagement.Migrations
 {
     [DbContext(typeof(SiteDbContext))]
-    [Migration("20200122085240_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200122142709_RemoveActiveMailClientFromSiteSetting")]
+    partial class RemoveActiveMailClientFromSiteSetting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,8 +88,6 @@ namespace CmsModulesManagement.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ActiveMailClient");
 
                     b.Property<string>("Name")
                         .IsRequired();

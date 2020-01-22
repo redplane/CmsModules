@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MailWeb": {
+    "CmsModuleManagement": {
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "api/values",
