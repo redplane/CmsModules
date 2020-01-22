@@ -15,13 +15,13 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
     {
         #region Properties
 
-        private readonly MailManagementDbContext _dbContext;
+        private readonly SiteDbContext _dbContext;
 
         #endregion
 
         #region Constructor
 
-        public EditMailSettingCommandHandler(MailManagementDbContext dbContext)
+        public EditMailSettingCommandHandler(SiteDbContext dbContext)
         {
             _dbContext = dbContext;
         }

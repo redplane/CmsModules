@@ -14,7 +14,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
     {
         #region Constructor
 
-        public AddMailSettingCommandHandler(MailManagementDbContext dbContext, IRequestProfile profile)
+        public AddMailSettingCommandHandler(SiteDbContext dbContext, IRequestProfile profile)
         {
             _dbContext = dbContext;
             _profile = profile;
@@ -49,7 +49,7 @@ namespace MailWeb.Cqrs.CommandHandlers.MailSettings
 
         #region Properties
 
-        private readonly MailManagementDbContext _dbContext;
+        private readonly SiteDbContext _dbContext;
 
         private readonly IRequestProfile _profile;
 

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using CorsModule.Services.Interfaces;
 using FluentValidation.AspNetCore;
 using MailModule.Services.Interfaces;
 using MailWeb.Constants;
@@ -7,6 +8,7 @@ using MailWeb.Extensions;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using MailWeb.Services.Implementations;
+using MailWeb.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -16,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json.Serialization;
 
 namespace MailWeb
@@ -53,19 +56,34 @@ namespace MailWeb
                 return new RequestProfile(tenantId);
             });
 
+            services.AddScoped<ITenant>(options =>
+            {
+                var httpContextAccessor = options.GetService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext;
+
+                var tenantId = httpContext.GetTenantId();
+                var tenant = new Tenant(tenantId);
+                return tenant;
+            });
+
             // Add connection string into system.
             services
-                .AddDbContext<MailManagementDbContext>(options => options
+                .AddDbContext<SiteDbContext>(options => options
                     .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
 
-            services.AddScoped<MailManagementDbContext>();
+            services.AddScoped<SiteDbContext>();
+
             services.AddScoped<IMailClientsManager, MailClientsManager>();
+            services.AddScoped<ISiteCorsPolicyService, CorsPoliciesManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+            services.AddCors();
+            services.AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
 
             services
                 .AddMvc()

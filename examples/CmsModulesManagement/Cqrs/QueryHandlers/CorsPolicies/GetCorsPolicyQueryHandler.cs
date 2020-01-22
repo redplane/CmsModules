@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CorsModule.Models.Interfaces;
-using CorsModule.Services.Interfaces;
 using MailWeb.Cqrs.Queries.CorsPolicies;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.QueryHandlers.CorsPolicies
@@ -11,13 +11,13 @@ namespace MailWeb.Cqrs.QueryHandlers.CorsPolicies
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly ISiteCorsPolicyService _corsPoliciesManager;
 
         #endregion
 
         #region Constructor
 
-        public GetCorsPolicyQueryHandler(ICorsPoliciesManager corsPoliciesManager)
+        public GetCorsPolicyQueryHandler(ISiteCorsPolicyService corsPoliciesManager)
         {
             _corsPoliciesManager = corsPoliciesManager;
         }

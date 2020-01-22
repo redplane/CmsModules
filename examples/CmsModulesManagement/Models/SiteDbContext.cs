@@ -2,19 +2,19 @@
 using CmsModulesShared.Constants;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
-using MailWeb.Constants;
 using MailWeb.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MailWeb.Models
 {
-    public class MailManagementDbContext : DbContext
+    public class SiteDbContext : DbContext
     {
         #region Constructor
 
-        public MailManagementDbContext(DbContextOptions<MailManagementDbContext> options) : base(options)
+        public SiteDbContext(DbContextOptions<SiteDbContext> options) : base(options)
         {
         }
 
@@ -26,6 +26,7 @@ namespace MailWeb.Models
         {
             AddMailClientSettingTable(modelBuilder);
             AddClientSettingTable(modelBuilder);
+            AddCorsPoliciesTable(modelBuilder);
         }
 
         #endregion
@@ -35,6 +36,8 @@ namespace MailWeb.Models
         public virtual DbSet<MailClientSetting> MailClientSettings { get; set; }
 
         public virtual DbSet<SiteSetting> ClientSettings { get; set; }
+
+        public virtual DbSet<SiteCorsPolicy> CorsPolicies { get; set; }
 
         #endregion
 
@@ -78,6 +81,34 @@ namespace MailWeb.Models
 
             clientSetting.HasIndex(x => x.Name)
                 .IsUnique();
+        }
+
+        protected virtual void AddCorsPoliciesTable(ModelBuilder modelBuilder)
+        {
+            var corsPolicies = modelBuilder.Entity<SiteCorsPolicy>();
+            corsPolicies.HasKey(x => x.Id);
+            corsPolicies.Property(x => x.Name)
+                .IsRequired();
+
+            corsPolicies.HasIndex(x => x.Name)
+                .IsUnique();
+
+            var textsToJsonTextConverter = new ValueConverter<string[], string>(
+                v => JsonConvert.SerializeObject(v),
+                v => JsonConvert.DeserializeObject<string[]>(v));
+
+
+            var allowedHeaders = corsPolicies.Property(x => x.AllowedHeaders);
+            allowedHeaders.HasConversion(textsToJsonTextConverter);
+
+            var allowedOrigins = corsPolicies.Property(x => x.AllowedOrigins);
+            allowedOrigins.HasConversion(textsToJsonTextConverter);
+
+            var allowedMethods = corsPolicies.Property(x => x.AllowedMethods);
+            allowedMethods.HasConversion(textsToJsonTextConverter);
+
+            var allowedExposedHeaders = corsPolicies.Property(x => x.AllowedExposedHeaders);
+            allowedExposedHeaders.HasConversion(textsToJsonTextConverter);
         }
 
         protected virtual IMailHost HandleIncomingMailHost(string x)

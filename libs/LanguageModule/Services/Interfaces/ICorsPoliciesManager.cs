@@ -36,7 +36,7 @@ namespace CorsModule.Services.Interfaces
         /// Get cors policy asynchronously.
         /// </summary>
         /// <returns></returns>
-        Task<ICorsPolicy> GetActiveCorsPolicyAsync();
+        Task<ICorsPolicy[]> GetInUseCorsPoliciesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get cors policy by using unique name asynchronously.
@@ -45,6 +45,15 @@ namespace CorsModule.Services.Interfaces
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<ICorsPolicy> GetCorsPolicyAsync(string uniqueName, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get cors policy asynchronously.
+        /// </summary>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<ICorsPolicy[]> GetCorsPoliciesAsync(int skip, int? take, CancellationToken cancellationToken = default);
 
         #endregion
     }

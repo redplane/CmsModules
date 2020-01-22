@@ -10,4 +10,8 @@
     <None Remove="Services\Implementations\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Implementations\" />
+  </ItemGroup>
+
 </Project>

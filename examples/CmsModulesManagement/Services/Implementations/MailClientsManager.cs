@@ -17,7 +17,7 @@ namespace MailWeb.Services.Implementations
 
         public MailClientsManager(
             IRequestProfile requestProfile, IHttpClientFactory httpClientFactory,
-            MailManagementDbContext dbContext)
+            SiteDbContext dbContext)
         {
             _requestProfile = requestProfile;
             _dbContext = dbContext;
@@ -28,7 +28,7 @@ namespace MailWeb.Services.Implementations
 
         #region Properties
 
-        private readonly MailManagementDbContext _dbContext;
+        private readonly SiteDbContext _dbContext;
 
         private readonly IRequestProfile _requestProfile;
 

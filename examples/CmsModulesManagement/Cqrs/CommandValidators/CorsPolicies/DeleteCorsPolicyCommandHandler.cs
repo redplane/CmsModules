@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands.CorsPolicies;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandValidators.CorsPolicies
@@ -11,13 +12,13 @@ namespace MailWeb.Cqrs.CommandValidators.CorsPolicies
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly ISiteCorsPolicyService _corsPoliciesManager;
 
         #endregion
 
         #region Constructor
 
-        public DeleteCorsPolicyCommandHandler(ICorsPoliciesManager corsPoliciesManager)
+        public DeleteCorsPolicyCommandHandler(ISiteCorsPolicyService corsPoliciesManager)
         {
             _corsPoliciesManager = corsPoliciesManager;
         }
