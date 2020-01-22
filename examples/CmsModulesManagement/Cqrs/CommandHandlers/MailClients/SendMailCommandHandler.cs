@@ -7,7 +7,7 @@ using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 using MediatR;
 
-namespace CmsModulesManagement.Cqrs.CommandHandlers.MailServices
+namespace CmsModulesManagement.Cqrs.CommandHandlers.MailClients
 {
     public class SendMailCommandHandler : IRequestHandler<SendMailCommand, bool>
     {

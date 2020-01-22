@@ -6,7 +6,7 @@ using CmsModulesManagement.Models.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CmsModulesManagement.Cqrs.QueryHandlers.Mails
+namespace CmsModulesManagement.Cqrs.QueryHandlers.SiteSettings
 {
     public class GetClientSettingsQueryHandler : IRequestHandler<GetClientSettingsQuery, SiteSetting[]>
     {

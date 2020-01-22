@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CmsModulesManagement.Cqrs.Queries.MailClients
+namespace CmsModulesManagement.Cqrs.Queries.MailClientSettings
 {
     public class GetMailClientsQuery : IRequest
     {
