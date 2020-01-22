@@ -1,4 +1,5 @@
 using System;
+using MailModule.Models.Interfaces;
 using MailWeb.Converters;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
@@ -8,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace MailWeb.Cqrs.Commands.MailSettings
 {
-    public class EditMailSettingCommand : IRequest<MailClientSetting>
+    public class EditSiteMailSettingCommand : IRequest<SiteMailClientSetting>
     {
         #region Properties
 
@@ -18,8 +19,12 @@ namespace MailWeb.Cqrs.Commands.MailSettings
 
         public EditableFieldViewModel<int> Timeout { get; set; }
 
-        [JsonConverter(typeof(EditMailHostConverter))]
-        public IEditMailHost MailHost { get; set; }
+        [JsonConverter(typeof(MailHostConverter))]
+        public IMailHost MailHost { get; set; }
+
+        public EditableFieldViewModel<MailAddressViewModel[]> CarbonCopies { get; set; }
+
+        public EditableFieldViewModel<MailAddressViewModel[]> BlindCarbonCopies { get; set; }
 
         #endregion
     }

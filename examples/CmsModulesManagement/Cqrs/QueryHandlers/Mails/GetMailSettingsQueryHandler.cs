@@ -31,7 +31,7 @@ namespace MailWeb.Cqrs.QueryHandlers.Mails
         public Task<MailSettingViewModel[]> Handle(GetMailSettingsQuery request, CancellationToken cancellationToken)
         {
             return _dbContext
-                .MailClientSettings
+                .SiteMailClientSettings
                 .Select(x => new MailSettingViewModel(x))
                 .ToArrayAsync(cancellationToken);
         }

@@ -5,6 +5,7 @@ using MailModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
@@ -13,10 +14,10 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Constructor
 
-        public AddSiteSettingCommandHandler(SiteDbContext dbContext, IMailClientsManager mailClientsManager)
+        public AddSiteSettingCommandHandler(SiteDbContext dbContext, ISiteMailClientsService siteMailClientsService)
         {
             _dbContext = dbContext;
-            _mailClientsManager = mailClientsManager;
+            _siteMailClientsService = siteMailClientsService;
         }
 
         #endregion
@@ -47,7 +48,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
 
         private readonly SiteDbContext _dbContext;
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _siteMailClientsService;
 
         #endregion
     }

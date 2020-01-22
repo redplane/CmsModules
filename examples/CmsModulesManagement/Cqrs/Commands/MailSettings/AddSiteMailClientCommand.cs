@@ -1,12 +1,13 @@
 ﻿using MailModule.Models.Interfaces;
 using MailWeb.Converters;
 using MailWeb.Models.Entities;
+using MailWeb.ViewModels;
 using MediatR;
 using Newtonsoft.Json;
 
 namespace MailWeb.Cqrs.Commands.MailSettings
 {
-    public class AddMailSettingCommand : IRequest<MailClientSetting>
+    public class AddSiteMailClientCommand : IRequest<SiteMailClientSetting>
     {
         #region Properties
 
@@ -18,6 +19,10 @@ namespace MailWeb.Cqrs.Commands.MailSettings
 
         [JsonConverter(typeof(MailHostConverter))]
         public IMailHost MailHost { get; set; }
+
+        public  MailAddressViewModel[] CarbonCopies { get; set; }
+
+        public MailAddressViewModel[] BlindCarbonCopies { get; set; }
 
         #endregion
     }

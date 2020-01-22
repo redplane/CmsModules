@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MailModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
+using MailWeb.Services.Interfaces;
 using MailWeb.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace MailWeb.Controllers
     {
         #region Constructor
 
-        public MailServiceController(IMailClientsManager mailClientsManager, IMediator mediator)
+        public MailServiceController(ISiteMailClientsService mailClientsManager, IMediator mediator)
         {
             _mailClientsManager = mailClientsManager;
             _mediator = mediator;
@@ -23,7 +24,7 @@ namespace MailWeb.Controllers
 
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _mailClientsManager;
 
         private readonly IMediator _mediator;
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.MailServices
@@ -12,13 +13,13 @@ namespace MailWeb.Cqrs.CommandHandlers.MailServices
     {
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _mailClientsManager;
 
         #endregion
 
         #region Constructor
 
-        public SendMailCommandHandler(IMailClientsManager mailClientsManager)
+        public SendMailCommandHandler(ISiteMailClientsService mailClientsManager)
         {
             _mailClientsManager = mailClientsManager;
         }

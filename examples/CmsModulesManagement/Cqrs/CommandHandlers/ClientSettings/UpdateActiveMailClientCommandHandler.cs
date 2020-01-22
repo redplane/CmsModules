@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MailModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands.ClientSettings;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
@@ -10,15 +11,15 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
     {
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _siteMailClientsService;
 
         #endregion
 
         #region Constructor
 
-        public UpdateActiveMailClientCommandHandler(IMailClientsManager mailClientsManager)
+        public UpdateActiveMailClientCommandHandler(ISiteMailClientsService siteMailClientsService)
         {
-            _mailClientsManager = mailClientsManager;
+            _siteMailClientsService = siteMailClientsService;
         }
 
         #endregion
@@ -28,7 +29,7 @@ namespace MailWeb.Cqrs.CommandHandlers.ClientSettings
         public virtual async Task<bool> Handle(UpdateActiveMailServiceCommand command,
             CancellationToken cancellationToken)
         {
-            await _mailClientsManager
+            await _siteMailClientsService
                 .MarkMailClientAsActiveAsync(command.MailServiceUniqueName, cancellationToken);
 
             return true;

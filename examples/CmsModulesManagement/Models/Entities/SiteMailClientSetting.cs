@@ -3,20 +3,19 @@ using MailModule.Models.Interfaces;
 
 namespace MailWeb.Models.Entities
 {
-    public class MailClientSetting : BaseEntity, IMailClientSetting
+    public class SiteMailClientSetting : BaseEntity, IMailClientSetting
     {
         #region Constructor
 
-        public MailClientSetting(Guid id, string uniqueName) : base(id)
+        public SiteMailClientSetting(Guid id, Guid tenantId, string uniqueName) : base(id)
         {
+            TenantId = tenantId;
             UniqueName = uniqueName;
         }
 
         #endregion
 
         #region Properties
-
-        public Guid ClientId { get; set; }
 
         public string UniqueName { get; }
 
@@ -29,6 +28,8 @@ namespace MailWeb.Models.Entities
         public IMailAddress[] BlindCarbonCopies { get; set; }
 
         public IMailHost MailHost { get; set; }
+
+        public Guid TenantId { get;}
 
         #endregion
     }

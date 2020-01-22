@@ -73,7 +73,7 @@ namespace MailWeb
 
             services.AddScoped<SiteDbContext>();
 
-            services.AddScoped<IMailClientsManager, MailClientsManager>();
+            services.AddScoped<ISiteMailClientsService, SiteMailClientsService>();
             services.AddScoped<ISiteCorsPolicyService, CorsPoliciesManager>();
 
             // Add mediatr.
