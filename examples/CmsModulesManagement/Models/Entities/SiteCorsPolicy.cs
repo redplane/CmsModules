@@ -4,15 +4,15 @@ using MailWeb.Enums;
 
 namespace MailWeb.Models.Entities
 {
-    public class CorsPolicy : BaseEntity, ICorsPolicy
+    public class SiteCorsPolicy : BaseEntity, ICorsPolicy
     {
         #region Constructor
 
-        public CorsPolicy(Guid id) : base(id)
+        public SiteCorsPolicy(Guid id) : base(id)
         {
         }
 
-        public CorsPolicy(Guid id, ICorsPolicy initialPolicy) : base(id)
+        public SiteCorsPolicy(Guid id, ICorsPolicy initialPolicy) : base(id)
         {
             Name = initialPolicy.Name;
             AllowedHeaders = initialPolicy.AllowedHeaders;
@@ -38,11 +38,6 @@ namespace MailWeb.Models.Entities
         public string[] AllowedExposedHeaders { get; set; }
 
         public bool AllowCredential { get; set; }
-
-        /// <summary>
-        /// Id of site that cors policy will be applied to.
-        /// </summary>
-        public Guid? SiteId { get; set; }
 
         #endregion
     }

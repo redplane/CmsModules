@@ -8,6 +8,7 @@ using MailWeb.Extensions;
 using MailWeb.Models;
 using MailWeb.Models.Interfaces;
 using MailWeb.Services.Implementations;
+using MailWeb.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -73,7 +74,7 @@ namespace MailWeb
             services.AddScoped<SiteDbContext>();
 
             services.AddScoped<IMailClientsManager, MailClientsManager>();
-            services.AddScoped<ICorsPoliciesManager, CorsPoliciesManager>();
+            services.AddScoped<ISiteCorsPolicyService, CorsPoliciesManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);

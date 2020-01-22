@@ -8,12 +8,14 @@ using MailWeb.Enums;
 using MailWeb.Models;
 using MailWeb.Models.Entities;
 using MailWeb.Models.Interfaces;
+using MailWeb.Services.Interfaces;
+using MailWeb.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace MailWeb.Services.Implementations
 {
-    public class CorsPoliciesManager : ICorsPoliciesManager
+    public class CorsPoliciesManager : ISiteCorsPolicyService
     {
         #region Properties
 
@@ -42,8 +44,7 @@ namespace MailWeb.Services.Implementations
 
         public virtual async Task<ICorsPolicy> AddCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default)
         {
-            var initialCorsPolicy = new CorsPolicy(Guid.NewGuid(), corsPolicy);
-            initialCorsPolicy.SiteId = _tenant.Id;
+            var initialCorsPolicy = new SiteCorsPolicy(Guid.NewGuid(), corsPolicy);
 
             _dbContext
                 .CorsPolicies
@@ -77,8 +78,7 @@ namespace MailWeb.Services.Implementations
                 .AsQueryable();
 
             var siteCorsPolicies = await corsPolicies
-                .Where(x => (x.SiteId == _tenant.Id || x.SiteId == null) && x.Availability == MasterItemAvailabilities.Available)
-                .OrderBy(x => x.SiteId)
+                .Where(x =>  x.Availability == MasterItemAvailabilities.Available)
                 .ToArrayAsync(cancellationToken);
 
             return siteCorsPolicies
@@ -115,6 +115,65 @@ namespace MailWeb.Services.Implementations
             .ToArray();
         }
 
+        public virtual async Task<ICorsPolicy> UpdateSiteCorsPolicyAsync(Guid id, EditableFieldViewModel<string[]> allowedHeaders, EditableFieldViewModel<string[]> allowedOrigins, EditableFieldViewModel<string[]> allowedMethods,
+            EditableFieldViewModel<string[]> allowedExposedHeaders, EditableFieldViewModel<bool> allowCredential,
+            EditableFieldViewModel<MasterItemAvailabilities> availability,
+            CancellationToken cancellationToken = default)
+        {
+            // Find the site cors policy by id.
+            var siteCorsPolicies = _dbContext.CorsPolicies.AsQueryable();
+            var hasFieldChanged = false;
+
+            var siteCorsPolicy = await siteCorsPolicies
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+            if (siteCorsPolicy == null)
+                throw new Exception("Cors policy is not found.");
+
+            if (allowedHeaders != null && allowedHeaders.HasModified)
+            {
+                siteCorsPolicy.AllowedHeaders = allowedHeaders.Value;
+                hasFieldChanged = true;
+            }
+
+            if (allowedOrigins != null && allowedOrigins.HasModified)
+            {
+                siteCorsPolicy.AllowedOrigins = allowedOrigins.Value;
+                hasFieldChanged = true;
+            }
+
+            if (allowedMethods != null && allowedMethods.HasModified)
+            {
+                siteCorsPolicy.AllowedMethods = allowedMethods.Value;
+                hasFieldChanged = true;
+            }
+
+            if (allowedExposedHeaders != null && allowedExposedHeaders.HasModified)
+            {
+                siteCorsPolicy.AllowedExposedHeaders = allowedExposedHeaders.Value;
+                hasFieldChanged = true;
+            }
+
+            if (allowCredential != null && allowCredential.HasModified)
+            {
+                siteCorsPolicy.AllowCredential = allowCredential.Value;
+                hasFieldChanged = true;
+            }
+
+            if (availability != null && availability.HasModified)
+            {
+                siteCorsPolicy.Availability = availability.Value;
+                hasFieldChanged = true;
+            }
+
+            if (hasFieldChanged)
+            {
+                await _dbContext.SaveChangesAsync(cancellationToken);
+                return siteCorsPolicy;
+            }
+
+            return siteCorsPolicy;
+        }
 
         #endregion
     }

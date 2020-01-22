@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
 using MailWeb.Models;
+using MailWeb.Services.Interfaces;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,17 +13,11 @@ namespace MailWeb.Services.Implementations
 {
     public class SiteCorsPolicyProvider : ICorsPolicyProvider
     {
-        #region Properties
-
-        private readonly IServiceProvider _serviceProvider;
-
-        #endregion
 
         #region Constructor
 
-        public SiteCorsPolicyProvider(IServiceProvider serviceProvider)
+        public SiteCorsPolicyProvider()
         {
-            _serviceProvider = serviceProvider;
         }
 
         #endregion
@@ -34,10 +29,10 @@ namespace MailWeb.Services.Implementations
             ICorsPolicy[] loadedCorsPolicies = null;
 
             // Find cors policies manager.
-            var corsPoliciesManager = context.RequestServices.GetService<ICorsPoliciesManager>();
+            var corsPoliciesManager = context.RequestServices.GetService<ISiteCorsPolicyService>();
 
             if (corsPoliciesManager == null)
-                throw new ArgumentException($"{nameof(ICorsPoliciesManager)} is not found in service context.");
+                throw new ArgumentException($"{nameof(ISiteCorsPolicyService)} is not found in service context.");
 
             // Policy name is defined, find the entity.
             if (!string.IsNullOrWhiteSpace(policyName))
@@ -71,6 +66,9 @@ namespace MailWeb.Services.Implementations
                 var allowedExposedHeaders = loadedCorsPolicy.AllowedExposedHeaders;
                 if (allowedExposedHeaders != null && allowedExposedHeaders.Length > 0)
                     appliedCorsPolicyBuilder = appliedCorsPolicyBuilder.WithExposedHeaders(allowedExposedHeaders);
+
+                if (loadedCorsPolicy.AllowCredential)
+                    appliedCorsPolicyBuilder = appliedCorsPolicyBuilder.AllowCredentials();
             }
 
             var builtPolicy = appliedCorsPolicyBuilder

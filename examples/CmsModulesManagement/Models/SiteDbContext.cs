@@ -37,7 +37,7 @@ namespace MailWeb.Models
 
         public virtual DbSet<SiteSetting> ClientSettings { get; set; }
 
-        public virtual DbSet<CorsPolicy> CorsPolicies { get; set; }
+        public virtual DbSet<SiteCorsPolicy> CorsPolicies { get; set; }
 
         #endregion
 
@@ -85,7 +85,7 @@ namespace MailWeb.Models
 
         protected virtual void AddCorsPoliciesTable(ModelBuilder modelBuilder)
         {
-            var corsPolicies = modelBuilder.Entity<CorsPolicy>();
+            var corsPolicies = modelBuilder.Entity<SiteCorsPolicy>();
             corsPolicies.HasKey(x => x.Id);
             corsPolicies.Property(x => x.Name)
                 .IsRequired();

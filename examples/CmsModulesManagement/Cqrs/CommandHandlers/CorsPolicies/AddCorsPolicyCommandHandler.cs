@@ -5,6 +5,7 @@ using CorsModule.Models.Interfaces;
 using CorsModule.Services.Interfaces;
 using MailWeb.Cqrs.Commands.CorsPolicies;
 using MailWeb.Models.Entities;
+using MailWeb.Services.Interfaces;
 using MediatR;
 
 namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
@@ -13,15 +14,15 @@ namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly ISiteCorsPolicyService _siteCorsPolicyService;
 
         #endregion
 
         #region Constructor
 
-        public AddCorsPolicyCommandHandler(ICorsPoliciesManager corsPoliciesManager)
+        public AddCorsPolicyCommandHandler(ISiteCorsPolicyService siteCorsPolicyService)
         {
-            _corsPoliciesManager = corsPoliciesManager;
+            _siteCorsPolicyService = siteCorsPolicyService;
         }
 
         #endregion
@@ -30,7 +31,7 @@ namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
 
         public virtual async Task<ICorsPolicy> Handle(AddCorsPolicyCommand request, CancellationToken cancellationToken)
         {
-            var corsPolicy = new CorsPolicy(Guid.NewGuid());
+            var corsPolicy = new SiteCorsPolicy(Guid.NewGuid());
             corsPolicy.Name = request.Name;
             corsPolicy.AllowCredential = request.AllowCredential;
             corsPolicy.AllowedExposedHeaders = request.AllowedExposedHeaders;
@@ -38,7 +39,7 @@ namespace MailWeb.Cqrs.CommandHandlers.CorsPolicies
             corsPolicy.AllowedMethods = request.AllowedMethods;
             corsPolicy.AllowedOrigins = request.AllowedOrigins;
 
-            var addedCorsPolicy = await _corsPoliciesManager
+            var addedCorsPolicy = await _siteCorsPolicyService
                 .AddCorsPolicyAsync(corsPolicy, cancellationToken);
 
             return addedCorsPolicy;
