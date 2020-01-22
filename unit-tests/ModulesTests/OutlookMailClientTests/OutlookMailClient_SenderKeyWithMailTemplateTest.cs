@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Autofac;
 using CmsModulesManagement.Services.Implementations;
+using CmsModulesManagement.Services.Implementations.MailClients;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;

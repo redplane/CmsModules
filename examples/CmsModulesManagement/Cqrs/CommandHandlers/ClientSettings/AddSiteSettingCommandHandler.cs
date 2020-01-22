@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CmsModulesManagement.Cqrs.Commands.ClientSettings;
 using CmsModulesManagement.Models;
 using CmsModulesManagement.Models.Entities;
+using CmsModulesManagement.Services.Interfaces;
 using MailModule.Services.Interfaces;
 using MediatR;
 
@@ -13,10 +14,10 @@ namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
     {
         #region Constructor
 
-        public AddSiteSettingCommandHandler(SiteDbContext dbContext, IMailClientsManager mailClientsManager)
+        public AddSiteSettingCommandHandler(SiteDbContext dbContext, ISiteMailClientsService siteMailClientsService)
         {
             _dbContext = dbContext;
-            _mailClientsManager = mailClientsManager;
+            _siteMailClientsService = siteMailClientsService;
         }
 
         #endregion
@@ -47,7 +48,7 @@ namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
 
         private readonly SiteDbContext _dbContext;
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _siteMailClientsService;
 
         #endregion
     }

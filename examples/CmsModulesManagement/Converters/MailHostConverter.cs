@@ -28,7 +28,7 @@ namespace CmsModulesManagement.Converters
             JsonSerializer serializer)
         {
             var jToken = JToken.ReadFrom(reader);
-            var mailHostTypeToken = jToken.SelectToken("type");
+            var mailHostTypeToken = jToken.SelectToken(nameof(IMailHost.Type).ToLower()) ?? jToken.SelectToken(nameof(IMailHost.Type));
             if (mailHostTypeToken == null)
                 return default;
 

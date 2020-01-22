@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CmsModulesManagement.Cqrs.Commands;
+using CmsModulesManagement.Services.Interfaces;
 using CmsModulesManagement.ViewModels;
 using MailModule.Services.Interfaces;
 using MediatR;
@@ -13,7 +14,7 @@ namespace CmsModulesManagement.Controllers
     {
         #region Constructor
 
-        public MailServiceController(IMailClientsManager mailClientsManager, IMediator mediator)
+        public MailServiceController(ISiteMailClientsService mailClientsManager, IMediator mediator)
         {
             _mailClientsManager = mailClientsManager;
             _mediator = mediator;
@@ -23,7 +24,7 @@ namespace CmsModulesManagement.Controllers
 
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _mailClientsManager;
 
         private readonly IMediator _mediator;
 

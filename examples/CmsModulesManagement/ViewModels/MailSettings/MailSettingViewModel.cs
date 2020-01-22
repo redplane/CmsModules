@@ -40,7 +40,7 @@ namespace CmsModulesManagement.ViewModels.MailSettings
             UniqueName = uniqueName;
         }
 
-        public MailSettingViewModel(MailClientSetting model)
+        public MailSettingViewModel(SiteMailClientSetting model)
         {
             Id = model.Id;
             UniqueName = model.UniqueName;

@@ -29,35 +29,28 @@ namespace CmsModulesManagement.Controllers
         #region Methods
 
         [HttpGet]
-        public virtual Task<MailSettingViewModel[]> GetMailClientSettingsAsync()
+        public virtual Task<MailSettingViewModel[]> GetSiteMailClientSettingsAsync()
         {
             var loadMailSettingsQuery = new GetMailSettingsQuery();
             return _mediator.Send(loadMailSettingsQuery);
         }
 
-        [HttpGet("mail-host-assemblies")]
-        public virtual Task<string[]> GetMailSettingAssembliesAsync()
-        {
-            var loadMailSettingAssembliesQuery = new GetMailHostAssembliesQuery();
-            return _mediator.Send(loadMailSettingAssembliesQuery);
-        }
-
         [HttpPost("")]
-        public virtual async Task<ActionResult> AddMailClientSettingAsync([FromBody] AddMailSettingCommand command)
+        public virtual async Task<ActionResult> AddSiteMailClientSettingAsync([FromBody] AddSiteMailClientCommand command)
         {
             if (command == null)
-                command = new AddMailSettingCommand();
+                command = new AddSiteMailClientCommand();
 
             var addedMailSetting = await _mediator.Send(command);
             return Ok(addedMailSetting);
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<ActionResult> EditMailClientSettingAsync([FromRoute] Guid id,
-            [FromBody] EditMailSettingCommand command)
+        public virtual async Task<ActionResult> EditSiteMailClientSettingAsync([FromRoute] Guid id,
+            [FromBody] EditSiteMailSettingCommand command)
         {
             if (command == null)
-                command = new EditMailSettingCommand();
+                command = new EditSiteMailSettingCommand();
 
             command.Id = id;
             var mailSetting = await _mediator.Send(command);

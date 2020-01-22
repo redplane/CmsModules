@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CmsModulesManagement.Cqrs.Commands.ClientSettings;
+using CmsModulesManagement.Services.Interfaces;
 using MailModule.Services.Interfaces;
 using MediatR;
 
@@ -10,15 +11,15 @@ namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
     {
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _siteMailClientsService;
 
         #endregion
 
         #region Constructor
 
-        public UpdateActiveMailClientCommandHandler(IMailClientsManager mailClientsManager)
+        public UpdateActiveMailClientCommandHandler(ISiteMailClientsService siteMailClientsService)
         {
-            _mailClientsManager = mailClientsManager;
+            _siteMailClientsService = siteMailClientsService;
         }
 
         #endregion
@@ -28,7 +29,7 @@ namespace CmsModulesManagement.Cqrs.CommandHandlers.ClientSettings
         public virtual async Task<bool> Handle(UpdateActiveMailServiceCommand command,
             CancellationToken cancellationToken)
         {
-            await _mailClientsManager
+            await _siteMailClientsService
                 .MarkMailClientAsActiveAsync(command.MailServiceUniqueName, cancellationToken);
 
             return true;

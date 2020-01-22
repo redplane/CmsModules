@@ -33,7 +33,7 @@ namespace CmsModulesManagement.Models
 
         #region Properties
 
-        public virtual DbSet<MailClientSetting> MailClientSettings { get; set; }
+        public virtual DbSet<SiteMailClientSetting> SiteMailClientSettings { get; set; }
 
         public virtual DbSet<SiteSetting> ClientSettings { get; set; }
 
@@ -45,27 +45,34 @@ namespace CmsModulesManagement.Models
 
         protected virtual void AddMailClientSettingTable(ModelBuilder modelBuilder)
         {
-            var mailClientSetting = modelBuilder.Entity<MailClientSetting>();
-            mailClientSetting.HasKey(x => x.Id);
+            var siteMailClientSetting = modelBuilder.Entity<SiteMailClientSetting>();
+            
+            siteMailClientSetting
+                .HasKey(x => x.Id);
 
-            mailClientSetting.Property(x => x.UniqueName)
+            siteMailClientSetting
+                .Property(x => x.UniqueName)
                 .IsRequired();
 
-            mailClientSetting.HasIndex(x => x.UniqueName)
+            siteMailClientSetting
+                .Property(x => x.TenantId)
+                .IsRequired();
+
+            siteMailClientSetting.HasIndex(x => new { x.UniqueName, x.TenantId})
                 .IsUnique();
 
-            mailClientSetting
+            siteMailClientSetting
                 .Property(x => x.MailHost)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => HandleIncomingMailHost(x));
 
-            mailClientSetting.Property(x => x.CarbonCopies)
+            siteMailClientSetting.Property(x => x.CarbonCopies)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => JsonConvert.DeserializeObject<IMailAddress[]>(x));
 
-            mailClientSetting.Property(x => x.BlindCarbonCopies)
+            siteMailClientSetting.Property(x => x.BlindCarbonCopies)
                 .HasConversion(
                     x => JsonConvert.SerializeObject(x),
                     x => JsonConvert.DeserializeObject<IMailAddress[]>(x));

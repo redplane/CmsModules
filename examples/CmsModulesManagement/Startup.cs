@@ -66,12 +66,15 @@ namespace CmsModulesManagement
 
             // Add connection string into system.
             services
-                .AddDbContext<SiteDbContext>(options => options
-                    .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
+                .AddDbContext<SiteDbContext>(options =>
+                {
+                    options
+                        .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default));
+                });
 
             services.AddScoped<SiteDbContext>();
 
-            services.AddScoped<IMailClientsManager, MailClientsManager>();
+            services.AddScoped<ISiteMailClientsService, SiteMailClientsService>();
             services.AddScoped<ISiteCorsPolicyService, CorsPoliciesManager>();
 
             // Add mediatr.

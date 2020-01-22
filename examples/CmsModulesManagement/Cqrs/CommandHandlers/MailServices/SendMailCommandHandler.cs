@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CmsModulesManagement.Cqrs.Commands;
+using CmsModulesManagement.Services.Interfaces;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 using MediatR;
@@ -12,13 +13,13 @@ namespace CmsModulesManagement.Cqrs.CommandHandlers.MailServices
     {
         #region Properties
 
-        private readonly IMailClientsManager _mailClientsManager;
+        private readonly ISiteMailClientsService _mailClientsManager;
 
         #endregion
 
         #region Constructor
 
-        public SendMailCommandHandler(IMailClientsManager mailClientsManager)
+        public SendMailCommandHandler(ISiteMailClientsService mailClientsManager)
         {
             _mailClientsManager = mailClientsManager;
         }
