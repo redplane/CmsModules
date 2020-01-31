@@ -1,14 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands;
 using CmsModulesManagement.Cqrs.Commands.MailSettings;
 using CmsModulesManagement.Cqrs.Queries;
+using CmsModulesManagement.Cqrs.Queries.MailClientSettings;
 using CmsModulesManagement.ViewModels.MailSettings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CmsModulesManagement.Controllers
 {
-    [Route("api/mail-client-setting")]
+    [Route("api/site-mail-client")]
     public class MailClientSettingController : Controller
     {
         #region Properties
@@ -55,6 +57,19 @@ namespace CmsModulesManagement.Controllers
             command.Id = id;
             var mailSetting = await _mediator.Send(command);
             return Ok(mailSetting);
+        }
+
+        [HttpPost("mail-delivery")]
+        public virtual async Task<ActionResult> SendMailAsync([FromBody] SendMailCommand command)
+        {
+            if (command == null)
+                command = new SendMailCommand();
+
+            var hasMailSent = await _mediator.Send(command);
+            if (!hasMailSent)
+                return NotFound();
+
+            return Ok();
         }
 
         #endregion

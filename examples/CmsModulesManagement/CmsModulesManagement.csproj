@@ -25,9 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\libs\LanguageModule\CorsModule.csproj" />
+    <ProjectReference Include="..\..\libs\CorsModule\CorsModule.csproj" />
     <ProjectReference Include="..\..\libs\MailModule\MailModule.csproj" />
     <ProjectReference Include="..\CmsModulesShared\CmsModulesShared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AppData" />
   </ItemGroup>
 
 </Project>

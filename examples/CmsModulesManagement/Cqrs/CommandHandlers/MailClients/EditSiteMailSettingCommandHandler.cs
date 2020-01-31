@@ -9,7 +9,7 @@ using CmsModulesManagement.ViewModels;
 using MailModule.Models.Interfaces;
 using MediatR;
 
-namespace CmsModulesManagement.Cqrs.CommandHandlers.MailSettings
+namespace CmsModulesManagement.Cqrs.CommandHandlers.MailClients
 {
     public class EditSiteMailSettingCommandHandler : IRequestHandler<EditSiteMailSettingCommand, SiteMailClientSetting>
     {

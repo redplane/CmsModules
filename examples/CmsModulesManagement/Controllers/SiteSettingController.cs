@@ -40,14 +40,6 @@ namespace CmsModulesManagement.Controllers
             return await _mediator.Send(command);
         }
 
-        [HttpPost("mail-service")]
-        public virtual async Task<ActionResult> UpdateMailServiceAsync(
-            [FromBody] UpdateActiveMailServiceCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
-        }
-
         #endregion
     }
 }

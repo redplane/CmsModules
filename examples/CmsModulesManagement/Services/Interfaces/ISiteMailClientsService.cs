@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Enums;
 using CmsModulesManagement.ViewModels;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
@@ -11,6 +12,10 @@ namespace CmsModulesManagement.Services.Interfaces
     {
         #region Properties
 
+        Task<IMailClient[]> GetMailClientsAsync(Guid? tenantId, 
+            string uniqueName, MasterItemAvailabilities? availability,
+            CancellationToken cancellationToken = default);
+        
         Task<IMailClientSetting> AddSiteMailClientSettingAsync(
             Guid tenantId,
             string uniqueName, 

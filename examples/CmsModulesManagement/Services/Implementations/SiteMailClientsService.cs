@@ -3,6 +3,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Enums;
+using CmsModulesManagement.Extensions;
 using CmsModulesManagement.Models;
 using CmsModulesManagement.Models.Entities;
 using CmsModulesManagement.Models.Interfaces;
@@ -45,13 +47,12 @@ namespace CmsModulesManagement.Services.Implementations
 
         public virtual async Task<IMailClient[]> GetMailClientsAsync(CancellationToken cancellationToken = default)
         {
-            var mailClients = await _dbContext.SiteMailClientSettings
-                .ToListAsync(cancellationToken);
-
-            return mailClients.Select(ToMailClient).ToArray();
+            return await GetMailClientsAsync(null, 
+                null, null, cancellationToken);
         }
 
-        public virtual async Task<IMailClient> GetMailClientAsync(string uniqueName, CancellationToken cancellationToken = default)
+        public virtual async Task<IMailClient> GetMailClientAsync(string uniqueName,
+            CancellationToken cancellationToken = default)
         {
             var mailClients = _dbContext.SiteMailClientSettings
                 .Where(x => x.UniqueName == uniqueName);
@@ -67,24 +68,13 @@ namespace CmsModulesManagement.Services.Implementations
 
         public virtual async Task<IMailClient> GetActiveMailClientAsync(CancellationToken cancellationToken = default)
         {
-            // Find the client settings.
-            var tenantId = _tenant.Id;
+            var siteMailClientSettings = await GetMailClientsAsync(_tenant.Id, null, 
+                MasterItemAvailabilities.Available, cancellationToken);
 
-            // Find the client setting.
-            var clientSetting = await _dbContext.ClientSettings
-                .Where(x => x.Id == tenantId)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            if (clientSetting == null)
+            if (siteMailClientSettings == null || siteMailClientSettings.Length < 1)
                 return null;
 
-            var mailClientSettingUniqueName = clientSetting.ActiveMailClient;
-
-            var mailClientSetting = await _dbContext.SiteMailClientSettings
-                .Where(x => x.UniqueName == mailClientSettingUniqueName)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            return ToMailClient(mailClientSetting);
+            return siteMailClientSettings.FirstOrDefault();
         }
 
         public virtual async Task MarkMailClientAsActiveAsync(string uniqueName,
@@ -105,11 +95,35 @@ namespace CmsModulesManagement.Services.Implementations
             if (mailService == null)
                 return;
 
-            clientSetting.ActiveMailClient = uniqueName;
             _dbContext.SaveChanges();
         }
 
-        public virtual async Task<IMailClientSetting> AddSiteMailClientSettingAsync(Guid tenantId, string uniqueName, string displayName, IMailHost mailHost, int timeout, IMailAddress[] carbonCopies, IMailAddress[] blindCarbonCopies,
+        public virtual async Task<IMailClient[]> GetMailClientsAsync(Guid? tenantId, string uniqueName,
+            MasterItemAvailabilities? availability,
+            CancellationToken cancellationToken = default)
+        {
+            var mailClients = _dbContext
+                .SiteMailClientSettings
+                .AsQueryable();
+
+            if (tenantId != null)
+                mailClients = mailClients.Where(x => x.TenantId == tenantId);
+
+            if (!string.IsNullOrWhiteSpace(uniqueName))
+                mailClients = mailClients.Where(x => x.UniqueName == uniqueName);
+
+            if (availability != null)
+                mailClients = mailClients.Where(x => x.Availability == availability);
+            
+            var loadedMailClients = await mailClients
+                .ToListAsync(cancellationToken);
+
+            return loadedMailClients.Select(ToMailClient).ToArray();
+        }
+
+        public virtual async Task<IMailClientSetting> AddSiteMailClientSettingAsync(Guid tenantId, string uniqueName,
+            string displayName, IMailHost mailHost, int timeout, IMailAddress[] carbonCopies,
+            IMailAddress[] blindCarbonCopies,
             CancellationToken cancellationToken = default)
         {
             var siteMailClientSetting = new SiteMailClientSetting(Guid.NewGuid(), tenantId, uniqueName);
@@ -133,9 +147,11 @@ namespace CmsModulesManagement.Services.Implementations
 
             return siteMailClientSetting;
         }
+
         public virtual async Task<IMailClientSetting> EditSiteMailClientSettingAsync(Guid id, Guid? tenantId,
             EditableFieldViewModel<string> displayName, IMailHost mailHost, EditableFieldViewModel<int> timeout,
-            EditableFieldViewModel<IMailAddress[]> carbonCopies, EditableFieldViewModel<IMailAddress[]> blindCarbonCopies, 
+            EditableFieldViewModel<IMailAddress[]> carbonCopies,
+            EditableFieldViewModel<IMailAddress[]> blindCarbonCopies,
             CancellationToken cancellationToken = default)
         {
             var siteMailClientSettings = _dbContext.SiteMailClientSettings.AsQueryable();
@@ -185,6 +201,7 @@ namespace CmsModulesManagement.Services.Implementations
             if (!hasFieldChanged)
                 return siteMailClientSetting;
 
+            siteMailClientSetting.LastModifiedTime = DateTime.UtcNow.ToUnixTime();
             await _dbContext.SaveChangesAsync(cancellationToken);
             return siteMailClientSetting;
         }

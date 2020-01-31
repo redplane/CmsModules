@@ -4,19 +4,17 @@
     {
         #region Properties
 
-        string UniqueName { get; }
-
-        string DisplayName { get; set; }
+        string Name { get; set; }
 
         string[] AllowedHeaders { get; set; }
 
-        string[] AllowedMethods { get; set; }
-
         string[] AllowedOrigins { get; set; }
+
+        string[] AllowedMethods { get; set; }
 
         string[] AllowedExposedHeaders { get; set; }
 
-        bool AllowCredentials { get; set; }
+        bool AllowCredential { get; set; }
 
         #endregion
     }
