@@ -129,6 +129,52 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 			return items.Where(lambda);
 		}
 
+		/// <summary>
+		/// Do date time search
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="items"></param>
+		/// <param name="property"></param>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public static IQueryable<T> WithDateTimeRangeSearch<T>(this IQueryable<T> items,
+			Expression<Func<T, DateTime>> property, DateTimeRangeFilter filter)
+		{
+			if (filter == null || property == null)
+				return items;
+
+			// Filter the from value.
+			items = items.WithDateTimeSearch(property, filter.From);
+
+			// Filter the to value.
+			items = items.WithDateTimeSearch(property, filter.To);
+
+			return items;
+		}
+
+		/// <summary>
+		/// Do date time search
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="items"></param>
+		/// <param name="property"></param>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public static IQueryable<T> WithDateTimeRangeSearch<T>(this IQueryable<T> items,
+			Expression<Func<T, DateTime?>> property, DateTimeRangeFilter filter)
+		{
+			if (filter == null || property == null)
+				return items;
+
+			// Filter the from value.
+			items = items.WithDateTimeSearch(property, filter?.From);
+
+			// Filter the to value.
+			items = items.WithDateTimeSearch(property, filter?.To);
+
+			return items;
+		}
+
 		#endregion
 	}
 }

@@ -106,6 +106,15 @@ namespace DataMagic.Abstractions.Models.Pagers
 			return _skippedRecords;
 		}
 
+		/// <summary>
+		/// <inheritdoc />
+		/// </summary>
+		/// <returns></returns>
+		public virtual long GetTotalRecords()
+		{
+			return TotalRecords;
+		}
+
 		#endregion
 	}
 }

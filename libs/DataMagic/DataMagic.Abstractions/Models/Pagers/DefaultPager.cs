@@ -95,9 +95,22 @@ namespace DataMagic.Abstractions.Models.Pagers
 			return _shouldItemsCounted;
 		}
 
-		public long GetSkippedRecords()
+		/// <summary>
+		/// <inheritdoc />
+		/// </summary>
+		/// <returns></returns>
+		public virtual long GetSkippedRecords()
 		{
 			return _skippedRecords;
+		}
+
+		/// <summary>
+		/// <inheritdoc />
+		/// </summary>
+		/// <returns></returns>
+		public virtual long GetTotalRecords()
+		{
+			return TotalRecords;
 		}
 
 		#endregion

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DataMagic.Abstractions.Enums;
 using DataMagic.Abstractions.Enums.Operators;
 using DataMagic.Abstractions.Models.Filters;
 
@@ -72,7 +71,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 		}
 
 		/// <summary>
-		/// Do date time search
+		///     Do date time search
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="items"></param>
@@ -127,6 +126,29 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 			var lambda =
 				Expression.Lambda<Func<T, bool>>(expression, property.Parameters.Single());
 			return items.Where(lambda);
+		}
+
+		/// <summary>
+		///     Do date time search
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="items"></param>
+		/// <param name="property"></param>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public static IQueryable<T> WithDateRangeSearch<T>(this IQueryable<T> items,
+			Expression<Func<T, DateTime>> property, DateRangeFilter filter)
+		{
+			if (filter == null || property == null)
+				return items;
+
+			// Filter by from value.
+			items = items.WithDateSearch(property, filter?.From);
+
+			// Filter by to value.
+			items = items.WithDateSearch(property, filter?.To);
+
+			return items;
 		}
 
 		#endregion

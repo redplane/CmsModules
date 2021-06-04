@@ -81,6 +81,34 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 			return items.Where(lambda);
 		}
 
+		/// <summary>
+		///     Do search on a numeric field base on specific condition.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <typeparam name="TValueType"></typeparam>
+		/// <param name="items"></param>
+		/// <param name="property"></param>
+		/// <param name="range"></param>
+		/// <returns></returns>
+		public static IQueryable<T> WithNumericRangeSearch<T, TValueType>(this IQueryable<T> items,
+			Expression<Func<T, TValueType>> property,
+			NumericRangeFilter<TValueType, TValueType> range)
+		{
+			if (range == null)
+				return items;
+
+			if (property == null)
+				return items;
+
+			// Find the start value.
+			items = items.WithNumericSearch(property, range?.From);
+
+			// Find the end value.
+			items = items.WithNumericSearch(property, range?.To);
+
+			return items;
+		}
+
 		#endregion
 	}
 }
