@@ -17,7 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesShared", "example
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesManagement", "examples\CmsModulesManagement\CmsModulesManagement.csproj", "{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsModule", "libs\LanguageModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsModule", "libs\LanguageModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataMagic", "DataMagic", "{1A31B342-C5A7-4D35-8314-E540FC44B7F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.Abstractions", "libs\DataMagic\DataMagic.Abstractions\DataMagic.Abstractions.csproj", "{8CD458A6-C814-412C-923E-61DF752AD760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.EntityFrameworkCore", "libs\DataMagic\DataMagic.EntityFrameworkCore\DataMagic.EntityFrameworkCore.csproj", "{C16B75E4-301C-4111-AD01-6C3C538DC492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +51,14 @@ Global
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD458A6-C814-412C-923E-61DF752AD760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD458A6-C814-412C-923E-61DF752AD760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD458A6-C814-412C-923E-61DF752AD760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD458A6-C814-412C-923E-61DF752AD760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +69,9 @@ Global
 		{58EDA8B0-B787-4783-B53B-774CC159340D} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
 		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
 		{87927845-5F09-4497-B200-9A405A83E3E4} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
+		{1A31B342-C5A7-4D35-8314-E540FC44B7F3} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
+		{8CD458A6-C814-412C-923E-61DF752AD760} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
+		{C16B75E4-301C-4111-AD01-6C3C538DC492} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40AD4BA3-5EBD-4455-B116-E6A4F5F66C0D}

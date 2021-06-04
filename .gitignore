@@ -44,3 +44,7 @@
 /libs/MailModule/bin
 /libs/CorsModule/obj
 /libs/CorsModule/bin
+/libs/DataMagic/DataMagic.Abstractions/obj
+/libs/DataMagic/DataMagic.Abstractions/bin
+/libs/DataMagic/DataMagic.EntityFrameworkCore/obj
+/libs/DataMagic/DataMagic.EntityFrameworkCore/bin
