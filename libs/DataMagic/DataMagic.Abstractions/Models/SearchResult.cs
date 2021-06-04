@@ -16,6 +16,12 @@ namespace DataMagic.Abstractions.Models
 			TotalRecords = totalRecords;
 		}
 
+		public SearchResult(IEnumerable<T> items, long totalRecords)
+		{
+			Items = items?.ToArray() ?? new T[0];
+			TotalRecords = totalRecords;
+		}
+
 		#endregion
 
 		#region Properties
@@ -28,7 +34,7 @@ namespace DataMagic.Abstractions.Models
 		/// <summary>
 		/// Total records.
 		/// </summary>
-		public int TotalRecords { get; private set; }
+		public long TotalRecords { get; private set; }
 
 		#endregion
 

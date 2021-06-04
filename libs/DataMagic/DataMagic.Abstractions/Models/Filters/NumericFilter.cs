@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using DataMagic.Abstractions.Enums;
+using DataMagic.Abstractions.Enums.Operators;
 
 namespace DataMagic.Abstractions.Models.Filters
 {
-    public class NumericFieldFilter<T>
+    public class NumericFilter<T>
     {
         #region Properties
 
@@ -22,7 +23,7 @@ namespace DataMagic.Abstractions.Models.Filters
 
         #region Constructors
 
-        public NumericFieldFilter(T value, NumericComparisonOperators @operator)
+        public NumericFilter(T value, NumericComparisonOperators @operator)
         {
             Value = value;
             Operator = @operator;

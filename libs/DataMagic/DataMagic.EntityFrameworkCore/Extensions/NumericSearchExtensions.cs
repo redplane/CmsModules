@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using DataMagic.Abstractions.Enums;
+using DataMagic.Abstractions.Enums.Operators;
 using DataMagic.Abstractions.Models.Filters;
 
 namespace DataMagic.EntityFrameworkCore.Extensions
@@ -22,7 +23,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 		/// <returns></returns>
 		public static IQueryable<T> WithNumericSearch<T, TValueType>(this IQueryable<T> items,
 			Expression<Func<T, TValueType>> property,
-			NumericFieldFilter<TValueType> range)
+			NumericFilter<TValueType> range)
 		{
 			if (range == null)
 				return items;
@@ -32,7 +33,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 
 			// Get the value type.
 			var valueType = typeof(TValueType);
-			var validTypes = NumericFieldFilter<T>.ValidNumericTypes();
+			var validTypes = NumericFilter<T>.ValidNumericTypes();
 
 			// Check whether the value type is supported.
 			var isValueTypeValid = validTypes.Any(x => x == valueType);

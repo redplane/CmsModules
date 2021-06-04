@@ -31,6 +31,12 @@
         /// <returns></returns>
         long GetSkippedRecords();
 
+        /// <summary>
+        /// Total records to be taken.
+        /// </summary>
+        /// <returns></returns>
+        long GetTotalRecords();
+
         #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DataMagic.Abstractions.Enums
+﻿namespace DataMagic.Abstractions.Enums.Operators
 {
     public enum NumericComparisonOperators
     {
