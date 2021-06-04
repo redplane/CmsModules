@@ -1,7 +1,8 @@
 ﻿using System;
-using MailWeb.Enums;
+using CmsModulesManagement.Enums;
+using CmsModulesManagement.Extensions;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class BaseEntity
     {
@@ -11,6 +12,7 @@ namespace MailWeb.Models.Entities
         {
             Id = id;
             Availability = MasterItemAvailabilities.Available;
+            CreatedTime = DateTime.UtcNow.ToUnixTime();
         }
 
         #endregion

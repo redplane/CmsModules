@@ -4,11 +4,10 @@ using System.Reflection;
 using CmsModulesShared.Constants;
 using CmsModulesShared.Models.MailHosts;
 using MailModule.Models.Interfaces;
-using MailWeb.Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MailWeb.Converters
+namespace CmsModulesManagement.Converters
 {
     public class MailHostConverter : JsonConverter
     {
@@ -29,7 +28,7 @@ namespace MailWeb.Converters
             JsonSerializer serializer)
         {
             var jToken = JToken.ReadFrom(reader);
-            var mailHostTypeToken = jToken.SelectToken("type");
+            var mailHostTypeToken = jToken.SelectToken(nameof(IMailHost.Type).ToLower()) ?? jToken.SelectToken(nameof(IMailHost.Type));
             if (mailHostTypeToken == null)
                 return default;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MailWeb.Models.Entities
+namespace CmsModulesManagement.Models.Entities
 {
     public class SiteSetting
     {
@@ -18,8 +18,6 @@ namespace MailWeb.Models.Entities
         public Guid Id { get; }
 
         public string Name { get; set; }
-
-        public string ActiveMailClient { get; set; }
 
         #endregion
     }

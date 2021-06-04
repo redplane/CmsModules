@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesShared", "example
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModulesManagement", "examples\CmsModulesManagement\CmsModulesManagement.csproj", "{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsModule", "libs\LanguageModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsModule", "libs\CorsModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataMagic", "DataMagic", "{1A31B342-C5A7-4D35-8314-E540FC44B7F3}"
 EndProject

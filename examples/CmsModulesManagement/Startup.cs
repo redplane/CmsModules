@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
+using CmsModulesManagement.Constants;
+using CmsModulesManagement.Cqrs;
+using CmsModulesManagement.Extensions;
+using CmsModulesManagement.Models;
+using CmsModulesManagement.Models.Interfaces;
+using CmsModulesManagement.Services.Implementations;
+using CmsModulesManagement.Services.Interfaces;
 using FluentValidation.AspNetCore;
 using MailModule.Services.Interfaces;
-using MailWeb.Constants;
-using MailWeb.Cqrs;
-using MailWeb.Extensions;
-using MailWeb.Models;
-using MailWeb.Models.Interfaces;
-using MailWeb.Services.Implementations;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -18,7 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 
-namespace MailWeb
+namespace CmsModulesManagement
 {
     public class Startup
     {
@@ -53,19 +54,37 @@ namespace MailWeb
                 return new RequestProfile(tenantId);
             });
 
+            services.AddScoped<ITenant>(options =>
+            {
+                var httpContextAccessor = options.GetService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext;
+
+                var tenantId = httpContext.GetTenantId();
+                var tenant = new Tenant(tenantId);
+                return tenant;
+            });
+
             // Add connection string into system.
             services
-                .AddDbContext<MailManagementDbContext>(options => options
-                    .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default)));
+                .AddDbContext<SiteDbContext>(options =>
+                {
+                    options
+                        .UseSqlite(Configuration.GetConnectionString(ConnectionStringKeyConstants.Default));
+                });
 
-            services.AddScoped<MailManagementDbContext>();
-            services.AddScoped<IMailClientsManager, MailClientsManager>();
+            services.AddScoped<SiteDbContext>();
+
+            services.AddScoped<ISiteMailClientsService, SiteMailClientsService>();
+            services.AddScoped<ISiteCorsPolicyService, CorsPoliciesManager>();
 
             // Add mediatr.
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
             // Request validation.
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+            services.AddCors();
+            services.AddTransient<ICorsPolicyProvider, SiteCorsPolicyProvider>();
 
             services
                 .AddMvc()

@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using MailWeb.Cqrs.Commands.ClientSettings;
-using MailWeb.Cqrs.Queries;
-using MailWeb.Models.Entities;
+using CmsModulesManagement.Cqrs.Commands.ClientSettings;
+using CmsModulesManagement.Cqrs.Queries;
+using CmsModulesManagement.Models.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MailWeb.Controllers
+namespace CmsModulesManagement.Controllers
 {
     [Route("api/client-setting")]
     public class SiteSettingController : Controller
@@ -38,14 +38,6 @@ namespace MailWeb.Controllers
             [FromBody] AddClientSettingCommand command)
         {
             return await _mediator.Send(command);
-        }
-
-        [HttpPost("mail-service")]
-        public virtual async Task<ActionResult> UpdateMailServiceAsync(
-            [FromBody] UpdateActiveMailServiceCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
         }
 
         #endregion

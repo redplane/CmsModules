@@ -1,23 +1,23 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Queries.CorsPolicies;
+using CmsModulesManagement.Services.Interfaces;
 using CorsModule.Models.Interfaces;
-using CorsModule.Services.Interfaces;
-using MailWeb.Cqrs.Queries.CorsPolicies;
 using MediatR;
 
-namespace MailWeb.Cqrs.QueryHandlers.CorsPolicies
+namespace CmsModulesManagement.Cqrs.QueryHandlers.CorsPolicies
 {
     public class GetCorsPolicyQueryHandler : IRequestHandler<GetCorsPolicyQuery, ICorsPolicy>
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly ISiteCorsPolicyService _corsPoliciesManager;
 
         #endregion
 
         #region Constructor
 
-        public GetCorsPolicyQueryHandler(ICorsPoliciesManager corsPoliciesManager)
+        public GetCorsPolicyQueryHandler(ISiteCorsPolicyService corsPoliciesManager)
         {
             _corsPoliciesManager = corsPoliciesManager;
         }

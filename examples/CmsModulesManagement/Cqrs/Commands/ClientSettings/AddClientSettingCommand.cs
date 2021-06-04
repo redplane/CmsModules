@@ -1,7 +1,7 @@
-﻿using MailWeb.Models.Entities;
+﻿using CmsModulesManagement.Models.Entities;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands.ClientSettings
+namespace CmsModulesManagement.Cqrs.Commands.ClientSettings
 {
     public class AddClientSettingCommand : IRequest<SiteSetting>
     {

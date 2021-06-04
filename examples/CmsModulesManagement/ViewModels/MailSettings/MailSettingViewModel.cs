@@ -1,8 +1,8 @@
 ﻿using System;
+using CmsModulesManagement.Models.Entities;
 using MailModule.Models.Interfaces;
-using MailWeb.Models.Entities;
 
-namespace MailWeb.ViewModels.MailSettings
+namespace CmsModulesManagement.ViewModels.MailSettings
 {
     public class MailSettingViewModel : IMailClientSetting
     {
@@ -24,6 +24,8 @@ namespace MailWeb.ViewModels.MailSettings
 
         public IMailHost MailHost { get; set; }
 
+        public Guid TenantId { get; set; }
+        
         #endregion
 
         #region Constructor
@@ -40,13 +42,14 @@ namespace MailWeb.ViewModels.MailSettings
             UniqueName = uniqueName;
         }
 
-        public MailSettingViewModel(MailClientSetting model)
+        public MailSettingViewModel(SiteMailClientSetting model)
         {
             Id = model.Id;
             UniqueName = model.UniqueName;
             DisplayName = model.DisplayName;
             Timeout = model.Timeout;
             MailHost = model.MailHost;
+            TenantId = model.TenantId;
         }
 
         #endregion

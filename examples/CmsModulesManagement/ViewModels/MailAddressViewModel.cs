@@ -1,6 +1,6 @@
 ﻿using MailModule.Models.Interfaces;
 
-namespace MailWeb.ViewModels
+namespace CmsModulesManagement.ViewModels
 {
     public class MailAddressViewModel : IMailAddress
     {

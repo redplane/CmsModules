@@ -1,7 +1,7 @@
 ﻿using CorsModule.Models.Interfaces;
 using MediatR;
 
-namespace MailWeb.Cqrs.Commands.CorsPolicies
+namespace CmsModulesManagement.Cqrs.Commands.CorsPolicies
 {
     public class AddCorsPolicyCommand : IRequest<ICorsPolicy>
     {

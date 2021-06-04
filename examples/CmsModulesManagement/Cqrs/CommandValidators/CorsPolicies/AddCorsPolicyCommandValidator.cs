@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using MailWeb.Cqrs.Commands.CorsPolicies;
+﻿using CmsModulesManagement.Cqrs.Commands.CorsPolicies;
+using FluentValidation;
 
-namespace MailWeb.Cqrs.CommandValidators.CorsPolicies
+namespace CmsModulesManagement.Cqrs.CommandValidators.CorsPolicies
 {
     public class AddCorsPolicyCommandValidator : AbstractValidator<AddCorsPolicyCommand>
     {

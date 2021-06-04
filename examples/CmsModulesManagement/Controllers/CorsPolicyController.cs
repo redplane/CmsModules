@@ -1,12 +1,13 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using CmsModulesManagement.Cqrs.Commands.CorsPolicies;
+using CmsModulesManagement.Cqrs.Queries.CorsPolicies;
 using CorsModule.Models.Interfaces;
-using MailWeb.Cqrs.Commands.CorsPolicies;
-using MailWeb.Cqrs.Queries.CorsPolicies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MailWeb.Controllers
+namespace CmsModulesManagement.Controllers
 {
     [Route("api/cors-policy")]
     public class CorsPolicyController : Controller
@@ -57,6 +58,15 @@ namespace MailWeb.Controllers
             return await _mediator.Send(query);
         }
 
+        [HttpPut("{id}")]
+        public virtual async Task<ICorsPolicy> UpdateCorsPolicyAsync([FromRoute] Guid id, [FromBody] UpdateCorsPolicyCommand command)
+        {
+            if (command == null)
+                command = new UpdateCorsPolicyCommand();
+
+            command.Id = id;
+            return await _mediator.Send(command);
+        }
 
         #endregion
     }

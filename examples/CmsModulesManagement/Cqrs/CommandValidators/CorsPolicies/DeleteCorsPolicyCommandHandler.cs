@@ -1,23 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using CorsModule.Models.Interfaces;
-using CorsModule.Services.Interfaces;
-using MailWeb.Cqrs.Commands.CorsPolicies;
+using CmsModulesManagement.Cqrs.Commands.CorsPolicies;
+using CmsModulesManagement.Services.Interfaces;
 using MediatR;
 
-namespace MailWeb.Cqrs.CommandValidators.CorsPolicies
+namespace CmsModulesManagement.Cqrs.CommandValidators.CorsPolicies
 {
     public class DeleteCorsPolicyCommandHandler : IRequestHandler<DeleteCorsPolicyCommand, bool>
     {
         #region Properties
 
-        private readonly ICorsPoliciesManager _corsPoliciesManager;
+        private readonly ISiteCorsPolicyService _corsPoliciesManager;
 
         #endregion
 
         #region Constructor
 
-        public DeleteCorsPolicyCommandHandler(ICorsPoliciesManager corsPoliciesManager)
+        public DeleteCorsPolicyCommandHandler(ISiteCorsPolicyService corsPoliciesManager)
         {
             _corsPoliciesManager = corsPoliciesManager;
         }

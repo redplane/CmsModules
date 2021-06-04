@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using CmsModulesManagement.Constants;
 using Microsoft.AspNetCore.Http;
 
-namespace MailWeb.Extensions
+namespace CmsModulesManagement.Extensions
 {
     public static class HttpContextExtensions
     {
@@ -11,7 +12,7 @@ namespace MailWeb.Extensions
         public static Guid GetTenantId(this HttpContext httpContext)
         {
             var initialSiteId = httpContext.Request
-                .Headers.Where(header => header.Key == "X-Site-Id")
+                .Headers.Where(header => HttpHeaderConstants.SiteId.Equals(header.Key, StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.Value.ToString())
                 .FirstOrDefault();
 
