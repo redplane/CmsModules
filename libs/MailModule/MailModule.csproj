@@ -8,6 +8,7 @@
     <RepositoryType>git</RepositoryType>
     <Description>A small library that provides interfaces for mail clients registration &amp; management.</Description>
     <Version>1.0.0-Preview-001</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
