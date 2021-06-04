@@ -44,3 +44,11 @@
 /libs/MailModule/bin
 /libs/CorsModule/obj
 /libs/CorsModule/bin
+/libs/DataMagic/DataMagic.Abstractions/obj
+/libs/DataMagic/DataMagic.Abstractions/bin
+/libs/DataMagic/DataMagic.EntityFrameworkCore/obj
+/libs/DataMagic/DataMagic.EntityFrameworkCore/bin
+/examples/CmsModules.Shares/obj
+/examples/CmsModules.Shares/bin
+/examples/CmsModules.ManagementUi/obj
+/examples/CmsModules.ManagementUi/bin

@@ -17,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\examples\CmsModulesManagement\CmsModulesManagement.csproj" />
-      <ProjectReference Include="..\..\examples\CmsModulesShared\CmsModulesShared.csproj" />
+      <ProjectReference Include="..\..\examples\CmsModulesManagement\CmsModules.ManagementUi.csproj" />
+      <ProjectReference Include="..\..\examples\CmsModulesShared\CmsModules.Shares.csproj" />
       <ProjectReference Include="..\..\libs\MailModule\MailModule.csproj" />
     </ItemGroup>
 
