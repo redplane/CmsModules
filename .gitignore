@@ -52,3 +52,7 @@
 /examples/CmsModules.Shares/bin
 /examples/CmsModules.ManagementUi/obj
 /examples/CmsModules.ManagementUi/bin
+/unit-tests/libs/CorsModule.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.Abstractions.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.EntityFrameworkCore.Tests/obj
+/unit-tests/libs/MailModule.Tests/obj
