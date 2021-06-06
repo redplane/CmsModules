@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MailModule.Tests.Services.Implementations
 {
-    class DefaultMailClientManager_MarkMailClientAsActiveAsync
+  public  class DefaultMailClientManager_GetMailClientAsyncTests
     {
+
     }
 }

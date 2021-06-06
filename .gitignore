@@ -56,3 +56,4 @@
 /unit-tests/libs/DataMagic/DataMagic.Abstractions.Tests/obj
 /unit-tests/libs/DataMagic/DataMagic.EntityFrameworkCore.Tests/obj
 /unit-tests/libs/MailModule.Tests/obj
+/unit-tests/libs/MailModule.Tests/bin/Debug/net5.0
