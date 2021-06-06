@@ -53,7 +53,10 @@
 /examples/CmsModules.ManagementUi/obj
 /examples/CmsModules.ManagementUi/bin
 /unit-tests/libs/CorsModule.Tests/obj
+/unit-tests/libs/CorsModule.Tests/bin
 /unit-tests/libs/DataMagic/DataMagic.Abstractions.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.Abstractions.Tests/bin
 /unit-tests/libs/DataMagic/DataMagic.EntityFrameworkCore.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.EntityFrameworkCore.Tests/bin
 /unit-tests/libs/MailModule.Tests/obj
-/unit-tests/libs/MailModule.Tests/bin/Debug/net5.0
+/unit-tests/libs/MailModule.Tests/bin
