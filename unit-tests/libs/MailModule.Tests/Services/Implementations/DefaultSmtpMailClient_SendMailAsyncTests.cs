@@ -20,7 +20,6 @@ namespace MailModule.Tests.Services.Implementations
         private Mock<DefaultSmtpMailClient> _defaultSmtpMailClientMock;
         private Mock<IMailAddress> _mailAddressMock;
         private Mock<IMailContent> _mailContentMock;
-        private Mock<SmtpClient> _smtpClientMock;
 
         #endregion
 
@@ -50,12 +49,13 @@ namespace MailModule.Tests.Services.Implementations
             _mailContentMock = new Mock<IMailContent>();
             _mailContentMock.Setup(c => c.Subject).Returns("subject");
             _mailContentMock.Setup(c => c.Content).Returns("content");
-            
+
         }
 
         #endregion
 
         #region Methods
+
 
         [TestCase("")]
         [TestCase(" ")]
@@ -64,7 +64,7 @@ namespace MailModule.Tests.Services.Implementations
         {
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(sender,
-                new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 It.IsAny<string>());
 
             // Assert
@@ -80,12 +80,24 @@ namespace MailModule.Tests.Services.Implementations
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("wrong_name",
-                new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 "name");
 
             // Assert
             result.Should().ThrowExactly<Exception>()
-                .WithMessage($"Mail sender whose name is wrong_name is not found.");
+                .WithMessage("Mail sender whose name is wrong_name is not found.");
+        }
+        [Test]
+        public void SendMailAsyncWithSenderName_GetSenderInBaseClass_ShouldReturnException()
+        {
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("name",
+                                                                                                  new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                                                                                                  "name");
+
+            // Assert
+            result.Should().ThrowExactly<NotImplementedException>();
         }
 
         [Test]
@@ -97,7 +109,7 @@ namespace MailModule.Tests.Services.Implementations
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
-                null, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                null, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 "name");
 
             // Assert
@@ -113,7 +125,7 @@ namespace MailModule.Tests.Services.Implementations
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
-                new IMailAddress[] { }, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                new IMailAddress[] { }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 "name");
 
             // Assert
@@ -131,7 +143,7 @@ namespace MailModule.Tests.Services.Implementations
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
-                new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 templateName);
 
             // Assert
@@ -152,7 +164,7 @@ namespace MailModule.Tests.Services.Implementations
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
-                new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
                 "wrong_name");
 
             // Assert
@@ -161,11 +173,10 @@ namespace MailModule.Tests.Services.Implementations
         }
 
         [Test]
-        public async Task SendMailAsyncWithSenderName_PassValidParams_ShouldSendMail()
+        public void SendMailAsyncWithSenderName_PassValidParams_ShouldCallSendMailFunction()
         {
             // Arrange 
             var attachment = new Attachment(Assembly.GetEntryAssembly()?.Location ?? string.Empty);
-            
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
@@ -173,20 +184,203 @@ namespace MailModule.Tests.Services.Implementations
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(_mailContentMock.Object));
-            
+
             _defaultSmtpMailClientMock.Protected()
                 .Setup<SmtpClient>("GetSmtpClient", _mailClientSettingMock.Object)
-                .Returns(_smtpClientMock.Object)
+                .Returns(new SmtpClient())
                 .Verifiable();
-            
-          
+
+
             // Act
-              await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
-                new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object}, new[] {_mailAddressMock.Object},
-                "templateName", "additionalSubjectData", "additionalContent", new Attachment[]{ attachment});
+            Func<Task> sendMailTask = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
+                 new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                 "templateName", "additionalSubjectData", "additionalContent", new[] { attachment });
 
             // Assert
-           // _smtpClientMock.Verify(c=>c.SendMailAsync(It.IsAny<MailMessage>()), Times.Once);
+            sendMailTask.Should().Throw<SmtpException>().WithMessage("Failure sending mail.");
+        }
+
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderNoTemplate_PassNullSender_ShouldReturnException()
+        {
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(null,
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, "subject", "content");
+
+            // Assert
+            result.Should()
+                  .ThrowExactly<ArgumentNullException>()
+                  .And.ParamName.Should()
+                  .Be("sender");
+        }
+
+
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderNoTemplate_PassNullRecipients_ShouldReturnException()
+        {
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                            null, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, "subject", "content");
+
+            // Assert
+            result.Should().ThrowExactly<ArgumentNullException>().And.ParamName.Should().Be("recipients");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderNoTemplate_PassEmptyRecipients_ShouldReturnException()
+        {
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                              new IMailAddress[] { }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, "subject", "content");
+
+            // Assert
+            result.Should().ThrowExactly<Exception>().And.Message.Should().Be("No recipient has been defined.");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderNoTemplate_PassValidParams_ShouldCallSendMailFunction()
+        {
+            // Arrange 
+            var attachment = new Attachment(Assembly.GetEntryAssembly()?.Location ?? string.Empty);
+            _defaultSmtpMailClientMock
+                .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+
+            _defaultSmtpMailClientMock
+                .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(_mailContentMock.Object));
+
+            _defaultSmtpMailClientMock.Protected()
+                .Setup<SmtpClient>("GetSmtpClient", _mailClientSettingMock.Object)
+                .Returns(new SmtpClient())
+                .Verifiable();
+
+
+            // Act
+            Func<Task> sendMailTask = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                          new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, "subject", "content",
+                         true, "additionalSubjectData", "additionalContent", new[] { attachment });
+
+            // Assert
+            sendMailTask.Should().Throw<SmtpException>().WithMessage("Failure sending mail.");
+        }
+
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase(null)]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassInvalidTemplateName_ShouldReturnException(string templateName)
+        {
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                                                                                                  new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                                                                                                  templateName);
+
+            // Assert
+            result.Should().ThrowExactly<ArgumentException>().And.ParamName.Should().Be(nameof(templateName));
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassValidWrongTemplateName_ShouldReturnException()
+        {
+            // Arrange
+            _defaultSmtpMailClientMock
+                .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult<IMailContent>(null));
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                                                                                                  new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                                                                                                  "wrong_name");
+
+            // Assert
+            result.Should().ThrowExactly<Exception>()
+                  .WithMessage("Mail content whose name is wrong_name is not found.");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_UseMailContentFromBaseClass_ShouldReturnException()
+        {
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                                                                                                  new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                                                                                                  "name");
+
+            // Assert
+            result.Should().ThrowExactly<NotImplementedException>();
+        }
+
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassNullSender_ShouldReturnException()
+        {
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync((IMailAddress)null,
+                new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                new[] { _mailAddressMock.Object }, templateName: "templateName");
+
+            // Assert
+            result.Should()
+                  .ThrowExactly<ArgumentNullException>()
+                  .And.ParamName.Should()
+                  .Be("sender");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassNullRecipients_ShouldReturnException()
+        {
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                            null, new[] { _mailAddressMock.Object },
+                            new[] { _mailAddressMock.Object }, templateName: "templateName");
+
+            // Assert
+            result.Should().ThrowExactly<ArgumentNullException>().And.ParamName.Should().Be("recipients");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassEmptyRecipients_ShouldReturnException()
+        {
+
+            // Act
+            Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                              new IMailAddress[] { }, new[] { _mailAddressMock.Object },
+                              new[] { _mailAddressMock.Object }, templateName: "templateName");
+
+            // Assert
+            result.Should().ThrowExactly<Exception>().And.Message.Should().Be("No recipient has been defined.");
+        }
+
+        [Test]
+        public void SendMailAsyncWithExistingSenderAndTemplate_PassValidParams_ShouldCallSendMailFunction()
+        {
+            // Arrange 
+            var attachment = new Attachment(Assembly.GetEntryAssembly()?.Location ?? string.Empty);
+            _defaultSmtpMailClientMock
+                .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(_mailAddressMock.Object));
+
+            _defaultSmtpMailClientMock
+                .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(_mailContentMock.Object));
+
+            _defaultSmtpMailClientMock.Protected()
+                .Setup<SmtpClient>("GetSmtpClient", _mailClientSettingMock.Object)
+                .Returns(new SmtpClient())
+                .Verifiable();
+
+
+            // Act
+            Func<Task> sendMailTask = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync(this._mailAddressMock.Object,
+                          new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object }, new[] { _mailAddressMock.Object },
+                          "templateName", "additionalSubject", "additionalContent", new[] { attachment });
+
+            // Assert
+            sendMailTask.Should().Throw<SmtpException>().WithMessage("Failure sending mail.");
         }
 
         #endregion
