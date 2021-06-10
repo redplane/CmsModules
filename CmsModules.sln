@@ -27,15 +27,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.EntityFrameworkCo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{34F3DD99-EE8C-4071-94A5-8461F1D8A258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsModule.Tests", "unit-tests\libs\CorsModule.Tests\CorsModule.Tests.csproj", "{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataMagic", "DataMagic", "{AB5AF467-825D-4AD1-82BD-D6B99086765A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.Abstractions.Tests", "unit-tests\libs\DataMagic\DataMagic.Abstractions.Tests\DataMagic.Abstractions.Tests.csproj", "{16C636EA-57E8-403E-85E6-13CFC54E6FBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.Abstractions.Tests", "unit-tests\libs\DataMagic\DataMagic.Abstractions.Tests\DataMagic.Abstractions.Tests.csproj", "{16C636EA-57E8-403E-85E6-13CFC54E6FBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailModule.Tests", "unit-tests\libs\MailModule.Tests\MailModule.Tests.csproj", "{129D39D3-5D81-41B2-ABE7-6CE0D12F21CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailModule.Tests", "unit-tests\libs\MailModule.Tests\MailModule.Tests.csproj", "{129D39D3-5D81-41B2-ABE7-6CE0D12F21CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.EntityFrameworkCore.Tests", "unit-tests\libs\DataMagic\DataMagic.EntityFrameworkCore.Tests\DataMagic.EntityFrameworkCore.Tests.csproj", "{03387788-148B-4FB2-93C8-610FB694806F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.EntityFrameworkCore.Tests", "unit-tests\libs\DataMagic\DataMagic.EntityFrameworkCore.Tests\DataMagic.EntityFrameworkCore.Tests.csproj", "{03387788-148B-4FB2-93C8-610FB694806F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C74EAED-CB4B-49F0-A881-D4D8CF2856A1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +74,6 @@ Global
 		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C16B75E4-301C-4111-AD01-6C3C538DC492}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16C636EA-57E8-403E-85E6-13CFC54E6FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16C636EA-57E8-403E-85E6-13CFC54E6FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16C636EA-57E8-403E-85E6-13CFC54E6FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -101,7 +100,6 @@ Global
 		{8CD458A6-C814-412C-923E-61DF752AD760} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
 		{C16B75E4-301C-4111-AD01-6C3C538DC492} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
 		{34F3DD99-EE8C-4071-94A5-8461F1D8A258} = {821DD67B-DA31-480A-97FD-DEF4440D5F69}
-		{F81E8FA7-5D8B-4BE4-BF6C-53E2561A972A} = {34F3DD99-EE8C-4071-94A5-8461F1D8A258}
 		{AB5AF467-825D-4AD1-82BD-D6B99086765A} = {34F3DD99-EE8C-4071-94A5-8461F1D8A258}
 		{16C636EA-57E8-403E-85E6-13CFC54E6FBF} = {AB5AF467-825D-4AD1-82BD-D6B99086765A}
 		{129D39D3-5D81-41B2-ABE7-6CE0D12F21CD} = {34F3DD99-EE8C-4071-94A5-8461F1D8A258}
