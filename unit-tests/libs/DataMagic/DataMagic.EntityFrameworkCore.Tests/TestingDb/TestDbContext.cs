@@ -13,19 +13,18 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
         {
          
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<User>()
-        //                .HasNoKey()
-        //                .HasData(
-        //                    new User { Id = 1, Name = "Name1", Birthday = DateTime.Now.ToOADate(  ) },
-        //                    new User { Id = 2, Name = "Name2", Birthday = DateTime.Now.AddDays( -1 ).ToOADate() },
-        //                    new User { Id = 3, Name = "Name3", Birthday = DateTime.Now.AddDays( -3 ).ToOADate() },
-        //                    new User { Id = 4, Name = "Name4", Birthday = DateTime.Now.ToOADate() }
-        //                );
-        
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestDbContext).Assembly);
+            modelBuilder.Entity<User>()
+                        .HasData(
+                            new User { Id = 1, Name = "Name1", Birthday = DateTime.Now.Date },
+                            new User { Id = 2, Name = "Name2", Birthday = DateTime.Now.Date.AddDays(-1) },
+                            new User { Id = 3, Name = "Name3", Birthday = DateTime.Now.Date.AddDays(-3) },
+                            new User { Id = 4, Name = "Name4", Birthday = DateTime.Now.Date }
+                        );
+
+        }
 
         public virtual DbSet<User> Users { get; set; }
     }
