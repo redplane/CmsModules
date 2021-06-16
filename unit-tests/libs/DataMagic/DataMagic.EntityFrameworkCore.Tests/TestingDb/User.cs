@@ -13,6 +13,8 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
         public string Name { get; set; }
 
         public DateTime Birthday { get; set; }
+
+        public DateTime? DeathTime { get; set; }
     }
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

@@ -60,3 +60,4 @@
 /unit-tests/libs/DataMagic/DataMagic.EntityFrameworkCore.Tests/bin
 /unit-tests/libs/MailModule.Tests/obj
 /unit-tests/libs/MailModule.Tests/bin
+*.coverage
