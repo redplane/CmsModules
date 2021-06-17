@@ -253,7 +253,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         public void WithDateSearchWithNotAllowDatetimeNull_PassNullDateFilter_ReturnFullItems()
         {
             // Arrange
-            Expression<Func<User, DateTime>> x = text => DateTime.Now;
+            Expression<Func<User, DateTime>> x = user => user.Birthday;
 
             // Act
             var result = this._users.WithDateSearch(x, null);

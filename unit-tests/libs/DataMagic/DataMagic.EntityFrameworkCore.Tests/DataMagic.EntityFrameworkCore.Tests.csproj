@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\libs\DataMagic\DataMagic.EntityFrameworkCore\DataMagic.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DataMagic.Abstractions.Tests\DataMagic.Abstractions.Tests.csproj" />
   </ItemGroup>
 
 </Project>
