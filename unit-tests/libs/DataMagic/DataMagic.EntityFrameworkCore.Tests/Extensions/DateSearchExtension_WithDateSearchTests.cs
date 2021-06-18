@@ -112,6 +112,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             var factory = new ConnectionFactory();
             var context = factory.CreateContextForSQLite();
+           
             this._users = context.Users.AsQueryable();
         }
         [Test]

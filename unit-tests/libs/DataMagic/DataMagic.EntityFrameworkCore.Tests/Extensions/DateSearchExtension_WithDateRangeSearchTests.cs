@@ -24,6 +24,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             get
             {
+                // For Date to is null
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.Equal ), null, new List<User>
                     {
                         new() { Id = 2, Name = "Name2", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2076" ) },
@@ -55,6 +56,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                         new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
                     }.AsQueryable( ) );
 
+                // For Date from is null.
                 yield return new TestCaseData( null, new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.SmallerThan ), new List<User>
                     {
                         new User { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null }
@@ -87,6 +89,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                         new User { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
                     }.AsQueryable( ) );
 
+                // For Date from operator is equal.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.Equal ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
                                                new List<User>( ).AsQueryable( ) );
@@ -115,6 +118,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                                                        new User { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) }
                                                    }.AsQueryable( ) );
 
+                // For Date from operator is greater than.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.GreaterThan ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
                                                new List<User>
@@ -147,7 +151,8 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                                                        new() { Id = 4, Name = "Name4", Birthday = Convert.ToDateTime( "1-1-2017" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) },
                                                        new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
                                                    }.AsQueryable( ) );
-
+              
+                // For Date from operator is smaller than.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.SmallerThan ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
                                                new List<User>( ).AsQueryable( ) );
@@ -174,6 +179,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                                                        new User { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null }
                                                    }.AsQueryable( ) );
 
+                // For Date from operator is smaller than equal.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.SmallerThanEqualTo ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
                                                new List<User>( ).AsQueryable( ) );
@@ -204,6 +210,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                                                        new User { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) }
                                                    }.AsQueryable( ) );
 
+                // // For Date from operator is greater than equal to.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.GreaterThanEqualTo ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
                                                new List<User>
