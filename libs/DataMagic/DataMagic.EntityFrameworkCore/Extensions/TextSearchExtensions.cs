@@ -96,7 +96,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 				Expression.Lambda<Func<T, bool>>(expression, property.Parameters.Single());
 			return items.Where(lambda);
 		}
-
+		
 		#endregion
 	}
 }

@@ -6,6 +6,7 @@
         EqualIgnoreCase,
         Contains,
         StartWith,
-        EndWith
+        EndWith,
+        None
     }
 }

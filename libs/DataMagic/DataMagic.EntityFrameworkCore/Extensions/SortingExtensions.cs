@@ -22,7 +22,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 			Expression<Func<TEntity, TKey>> keySelectorExpression,
 			SortDirections direction = SortDirections.None)
 		{
-			switch (direction)
+            switch (direction)
 			{
 				case SortDirections.Ascending:
 					return items.OrderBy(keySelectorExpression);

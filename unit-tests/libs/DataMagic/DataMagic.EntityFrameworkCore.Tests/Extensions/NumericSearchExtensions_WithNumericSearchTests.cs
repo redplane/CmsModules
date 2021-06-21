@@ -60,6 +60,8 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 
         #region Private
 
+        private ConnectionFactory _connectionFactory;
+
         private IQueryable<Number> _numbers;
 
         #endregion
@@ -69,17 +71,32 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         [SetUp]
         public void Setup( )
         {
-            var factory = new ConnectionFactory( );
-            var context = factory.CreateContextForSQLite( );
+            this._connectionFactory = new ConnectionFactory( );
+            var dbContext = this._connectionFactory.CreateContextForSQLite( );
+            var numbers = new List<Number>
+                {
+                    new() { Id = 1, Int = 1, Float = ( float ) 2.6 },
+                    new() { Id = 2, Int = 2, Float = ( float ) 7.3 },
+                    new() { Id = 3, Int = 2, Float = ( float ) 5.4 },
+                    new() { Id = 4, Int = 3, Float = ( float ) 5.4 }
+                };
+            dbContext.Numbers.AddRange( numbers );
+            dbContext.SaveChanges( );
 
-            this._numbers = context.Numbers.AsQueryable( );
+            this._numbers = dbContext.Numbers.AsQueryable( );
+        }
+
+        [TearDown]
+        public void TearDown( )
+        {
+            this._connectionFactory.Dispose( );
         }
 
         [Test]
         public void WithNumericSearch_PassInvalidValueType_ShouldThrowException( )
         {
             // Arrange
-            Expression<Func<Number, string>> property = number => number.Text;
+            Expression<Func<Number, string>> property = number => "number.Text";
             var range = new NumericFilter<string>( "2", NumericComparisonOperators.Equal );
 
             // Act

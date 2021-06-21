@@ -151,7 +151,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                                                        new() { Id = 4, Name = "Name4", Birthday = Convert.ToDateTime( "1-1-2017" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) },
                                                        new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
                                                    }.AsQueryable( ) );
-              
+
                 // For Date from operator is smaller than.
                 yield return new TestCaseData( new DateFilter( new Date( 2016, 1, 1 ), DateComparisonOperators.SmallerThan ),
                                                new DateFilter( new Date( 2018, 1, 1 ), DateComparisonOperators.Equal ),
@@ -255,6 +255,8 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 
         #region Private
 
+        private ConnectionFactory _connectionFactory;
+
         private IQueryable<User> _users;
 
         #endregion
@@ -264,9 +266,26 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         [SetUp]
         public void Setup( )
         {
-            var factory = new ConnectionFactory( );
-            var context = factory.CreateContextForSQLite( );
-            this._users = context.Users.AsQueryable( );
+            this._connectionFactory = new ConnectionFactory( );
+            var dbContext = this._connectionFactory.CreateContextForSQLite( );
+            var users = new List<User>
+                {
+                    new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null },
+                    new() { Id = 2, Name = "Name2", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2076" ) },
+                    new() { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) },
+                    new() { Id = 4, Name = "Name4", Birthday = Convert.ToDateTime( "1-1-2017" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) },
+                    new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
+                };
+            dbContext.Users.AddRange( users );
+            dbContext.SaveChanges( );
+
+            this._users = dbContext.Users.AsQueryable( );
+        }
+
+        [TearDown]
+        public void TearDown( )
+        {
+            this._connectionFactory.Dispose( );
         }
         [Test]
         public void WithDateRangeSearch_PassNullFilter_ShouldReturnAllItems( )

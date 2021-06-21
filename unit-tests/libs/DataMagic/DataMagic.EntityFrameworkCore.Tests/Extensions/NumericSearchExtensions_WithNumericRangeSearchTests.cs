@@ -263,6 +263,8 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 
         #region Private
 
+        private ConnectionFactory _connectionFactory;
+
         private IQueryable<Number> _numbers;
 
         #endregion
@@ -272,10 +274,27 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         [SetUp]
         public void Setup( )
         {
-            var factory = new ConnectionFactory( );
-            var context = factory.CreateContextForSQLite( );
+            this._connectionFactory = new ConnectionFactory( );
+            var dbContext = this._connectionFactory.CreateContextForSQLite( );
+            var numbers = new List<Number>
+                {
+                    new() { Id = 1, Int = 1, Float =  2.6f },
+                    new() { Id = 2, Int = 2, Float =  7.3f },
+                    new() { Id = 3, Int = 2, Float = 5.4f },
+                    new() { Id = 4, Int = 3, Float = 5.4f }
+                };
+            dbContext.Numbers.AddRange( numbers );
+            dbContext.SaveChanges( );
 
-            this._numbers = context.Numbers.AsQueryable( );
+            this._numbers = dbContext.Numbers.AsQueryable( );
+            var a = dbContext.Numbers.AsQueryable(  ).Where( c => Math.Abs( c.Float - 2.6 ) < 0.001).ToList(  );
+
+        }
+
+        [TearDown]
+        public void TearDown( )
+        {
+            this._connectionFactory.Dispose( );
         }
 
         [Test]

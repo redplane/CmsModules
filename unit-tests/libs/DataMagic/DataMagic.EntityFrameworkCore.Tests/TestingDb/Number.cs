@@ -11,7 +11,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 
         public int Int { get; set; }
         public float Float { get; set; }
-        public string Text { get; set; }
     }
     public class StudentConfiguration : IEntityTypeConfiguration<Number>
     {
