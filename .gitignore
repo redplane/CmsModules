@@ -61,3 +61,7 @@
 /unit-tests/libs/MailModule.Tests/obj
 /unit-tests/libs/MailModule.Tests/bin
 *.coverage
+/libs/DataMagic/DataMagic.LiteDatabase/obj
+/libs/DataMagic/DataMagic.LiteDatabase/bin
+/.idea
+/*.user
