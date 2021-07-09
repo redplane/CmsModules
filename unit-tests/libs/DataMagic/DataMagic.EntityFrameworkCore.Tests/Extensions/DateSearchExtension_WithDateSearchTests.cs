@@ -14,11 +14,10 @@ using NUnit.Framework;
 
 namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 {
+    [TestFixture]
     [SuppressMessage( "ReSharper", "InconsistentNaming" )]
     public class DateSearchExtension_WithDateSearchTests
     {
-        #region Static
-
         #region - Public
 
         public static IEnumerable<TestCaseData> UserBirthdayMatchedOperatorTestCases
@@ -94,8 +93,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     }.AsQueryable( ) );
             }
         }
-
-        #endregion
 
         #endregion
 

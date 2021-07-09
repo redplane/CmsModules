@@ -11,6 +11,7 @@ using NUnit.Framework;
 
 namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 {
+    [TestFixture]
     // ReSharper disable once InconsistentNaming
     public class NumericSearchExtensions_WithNumericSearchTests
     {
