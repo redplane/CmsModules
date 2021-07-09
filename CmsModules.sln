@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.LiteDatabase", "libs\DataMagic\DataMagic.LiteDatabase\DataMagic.LiteDatabase.csproj", "{A8D6EF00-D452-46EB-A359-F92866697A98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.MongoDatabase", "libs\DataMagic\DataMagic.MongoDatabase\DataMagic.MongoDatabase.csproj", "{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{A8D6EF00-D452-46EB-A359-F92866697A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8D6EF00-D452-46EB-A359-F92866697A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8D6EF00-D452-46EB-A359-F92866697A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{129D39D3-5D81-41B2-ABE7-6CE0D12F21CD} = {34F3DD99-EE8C-4071-94A5-8461F1D8A258}
 		{03387788-148B-4FB2-93C8-610FB694806F} = {AB5AF467-825D-4AD1-82BD-D6B99086765A}
 		{A8D6EF00-D452-46EB-A359-F92866697A98} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
+		{8CEE3103-F4BF-4D96-85A4-0561280CD2DB} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40AD4BA3-5EBD-4455-B116-E6A4F5F66C0D}

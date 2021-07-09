@@ -65,3 +65,5 @@
 /libs/DataMagic/DataMagic.LiteDatabase/bin
 /.idea
 /*.user
+/libs/DataMagic/DataMagic.MongoDatabase/obj
+/libs/DataMagic/DataMagic.MongoDatabase/bin
