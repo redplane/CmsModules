@@ -1,0 +1,32 @@
+[
+  {
+    "id": "17bf0b97-9266-416c-ac5d-020450edb831",
+    "name": "Kayley Lyst",
+    "age": 19,
+    "balance": 492234
+  },
+  {
+    "id": "2db559b5-6a02-4764-9df3-216011142aac",
+    "name": "Roxana Barta",
+    "age": 5,
+    "balance": 436995
+  },
+  {
+    "id": "4612000b-df1d-431b-a31d-386e38503c96",
+    "name": "Pavel Sweeny",
+    "age": 10,
+    "balance": 146812
+  },
+  {
+    "id": "d8284f36-d4a8-4e07-9e3a-b47296c700af",
+    "name": "Pall Mandell",
+    "age": 8,
+    "balance": 342974
+  },
+  {
+    "id": "4beb1027-77ad-4ae5-8c18-5d4a2128ddde",
+    "name": "Victoria Cordier",
+    "age": 9,
+    "balance": 462547
+  }
+]

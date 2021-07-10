@@ -67,3 +67,7 @@
 /*.user
 /libs/DataMagic/DataMagic.MongoDatabase/obj
 /libs/DataMagic/DataMagic.MongoDatabase/bin
+/unit-tests/libs/CmsModules.TestDependencies/bin
+/unit-tests/libs/CmsModules.TestDependencies/obj
+/unit-tests/libs/DataMagic/DataMagic.LiteDatabase.Tests/bin
+/unit-tests/libs/DataMagic/DataMagic.LiteDatabase.Tests/obj

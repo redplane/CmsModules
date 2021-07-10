@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DataMagic.Abstractions.Interfaces;
 using DataMagic.Abstractions.Models;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace DataMagic.MongoDatabase.Extensions
@@ -50,6 +51,61 @@ namespace DataMagic.MongoDatabase.Extensions
             return Task.FromResult(new SearchResult<T>(items, totalRecords) as ISearchResult<T>);
         }
 
+        /// <summary>
+        ///     Find and build projected search result from mongo database.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<ISearchResult<TProjection>> ToSearchResultAsync<T, TProjection>(
+            this IFindFluent<T, TProjection> source,
+            IPager pager, CancellationToken cancellationToken = default)
+        {
+            // Count total records.
+            var totalRecords = await source.CountDocumentsAsync(cancellationToken);
+
+            var items = new List<TProjection>();
+
+            // Do pagination with one extra item.
+            if (pager != null)
+            {
+                if (pager.ShouldItemsQueried())
+                    items = await source.Skip((int) pager.GetSkippedRecords())
+                        .Limit((int) pager.GetTotalRecords())
+                        .ToListAsync(cancellationToken);
+
+                return new SearchResult<TProjection>(items.ToArray(), totalRecords);
+            }
+
+            items = await source.ToListAsync(cancellationToken);
+            return new SearchResult<TProjection>(items.ToArray(), totalRecords);
+        }
+
+        /// <summary>
+        ///     Find and build projected search result from mongo database.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<ISearchResult<T>> ToSearchResultAsync<T>(this IAggregateFluent<T> source,
+            IPager pager, CancellationToken cancellationToken = default)
+        {
+            // Count total records.
+            var aggregateResult = await source.Count().FirstOrDefaultAsync(cancellationToken);
+            var items = new List<T>();
+
+            // Do pagination with one extra item.
+            if (pager != null)
+            {
+                if (pager.ShouldItemsQueried())
+                    items = await source
+                        .Skip((int) pager.GetSkippedRecords())
+                        .Limit((int) pager.GetTotalRecords())
+                        .ToListAsync(cancellationToken);
+
+                // Initialize pager result.
+                return new SearchResult<T>(items.ToArray(), aggregateResult.Count);
+            }
+
+            items = await source.ToListAsync(cancellationToken);
+            return new SearchResult<T>(items.ToArray(), aggregateResult.Count);
+        }
         #endregion
     }
 }
