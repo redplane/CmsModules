@@ -6,6 +6,7 @@
 		SmallerThanEqualTo,
 		Equal,
 		GreaterThanEqualTo,
-		GreaterThan
+		GreaterThan,
+		None
 	}
 }

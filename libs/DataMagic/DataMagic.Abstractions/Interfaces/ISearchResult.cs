@@ -8,7 +8,9 @@ namespace DataMagic.Abstractions.Interfaces
         #region Properties
 
         T[] Items { get; }
-
+        
+        long TotalRecords { get; }
+        
         #endregion
 
         #region Methods

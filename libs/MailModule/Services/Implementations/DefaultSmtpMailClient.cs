@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+using GuardNet;
 using MailModule.Models.Interfaces;
 using MailModule.Services.Interfaces;
 
@@ -38,6 +39,11 @@ namespace MailModule.Services.Implementations
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
+            Guard.NotNull( sender, nameof(sender) );
+            Guard.NotNull(recipients, nameof(recipients) );
+            if (recipients.Length < 1)
+                throw new Exception("No recipient has been defined.");
+
             using (var smtpClient = GetSmtpClient(_mailClientSetting))
             {
                 var mailMessage = await BuildMailMessageAsync(_mailClientSetting, sender, recipients, subject,
@@ -58,6 +64,12 @@ namespace MailModule.Services.Implementations
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
+            Guard.NotNull(sender, nameof(sender));
+            Guard.NotNull(recipients, nameof(recipients));
+            Guard.NotNullOrWhitespace(templateName, nameof(templateName));
+            if (recipients.Length < 1)
+                throw new Exception("No recipient has been defined.");
+
             // Find mail template.
             var mail = await GetMailContentAsync(templateName, cancellationToken);
 
@@ -83,6 +95,12 @@ namespace MailModule.Services.Implementations
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
+            Guard.NotNullOrWhitespace(sender, nameof(sender));
+            Guard.NotNullOrWhitespace(templateName, nameof(templateName));
+            Guard.NotNull(recipients, nameof(recipients));
+            if ( recipients.Length < 1)
+                throw new Exception("No recipient has been defined.");
+            
             // Find mail sender.
             var mailSender = await GetSenderAsync(sender, cancellationToken);
 
@@ -141,10 +159,10 @@ namespace MailModule.Services.Implementations
             bool isHtml = default,
             CancellationToken cancellationToken = default)
         {
-            if (sender == null)
-                throw new Exception("Sender is not found");
-
-            if (recipients == null || recipients.Length < 1)
+            Guard.NotNull(sender, nameof(sender));
+            Guard.NotNull(recipients, nameof(recipients));
+          
+            if ( recipients.Length < 1)
                 throw new Exception("No recipient has been defined.");
 
             var smtpMail = new MailMessage();
