@@ -71,3 +71,5 @@
 /unit-tests/libs/CmsModules.TestDependencies/obj
 /unit-tests/libs/DataMagic/DataMagic.LiteDatabase.Tests/bin
 /unit-tests/libs/DataMagic/DataMagic.LiteDatabase.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.MongoDatabase.Tests/obj
+/unit-tests/libs/DataMagic/DataMagic.MongoDatabase.Tests/bin

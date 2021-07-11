@@ -34,6 +34,12 @@
       <None Update="Resources\MockItems\e27036c3430a0b1a8e87a06e4682df7f\Users.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Resources\MockItems\574029cf370d7010a3a7a8f4be15ee01\User.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\MockItems\c4d37eb457d22c7645f8c7ed9a78c4e8\User.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
