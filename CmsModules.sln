@@ -11,12 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModulesTests", "unit-tests\ModulesTests\ModulesTests.csproj", "{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModules.Shares", "examples\CmsModulesShared\CmsModules.Shares.csproj", "{58EDA8B0-B787-4783-B53B-774CC159340D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModules.ManagementUi", "examples\CmsModulesManagement\CmsModules.ManagementUi.csproj", "{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsModule", "libs\CorsModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataMagic", "DataMagic", "{1A31B342-C5A7-4D35-8314-E540FC44B7F3}"
