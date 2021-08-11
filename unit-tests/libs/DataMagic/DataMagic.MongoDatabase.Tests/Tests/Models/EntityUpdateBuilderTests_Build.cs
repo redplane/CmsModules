@@ -37,12 +37,12 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
             var toolProvider = _tools.BuildServiceProvider();
             var fileProvider = toolProvider.GetService<IFileProvider>();
             var user = await fileProvider.ReadJsonFromFileAsync<User>(new[]
-                {"Resources", "62bbccd2607f708023a35326355adc39", "User.json"});
+                { "Resources", "62bbccd2607f708023a35326355adc39", "User.json" });
             await users.InsertOneAsync(user);
-            
+
             // Find the added user.
             var addedUser = await users.Find(x => x.Id == user.Id).FirstOrDefaultAsync();
-            
+
             // Build the entity update.
             var entityUpdateBuilder = new EntityUpdateBuilder<User>()
                 .Update(x => x.Age, new EditableField<int>(10))
@@ -50,16 +50,17 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
                 .Update(x => x.Name, new EditableField<string>("Changed name"));
 
             var updateDefinition = entityUpdateBuilder.Build();
-            var editedUser = await users.FindOneAndUpdateAsync<User>(x => x.Id == user.Id, updateDefinition, new FindOneAndUpdateOptions<User>()
-            {
-                ReturnDocument = ReturnDocument.After
-            }, CancellationToken.None);
-            
+            var editedUser = await users.FindOneAndUpdateAsync<User>(x => x.Id == user.Id, updateDefinition,
+                new FindOneAndUpdateOptions<User>()
+                {
+                    ReturnDocument = ReturnDocument.After
+                }, CancellationToken.None);
+
             Assert.AreEqual(10, editedUser.Age);
             Assert.AreEqual(2500, editedUser.Balance);
             Assert.AreEqual("Changed name", editedUser.Name);
         }
-        
+
         #endregion
     }
 }

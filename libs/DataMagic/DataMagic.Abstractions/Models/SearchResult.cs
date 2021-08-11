@@ -6,83 +6,83 @@ using DataMagic.Abstractions.Interfaces;
 
 namespace DataMagic.Abstractions.Models
 {
-	public class SearchResult<T> : ISearchResult<T>
-	{
-		#region Constructor
+    public class SearchResult<T> : ISearchResult<T>
+    {
+        #region Constructor
 
-		public SearchResult(IEnumerable<T> items, int totalRecords)
-		{
-			Items = items?.ToArray() ?? new T[0];
-			TotalRecords = totalRecords;
-		}
+        public SearchResult(IEnumerable<T> items, int totalRecords)
+        {
+            Items = items?.ToArray() ?? new T[0];
+            TotalRecords = totalRecords;
+        }
 
-		public SearchResult(IEnumerable<T> items, long totalRecords)
-		{
-			Items = items?.ToArray() ?? new T[0];
-			TotalRecords = totalRecords;
-		}
+        public SearchResult(IEnumerable<T> items, long totalRecords)
+        {
+            Items = items?.ToArray() ?? new T[0];
+            TotalRecords = totalRecords;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		///     <inheritdoc />
-		/// </summary>
-		public T[] Items { get; private set; }
+        /// <summary>
+        ///     <inheritdoc />
+        /// </summary>
+        public T[] Items { get; private set; }
 
-		/// <summary>
-		/// Total records.
-		/// </summary>
-		public long TotalRecords { get; private set; }
+        /// <summary>
+        /// Total records.
+        /// </summary>
+        public long TotalRecords { get; private set; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		/// <summary>
-		///     <inheritdoc />
-		/// </summary>
-		/// <returns></returns>
-		public virtual T First()
-		{
-			return Items.First();
-		}
+        /// <summary>
+        ///     <inheritdoc />
+        /// </summary>
+        /// <returns></returns>
+        public virtual T First()
+        {
+            return Items.First();
+        }
 
-		/// <summary>
-		///     <inheritdoc />
-		/// </summary>
-		/// <param name="cancellationToken"></param>
-		/// <returns></returns>
-		public virtual Task<T> FirstAsync(CancellationToken cancellationToken = default)
-		{
-			var item = Items.First();
-			return Task.FromResult(item);
-		}
+        /// <summary>
+        ///     <inheritdoc />
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<T> FirstAsync(CancellationToken cancellationToken = default)
+        {
+            var item = Items.First();
+            return Task.FromResult(item);
+        }
 
-		/// <summary>
-		///     <inheritdoc />
-		/// </summary>
-		/// <returns></returns>
-		public virtual T FirstOrDefault()
-		{
-			if (Items == null)
-				return default;
+        /// <summary>
+        ///     <inheritdoc />
+        /// </summary>
+        /// <returns></returns>
+        public virtual T FirstOrDefault()
+        {
+            if (Items == null)
+                return default;
 
-			return Items.FirstOrDefault();
-		}
+            return Items.FirstOrDefault();
+        }
 
-		/// <summary>
-		///     <inheritdoc />
-		/// </summary>
-		/// <param name="cancellationToken"></param>
-		/// <returns></returns>
-		public virtual Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken = default)
-		{
-			var item = Items.FirstOrDefault();
-			return Task.FromResult(item);
-		}
+        /// <summary>
+        ///     <inheritdoc />
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken = default)
+        {
+            var item = Items.FirstOrDefault();
+            return Task.FromResult(item);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

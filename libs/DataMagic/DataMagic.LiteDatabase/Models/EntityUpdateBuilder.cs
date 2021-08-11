@@ -11,9 +11,9 @@ namespace DataMagic.LiteDatabase.Models
         #region Properties
 
         private readonly LinkedList<FieldUpdate> _fieldUpdates;
-        
+
         #endregion
-        
+
         #region Constructor
 
         public EntityUpdateBuilder()
@@ -22,7 +22,7 @@ namespace DataMagic.LiteDatabase.Models
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -32,8 +32,12 @@ namespace DataMagic.LiteDatabase.Models
         /// <param name="model"></param>
         /// <typeparam name="TField"></typeparam>
         /// <returns></returns>
-        public virtual EntityUpdateBuilder<T> Update<TField>(Expression<Func<T, TField>> field, IEditableField<TField> model)
+        public virtual EntityUpdateBuilder<T> Update<TField>(Expression<Func<T, TField>> field,
+            IEditableField<TField> model)
         {
+            if (model == null)
+                return this;
+
             if (!model.HasModified)
                 return this;
 
@@ -54,7 +58,7 @@ namespace DataMagic.LiteDatabase.Models
             foreach (var fieldUpdate in _fieldUpdates)
             {
                 var expression = fieldUpdate.Expression;
-                var memberExpression = (MemberExpression) expression.Body;
+                var memberExpression = (MemberExpression)expression.Body;
                 var propertyInfo = memberExpression.Member as PropertyInfo;
                 propertyInfo!.SetValue(entity, fieldUpdate.Value);
             }
@@ -68,7 +72,7 @@ namespace DataMagic.LiteDatabase.Models
         {
             return _fieldUpdates.Count;
         }
-        
+
         #endregion
     }
 }

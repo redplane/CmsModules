@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>1.0.0-Preview-001</PackageVersion>
-    <Title>Cors Module</Title>
-    <PackageProjectUrl>https://github.com/redplane/CmsModules</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/redplane/CmsModules</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>cors cors-module</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageVersion>1.0.0-Preview-001</PackageVersion>
+        <Title>Cors Module</Title>
+        <PackageProjectUrl>https://github.com/redplane/CmsModules</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/redplane/CmsModules</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>cors cors-module</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Services\Implementations\**" />
-    <EmbeddedResource Remove="Services\Implementations\**" />
-    <None Remove="Services\Implementations\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="Services\Implementations\**"/>
+        <EmbeddedResource Remove="Services\Implementations\**"/>
+        <None Remove="Services\Implementations\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Implementations\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Models\Implementations\"/>
+    </ItemGroup>
 
 </Project>

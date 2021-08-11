@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 {
-    public class ConnectionFactory: IDisposable
+    public class ConnectionFactory : IDisposable
     {
         #region Implementation of IDisposable
+
         private bool _disposedValue = false; // To detect redundant calls 
-        private  DbConnection _connection;
-       
+        private DbConnection _connection;
+
         public TestDbContext CreateContextForSQLite()
         {
             var connection = new SqliteConnection("DataSource=:memory:");
@@ -27,7 +28,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 
             return context;
         }
-      
 
         #endregion
 
@@ -35,14 +35,11 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposedValue)
+            if (!_disposedValue)
             {
-                if (disposing)
-                {
-                    _connection.Dispose(  );
-                }
+                if (disposing) _connection.Dispose();
 
-                this._disposedValue = true;
+                _disposedValue = true;
             }
         }
 

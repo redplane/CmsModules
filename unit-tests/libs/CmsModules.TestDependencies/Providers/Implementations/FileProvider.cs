@@ -59,17 +59,17 @@ namespace CmsModules.TestDependencies.Providers.Implementations
         /// <returns></returns>
         public virtual async Task<byte[]> ReadBytesAsync(string[] paths)
         {
-	        var executingDirectory = Directory.GetCurrentDirectory();
+            var executingDirectory = Directory.GetCurrentDirectory();
 
-	        var allPaths = new LinkedList<string>();
-	        allPaths.AddLast(executingDirectory);
+            var allPaths = new LinkedList<string>();
+            allPaths.AddLast(executingDirectory);
 
-	        foreach (var path in paths)
-		        allPaths.AddLast(path);
+            foreach (var path in paths)
+                allPaths.AddLast(path);
 
-	        var finalPath = Path.Combine(allPaths.ToArray());
-	        var szContent = await File.ReadAllBytesAsync(finalPath);
-	        return szContent;
+            var finalPath = Path.Combine(allPaths.ToArray());
+            var szContent = await File.ReadAllBytesAsync(finalPath);
+            return szContent;
         }
 
         #endregion

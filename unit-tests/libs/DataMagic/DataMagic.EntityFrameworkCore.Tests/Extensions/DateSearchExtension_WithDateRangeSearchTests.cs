@@ -42,7 +42,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                 yield return new TestCaseData(new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.SmallerThan),
                     null, new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null}
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
                     }.AsQueryable());
 
                 yield return new TestCaseData(new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.GreaterThan),
@@ -64,7 +64,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.SmallerThanEqualTo), null,
                     new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null},
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                         new()
                         {
                             Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
@@ -106,7 +106,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                 yield return new TestCaseData(null,
                     new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.SmallerThan), new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null}
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
                     }.AsQueryable());
 
                 yield return new TestCaseData(null,
@@ -142,7 +142,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                 yield return new TestCaseData(null,
                     new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.SmallerThanEqualTo), new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null},
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                         new()
                         {
                             Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
@@ -292,7 +292,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     new DateFilter(new Date(2018, 1, 1), DateComparisonOperators.SmallerThan),
                     new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null}
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
                     }.AsQueryable());
 
                 yield return new TestCaseData(new DateFilter(new Date(2016, 1, 1), DateComparisonOperators.SmallerThan),
@@ -303,7 +303,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     new DateFilter(new Date(2018, 1, 1), DateComparisonOperators.SmallerThanEqualTo),
                     new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null}
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
                     }.AsQueryable());
 
                 // For Date from operator is smaller than equal.
@@ -322,7 +322,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     new DateFilter(new Date(2018, 1, 1), DateComparisonOperators.SmallerThan),
                     new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null},
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                         new()
                         {
                             Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
@@ -345,7 +345,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     new DateFilter(new Date(2018, 1, 1), DateComparisonOperators.SmallerThanEqualTo),
                     new List<User>
                     {
-                        new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null},
+                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                         new()
                         {
                             Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
@@ -457,7 +457,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             var dbContext = _connectionFactory.CreateContextForSQLite();
             var users = new List<User>
             {
-                new() {Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null},
+                new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                 new()
                 {
                     Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),

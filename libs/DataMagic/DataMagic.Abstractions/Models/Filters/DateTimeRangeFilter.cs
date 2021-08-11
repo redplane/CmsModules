@@ -1,29 +1,29 @@
 ﻿namespace DataMagic.Abstractions.Models.Filters
 {
-	public class DateTimeRangeFilter
-	{
-		#region Properties
+    public class DateTimeRangeFilter
+    {
+        #region Properties
 
-		/// <summary>
-		/// From when the items should be filtered.
-		/// </summary>
-		public DateTimeFilter From { get; private set; }
+        /// <summary>
+        /// From when the items should be filtered.
+        /// </summary>
+        public DateTimeFilter From { get; private set; }
 
-		/// <summary>
-		/// To when the items should be filtered.
-		/// </summary>
-		public DateTimeFilter To { get; private set; }
+        /// <summary>
+        /// To when the items should be filtered.
+        /// </summary>
+        public DateTimeFilter To { get; private set; }
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
-		public DateTimeRangeFilter(DateTimeFilter @from, DateTimeFilter to)
-		{
-			From = @from;
-			To = to;
-		}
+        public DateTimeRangeFilter(DateTimeFilter @from, DateTimeFilter to)
+        {
+            From = @from;
+            To = to;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

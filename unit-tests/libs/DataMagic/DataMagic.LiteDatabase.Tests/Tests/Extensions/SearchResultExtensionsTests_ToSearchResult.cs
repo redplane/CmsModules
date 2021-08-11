@@ -14,7 +14,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
     public partial class SearchResultExtensionsTests
     {
         #region Methods
-        
+
         /// <summary>
         ///     Test code: bb119e69ac0a918112c19712ec0b2dac
         /// Pre-condition:
@@ -37,7 +37,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
                 // Read mock file.
                 var mockUsers = await fileProvider.ReadJsonFromFileAsync<User[]>(new[]
-                    {"Resources", "MockItems", "bb119e69ac0a918112c19712ec0b2dac", "Users.json"});
+                    { "Resources", "MockItems", "bb119e69ac0a918112c19712ec0b2dac", "Users.json" });
                 users.InsertBulk(mockUsers);
 
                 // Find the user.
@@ -85,7 +85,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
                 // Read mock file.
                 var mockUsers = await fileProvider.ReadJsonFromFileAsync<User[]>(new[]
-                    {"Resources", "MockItems", "f2be8e62c29ed26c2bdbb59ca283296e", "Users.json"});
+                    { "Resources", "MockItems", "f2be8e62c29ed26c2bdbb59ca283296e", "Users.json" });
                 users.InsertBulk(mockUsers);
 
                 // Find the user.
@@ -94,7 +94,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 mockPager.Setup(x => x.ShouldItemsCounted()).Returns(true);
                 mockPager.Setup(x => x.GetSkippedRecords()).Returns(0);
                 mockPager.Setup(x => x.GetTotalRecords()).Returns(2);
-                
+
                 var loadUsersResult = await
                     users.Query()
                         .ToSearchResultAsync(mockPager.Object);
@@ -105,7 +105,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 {
                     var mockUser = mockUsers[i];
                     var actualUser = loadUsersResult.Items[i];
-                    
+
                     Assert.AreEqual(mockUser.Name, actualUser.Name);
                     Assert.AreEqual(mockUser.Age, actualUser.Age);
                     Assert.AreEqual(mockUser.Balance, actualUser.Balance);
@@ -140,7 +140,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
                 // Read mock file.
                 var mockUsers = await fileProvider.ReadJsonFromFileAsync<User[]>(new[]
-                    {"Resources", "MockItems", "c043b10c63d180e9c888d2886630758f", "Users.json"});
+                    { "Resources", "MockItems", "c043b10c63d180e9c888d2886630758f", "Users.json" });
                 users.InsertBulk(mockUsers);
 
                 // Find the user.
@@ -148,18 +148,18 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 mockPager.Setup(x => x.ShouldItemsQueried()).Returns(true);
                 mockPager.Setup(x => x.ShouldItemsCounted()).Returns(false);
                 mockPager.Setup(x => x.GetSkippedRecords()).Returns(0);
-                
+
                 var loadUsersResult = await
                     users.Query()
                         .ToSearchResultAsync(mockPager.Object);
-                
+
                 Assert.AreEqual(0, loadUsersResult.TotalRecords);
-                
+
                 for (var i = 0; i < loadUsersResult.Items.Length; i++)
                 {
                     var mockUser = mockUsers[i];
                     var actualUser = loadUsersResult.Items[i];
-                    
+
                     Assert.AreEqual(mockUser.Name, actualUser.Name);
                     Assert.AreEqual(mockUser.Age, actualUser.Age);
                     Assert.AreEqual(mockUser.Balance, actualUser.Balance);
@@ -171,7 +171,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 serviceProvider?.Dispose();
             }
         }
-        
+
         /// <summary>
         /// Test code: e27036c3430a0b1a8e87a06e4682df7f
         /// Pre-condition:
@@ -194,7 +194,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
                 // Read mock file.
                 var mockUsers = await fileProvider.ReadJsonFromFileAsync<User[]>(new[]
-                    {"Resources", "MockItems", "e27036c3430a0b1a8e87a06e4682df7f", "Users.json"});
+                    { "Resources", "MockItems", "e27036c3430a0b1a8e87a06e4682df7f", "Users.json" });
                 users.InsertBulk(mockUsers);
 
                 // Find the user.
@@ -202,11 +202,11 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 mockPager.Setup(x => x.ShouldItemsQueried()).Returns(false);
                 mockPager.Setup(x => x.ShouldItemsCounted()).Returns(true);
                 mockPager.Setup(x => x.GetSkippedRecords()).Returns(0);
-                
+
                 var loadUsersResult = await
                     users.Query()
                         .ToSearchResultAsync(mockPager.Object);
-                
+
                 Assert.AreEqual(mockUsers.Length, loadUsersResult.TotalRecords);
                 Assert.IsEmpty(loadUsersResult.Items);
             }
@@ -216,7 +216,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 serviceProvider?.Dispose();
             }
         }
-        
+
         #endregion
     }
 }

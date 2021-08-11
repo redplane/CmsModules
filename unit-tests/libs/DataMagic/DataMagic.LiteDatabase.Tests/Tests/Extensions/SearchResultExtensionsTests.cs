@@ -17,9 +17,9 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
         private readonly IServiceCollection _services;
 
         private readonly IServiceCollection _tools;
-        
+
         #endregion
-        
+
         #region Constructor
 
         public SearchResultExtensionsTests()
@@ -27,9 +27,9 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
             _services = new ServiceCollection();
             _tools = new ServiceCollection();
         }
-        
+
         #endregion
-        
+
         #region Installation & Uninstallation
 
         [SetUp]
@@ -40,7 +40,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
             // Add tools list.
             _tools.AddScoped<IFileProvider, FileProvider>();
-            
+
             // Service registration.
             _services.AddScoped<ILiteDatabase>(provider => new LiteDB.LiteDatabase(new MemoryStream()));
             _services.AddScoped(provider =>
@@ -55,7 +55,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
         {
             // Do nothing/
         }
-        
+
         #endregion
     }
 }

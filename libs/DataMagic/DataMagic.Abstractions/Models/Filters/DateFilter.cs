@@ -3,30 +3,30 @@ using DataMagic.Abstractions.Enums.Operators;
 
 namespace DataMagic.Abstractions.Models.Filters
 {
-	public class DateFilter
-	{
-		#region Properties
+    public class DateFilter
+    {
+        #region Properties
 
-		/// <summary>
-		/// Value to filter.
-		/// </summary>
-		public Date Value { get; private set; }
+        /// <summary>
+        /// Value to filter.
+        /// </summary>
+        public Date Value { get; private set; }
 
-		/// <summary>
-		/// Operator to apply in the comparison.
-		/// </summary>
-		public DateComparisonOperators Operator { get; private set; }
+        /// <summary>
+        /// Operator to apply in the comparison.
+        /// </summary>
+        public DateComparisonOperators Operator { get; private set; }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		public DateFilter(Date value, DateComparisonOperators @operator)
-		{
-			Value = value;
-			Operator = @operator;
-		}
+        public DateFilter(Date value, DateComparisonOperators @operator)
+        {
+            Value = value;
+            Operator = @operator;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -42,8 +42,8 @@ namespace DataMagic.LiteDatabase.Extensions
 
             // Do pagination with one extra item.
             if (pager.ShouldItemsQueried())
-                items = source.Offset((int) pager.GetSkippedRecords())
-                    .Limit((int) pager.GetTotalRecords())
+                items = source.Offset((int)pager.GetSkippedRecords())
+                    .Limit((int)pager.GetTotalRecords())
                     .ToArray();
 
             // Initialize pager result.
