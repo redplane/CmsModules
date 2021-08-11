@@ -23,36 +23,34 @@ namespace MailModule.Tests.Services.Implementations
         [SetUp]
         public void Setup()
         {
-            this._mailClientInterfaces = new List<IMailClient>();
+            _mailClientInterfaces = new List<IMailClient>();
             var googleMailClientMock = new Mock<IMailClient>();
             googleMailClientMock.Setup(c => c.DisplayName).Returns("google");
-            this._mailClientInterfaces.Add(googleMailClientMock.Object);
+            _mailClientInterfaces.Add(googleMailClientMock.Object);
 
             var yahooMailClientMock = new Mock<IMailClient>();
             yahooMailClientMock.Setup(c => c.DisplayName).Returns("yahoo");
-            this._mailClientInterfaces.Add(yahooMailClientMock.Object);
+            _mailClientInterfaces.Add(yahooMailClientMock.Object);
         }
-
 
         #endregion
 
         #region Methods
 
         [Test]
-        public async Task GetMailClientsAsync_ShouldReturnAllMailClients( )
+        public async Task GetMailClientsAsync_ShouldReturnAllMailClients()
         {
             // Arrange           
-            var defaultMailService = new DefaultMailClientManager( this._mailClientInterfaces );
+            var defaultMailService = new DefaultMailClientManager(_mailClientInterfaces);
 
             // Act
-            var mailClients = await defaultMailService.GetMailClientsAsync( );
+            var mailClients = await defaultMailService.GetMailClientsAsync();
 
             // Assert
-            mailClients.Length.Should( ).Be( 2 );
-            mailClients.Any( c => c.DisplayName == "google" ).Should( ).BeTrue( );
+            mailClients.Length.Should().Be(2);
+            mailClients.Any(c => c.DisplayName == "google").Should().BeTrue();
         }
 
-   
         #endregion
     }
 }

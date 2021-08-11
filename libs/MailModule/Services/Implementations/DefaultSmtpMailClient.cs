@@ -39,8 +39,8 @@ namespace MailModule.Services.Implementations
             Attachment[] attachments = default,
             CancellationToken cancellationToken = default)
         {
-            Guard.NotNull( sender, nameof(sender) );
-            Guard.NotNull(recipients, nameof(recipients) );
+            Guard.NotNull(sender, nameof(sender));
+            Guard.NotNull(recipients, nameof(recipients));
             if (recipients.Length < 1)
                 throw new Exception("No recipient has been defined.");
 
@@ -98,9 +98,9 @@ namespace MailModule.Services.Implementations
             Guard.NotNullOrWhitespace(sender, nameof(sender));
             Guard.NotNullOrWhitespace(templateName, nameof(templateName));
             Guard.NotNull(recipients, nameof(recipients));
-            if ( recipients.Length < 1)
+            if (recipients.Length < 1)
                 throw new Exception("No recipient has been defined.");
-            
+
             // Find mail sender.
             var mailSender = await GetSenderAsync(sender, cancellationToken);
 
@@ -161,8 +161,8 @@ namespace MailModule.Services.Implementations
         {
             Guard.NotNull(sender, nameof(sender));
             Guard.NotNull(recipients, nameof(recipients));
-          
-            if ( recipients.Length < 1)
+
+            if (recipients.Length < 1)
                 throw new Exception("No recipient has been defined.");
 
             var smtpMail = new MailMessage();

@@ -1,22 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/redplane/MailManagement</PackageProjectUrl>
-    <PackageIconUrl>https://i.imgur.com/9Ggpdtj.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/redplane/MailManagement</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Description>A small library that provides interfaces for mail clients registration &amp; management.</Description>
-    <Version>1.0.0-Preview-001</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageProjectUrl>https://github.com/redplane/MailManagement</PackageProjectUrl>
+        <PackageIconUrl>https://i.imgur.com/9Ggpdtj.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/redplane/MailManagement</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Description>A small library that provides interfaces for mail clients registration &amp; management.</Description>
+        <Version>1.0.0-Preview-001</Version>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Implementations" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Models\Implementations"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Guard.Net" Version="1.2.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Guard.Net" Version="1.2.0"/>
+    </ItemGroup>
 
 </Project>

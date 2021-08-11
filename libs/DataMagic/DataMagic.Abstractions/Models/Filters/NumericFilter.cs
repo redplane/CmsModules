@@ -32,7 +32,7 @@ namespace DataMagic.Abstractions.Models.Filters
             var valueTypes = ValidNumericTypes();
             if (!valueTypes.Any(valueType => valueTypes.Contains(valueType)))
             {
-	            var szValueTypes = string.Join(',', valueTypes.Select(x => x.Name));
+                var szValueTypes = string.Join(',', valueTypes.Select(x => x.Name));
                 throw new ArgumentException($"Must be one of these data type: {szValueTypes}", nameof(value));
             }
         }
@@ -43,16 +43,16 @@ namespace DataMagic.Abstractions.Models.Filters
 
         public static Type[] ValidNumericTypes()
         {
-	        var validTypes = new[]
-	        {
-		        typeof(byte), typeof(sbyte), typeof(decimal), typeof(double), typeof(float), typeof(int),
-		        typeof(uint), typeof(long), typeof(ulong), typeof(short), typeof(ushort),
+            var validTypes = new[]
+            {
+                typeof(byte), typeof(sbyte), typeof(decimal), typeof(double), typeof(float), typeof(int),
+                typeof(uint), typeof(long), typeof(ulong), typeof(short), typeof(ushort),
 
-		        typeof(byte?), typeof(sbyte?), typeof(decimal?), typeof(double?), typeof(float?), typeof(int?),
-		        typeof(uint?), typeof(long?), typeof(ulong?), typeof(short?), typeof(ushort?)
-	        };
+                typeof(byte?), typeof(sbyte?), typeof(decimal?), typeof(double?), typeof(float?), typeof(int?),
+                typeof(uint?), typeof(long?), typeof(ulong?), typeof(short?), typeof(ushort?)
+            };
 
-	        return validTypes;
+            return validTypes;
         }
 
         #endregion

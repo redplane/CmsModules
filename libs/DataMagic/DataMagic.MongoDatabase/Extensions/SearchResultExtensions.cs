@@ -43,8 +43,8 @@ namespace DataMagic.MongoDatabase.Extensions
 
             // Do pagination with one extra item.
             if (pager.ShouldItemsQueried())
-                items = source.Skip((int) pager.GetSkippedRecords())
-                    .Take((int) pager.GetTotalRecords())
+                items = source.Skip((int)pager.GetSkippedRecords())
+                    .Take((int)pager.GetTotalRecords())
                     .ToArray();
 
             // Initialize pager result.
@@ -68,8 +68,8 @@ namespace DataMagic.MongoDatabase.Extensions
             if (pager != null)
             {
                 if (pager.ShouldItemsQueried())
-                    items = await source.Skip((int) pager.GetSkippedRecords())
-                        .Limit((int) pager.GetTotalRecords())
+                    items = await source.Skip((int)pager.GetSkippedRecords())
+                        .Limit((int)pager.GetTotalRecords())
                         .ToListAsync(cancellationToken);
 
                 return new SearchResult<TProjection>(items.ToArray(), totalRecords);
@@ -95,8 +95,8 @@ namespace DataMagic.MongoDatabase.Extensions
             {
                 if (pager.ShouldItemsQueried())
                     items = await source
-                        .Skip((int) pager.GetSkippedRecords())
-                        .Limit((int) pager.GetTotalRecords())
+                        .Skip((int)pager.GetSkippedRecords())
+                        .Limit((int)pager.GetTotalRecords())
                         .ToListAsync(cancellationToken);
 
                 // Initialize pager result.
@@ -106,6 +106,7 @@ namespace DataMagic.MongoDatabase.Extensions
             items = await source.ToListAsync(cancellationToken);
             return new SearchResult<T>(items.ToArray(), aggregateResult.Count);
         }
+
         #endregion
     }
 }

@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace MailModule.Tests.Services.Implementations
 {
-  public  class DefaultMailClientManager_GetActiveMailClientAsyncTests
+    public class DefaultMailClientManager_GetActiveMailClientAsyncTests
     {
         #region Properties
 
@@ -24,16 +24,15 @@ namespace MailModule.Tests.Services.Implementations
         [SetUp]
         public void Setup()
         {
-            this._mailClientInterfaces = new List<IMailClient>();
+            _mailClientInterfaces = new List<IMailClient>();
             var googleMailClientMock = new Mock<IMailClient>();
             googleMailClientMock.Setup(c => c.DisplayName).Returns("google");
-            this._mailClientInterfaces.Add(googleMailClientMock.Object);
+            _mailClientInterfaces.Add(googleMailClientMock.Object);
 
             var yahooMailClientMock = new Mock<IMailClient>();
             yahooMailClientMock.Setup(c => c.DisplayName).Returns("yahoo");
-            this._mailClientInterfaces.Add(yahooMailClientMock.Object);
+            _mailClientInterfaces.Add(yahooMailClientMock.Object);
         }
-
 
         #endregion
 
@@ -43,16 +42,15 @@ namespace MailModule.Tests.Services.Implementations
         public async Task GetActiveMailClientAsync_ShouldReturnActiveMailClient()
         {
             // Arrange           
-            var defaultMailService = new DefaultMailClientManager(this._mailClientInterfaces);
+            var defaultMailService = new DefaultMailClientManager(_mailClientInterfaces);
 
             // Act
             var mailClient = await defaultMailService.GetActiveMailClientAsync();
 
             // Assert
-            mailClient.Should( ).NotBeNull( );
-            mailClient.DisplayName.Should( ).Be( "google" );
+            mailClient.Should().NotBeNull();
+            mailClient.DisplayName.Should().Be("google");
         }
-
 
         #endregion
     }

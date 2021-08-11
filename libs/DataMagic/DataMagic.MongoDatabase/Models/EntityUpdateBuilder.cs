@@ -13,7 +13,7 @@ namespace DataMagic.MongoDatabase.Models
         private readonly LinkedList<UpdateDefinition<T>> _definitions;
 
         #endregion
-        
+
         #region Constructor
 
         public EntityUpdateBuilder()
@@ -22,35 +22,22 @@ namespace DataMagic.MongoDatabase.Models
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
-        /// Update property base on editable field.
+        ///     Update property base on editable field.
         /// </summary>
         /// <param name="field"></param>
         /// <param name="model"></param>
         /// <typeparam name="TField"></typeparam>
         /// <returns></returns>
-        public virtual EntityUpdateBuilder<T> Update<TField>(FieldDefinition<T, TField> field, IEditableField<TField> model)
+        public virtual EntityUpdateBuilder<T> Update<TField>(FieldDefinition<T, TField> field,
+            IEditableField<TField> model)
         {
-            if (!model.HasModified)
+            if (model == null)
                 return this;
 
-            var updateDefinition = Builders<T>.Update.Set(field, model.Value);
-            _definitions.AddLast(updateDefinition);
-            return this;
-        }
-        
-        /// <summary>
-        /// Update property base on editable field.
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="model"></param>
-        /// <typeparam name="TField"></typeparam>
-        /// <returns></returns>
-        public virtual EntityUpdateBuilder<T> Update<TField>(Expression<Func<T, TField>> field, IEditableField<TField> model)
-        {
             if (!model.HasModified)
                 return this;
 
@@ -60,7 +47,28 @@ namespace DataMagic.MongoDatabase.Models
         }
 
         /// <summary>
-        /// Build the update definition.
+        ///     Update property base on editable field.
+        /// </summary>
+        /// <param name="field"></param>
+        /// <param name="model"></param>
+        /// <typeparam name="TField"></typeparam>
+        /// <returns></returns>
+        public virtual EntityUpdateBuilder<T> Update<TField>(Expression<Func<T, TField>> field,
+            IEditableField<TField> model)
+        {
+            if (model == null)
+                return this;
+
+            if (!model.HasModified)
+                return this;
+
+            var updateDefinition = Builders<T>.Update.Set(field, model.Value);
+            _definitions.AddLast(updateDefinition);
+            return this;
+        }
+
+        /// <summary>
+        ///     Build the update definition.
         /// </summary>
         /// <returns></returns>
         public virtual UpdateDefinition<T> Build()
@@ -72,14 +80,14 @@ namespace DataMagic.MongoDatabase.Models
         }
 
         /// <summary>
-        /// Get the number of updated fields.
+        ///     Get the number of updated fields.
         /// </summary>
         /// <returns></returns>
         public virtual int CountUpdatedFields()
         {
             return _definitions.Count;
         }
-        
+
         #endregion
     }
 }

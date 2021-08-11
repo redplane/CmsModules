@@ -59,7 +59,7 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
 
             _tools.AddScoped<IFileProvider, FileProvider>();
         }
-        
+
         #endregion
     }
 }

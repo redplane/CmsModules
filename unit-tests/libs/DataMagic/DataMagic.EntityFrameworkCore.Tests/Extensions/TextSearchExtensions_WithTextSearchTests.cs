@@ -24,34 +24,62 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             get
             {
-                yield return new TestCaseData( TextComparisonOperators.StartWith, "N", new List<User>
+                yield return new TestCaseData(TextComparisonOperators.StartWith, "N", new List<User>
+                {
+                    new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
+                    new()
                     {
-                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null },
-                        new() { Id = 2, Name = "Name2", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2076" ) },
-                        new() { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) },
-                        new() { Id = 4, Name = "Name4", Birthday = Convert.ToDateTime( "1-1-2017" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) },
-                        new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
-                    }.AsQueryable( ) );
+                        Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
+                        DeathTime = Convert.ToDateTime("1-1-2076")
+                    },
+                    new()
+                    {
+                        Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
+                        DeathTime = Convert.ToDateTime("1-1-2096")
+                    },
+                    new()
+                    {
+                        Id = 4, Name = "Name4", Birthday = Convert.ToDateTime("1-1-2017"),
+                        DeathTime = Convert.ToDateTime("1-1-2086")
+                    },
+                    new()
+                    {
+                        Id = 5, Name = "Name5", Birthday = Convert.ToDateTime("1-1-2018"),
+                        DeathTime = Convert.ToDateTime("1-1-2086")
+                    }
+                }.AsQueryable());
 
-                yield return new TestCaseData( TextComparisonOperators.EndWith, "1", new List<User>
-                    {
-                        new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null }
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(TextComparisonOperators.EndWith, "1", new List<User>
+                {
+                    new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
+                }.AsQueryable());
 
-                yield return new TestCaseData( TextComparisonOperators.Contains, "5", new List<User>
+                yield return new TestCaseData(TextComparisonOperators.Contains, "5", new List<User>
+                {
+                    new()
                     {
-                        new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
-                    }.AsQueryable( ) );
+                        Id = 5, Name = "Name5", Birthday = Convert.ToDateTime("1-1-2018"),
+                        DeathTime = Convert.ToDateTime("1-1-2086")
+                    }
+                }.AsQueryable());
 
-                yield return new TestCaseData( TextComparisonOperators.Equal, "Name3", new List<User>
+                yield return new TestCaseData(TextComparisonOperators.Equal, "Name3", new List<User>
+                {
+                    new()
                     {
-                        new() { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) }
-                    }.AsQueryable( ) );
+                        Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
+                        DeathTime = Convert.ToDateTime("1-1-2096")
+                    }
+                }.AsQueryable());
 
-                yield return new TestCaseData( TextComparisonOperators.None, "Name3", new List<User>
+                yield return new TestCaseData(TextComparisonOperators.None, "Name3", new List<User>
+                {
+                    new()
                     {
-                        new() { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) }
-                    }.AsQueryable( ) );
+                        Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
+                        DeathTime = Convert.ToDateTime("1-1-2096")
+                    }
+                }.AsQueryable());
             }
         }
 
@@ -70,97 +98,115 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         #region Public
 
         [SetUp]
-        public void Setup( )
+        public void Setup()
         {
-            this._connectionFactory = new ConnectionFactory( );
-            var dbContext = this._connectionFactory.CreateContextForSQLite( );
+            _connectionFactory = new ConnectionFactory();
+            var dbContext = _connectionFactory.CreateContextForSQLite();
             var users = new List<User>
+            {
+                new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
+                new()
                 {
-                    new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime( "1-1-2015" ), DeathTime = null },
-                    new() { Id = 2, Name = "Name2", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2076" ) },
-                    new() { Id = 3, Name = "Name3", Birthday = Convert.ToDateTime( "1-1-2016" ), DeathTime = Convert.ToDateTime( "1-1-2096" ) },
-                    new() { Id = 4, Name = "Name4", Birthday = Convert.ToDateTime( "1-1-2017" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) },
-                    new() { Id = 5, Name = "Name5", Birthday = Convert.ToDateTime( "1-1-2018" ), DeathTime = Convert.ToDateTime( "1-1-2086" ) }
-                };
-            dbContext.Users.AddRange( users );
-            dbContext.SaveChanges( );
+                    Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
+                    DeathTime = Convert.ToDateTime("1-1-2076")
+                },
+                new()
+                {
+                    Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
+                    DeathTime = Convert.ToDateTime("1-1-2096")
+                },
+                new()
+                {
+                    Id = 4, Name = "Name4", Birthday = Convert.ToDateTime("1-1-2017"),
+                    DeathTime = Convert.ToDateTime("1-1-2086")
+                },
+                new()
+                {
+                    Id = 5, Name = "Name5", Birthday = Convert.ToDateTime("1-1-2018"),
+                    DeathTime = Convert.ToDateTime("1-1-2086")
+                }
+            };
+            dbContext.Users.AddRange(users);
+            dbContext.SaveChanges();
 
-            this._users = dbContext.Users.AsQueryable( );
+            _users = dbContext.Users.AsQueryable();
         }
 
         [TearDown]
-        public void TearDown( )
+        public void TearDown()
         {
-            this._connectionFactory.Dispose( );
+            _connectionFactory.Dispose();
         }
 
         [Test]
-        public void WithTextSearch_PassInvalidPropertyBody_ShouldThrowException( )
+        public void WithTextSearch_PassInvalidPropertyBody_ShouldThrowException()
         {
             // Arrange
-            Expression<Func<User, string>> x = user => new string( "" );
-            var textFilter = new TextFilter( );
+            Expression<Func<User, string>> x = user => new string("");
+            var textFilter = new TextFilter();
             textFilter.Value = "name";
 
             // Act
-            Action result = ( ) => this._users.WithTextSearch( x, textFilter );
+            Action result = () => _users.WithTextSearch(x, textFilter);
 
             // Assert
-            result.Should( ).ThrowExactly<ArgumentException>( ).And.Message.Should( ).Be( "Property expected (Parameter 'property')" );
+            result.Should().ThrowExactly<ArgumentException>().And.Message.Should()
+                .Be("Property expected (Parameter 'property')");
         }
 
         [Test]
-        public void WithTextSearch_PassNullFilter_ShouldReturnAllItems( )
+        public void WithTextSearch_PassNullFilter_ShouldReturnAllItems()
         {
             // Act
-            var actualUser = this._users.WithTextSearch( It.IsAny<Expression<Func<User, string>>>( ), null );
+            var actualUser = _users.WithTextSearch(It.IsAny<Expression<Func<User, string>>>(), null);
 
             // Assert
-            actualUser.Should( ).BeEquivalentTo( this._users );
+            actualUser.Should().BeEquivalentTo(_users);
         }
 
-        [TestCase( "" )]
-        [TestCase( " " )]
-        [TestCase( null )]
-        public void WithTextSearch_PassNullOrEmptyFilterValue_ShouldReturnOriginalItems( string filterValue )
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase(null)]
+        public void WithTextSearch_PassNullOrEmptyFilterValue_ShouldReturnOriginalItems(string filterValue)
         {
             // Arrange
             Expression<Func<User, string>> x = user => user.Name;
-            var textFilter = new TextFilter( );
+            var textFilter = new TextFilter();
             textFilter.Value = filterValue;
             textFilter.Operator = TextComparisonOperators.Equal;
 
             // Act
-            var actualUsers = this._users.WithTextSearch( x, textFilter );
+            var actualUsers = _users.WithTextSearch(x, textFilter);
 
             // Assert
-            actualUsers.Should( ).BeEquivalentTo( this._users );
+            actualUsers.Should().BeEquivalentTo(_users);
         }
 
         [Test]
-        public void WithTextSearch_PassNullProperty_ShouldThrowException( )
+        public void WithTextSearch_PassNullProperty_ShouldThrowException()
         {
             // Act
-            Action result = ( ) => this._users.WithTextSearch( null, new TextFilter( ) );
+            Action result = () => _users.WithTextSearch(null, new TextFilter());
 
             // Assert
-            result.Should( ).ThrowExactly<ArgumentNullException>( ).And.ParamName.Should( ).Be( "property" );
+            result.Should().ThrowExactly<ArgumentNullException>().And.ParamName.Should().Be("property");
         }
 
-        [TestCaseSource( nameof( UserNameMatchOperatorTestCaseData ) )]
-        public void WithTextSearch_PassValidParams_ShouldReturnMatchItems( TextComparisonOperators textComparisonOperators, string value, IQueryable<User> expectedUsers )
+        [TestCaseSource(nameof(UserNameMatchOperatorTestCaseData))]
+        public void WithTextSearch_PassValidParams_ShouldReturnMatchItems(
+            TextComparisonOperators textComparisonOperators, string value, IQueryable<User> expectedUsers)
         {
             // Arrange
             Expression<Func<User, string>> x = user => user.Name;
-            var textFilter = new TextFilter( );
+            var textFilter = new TextFilter();
             textFilter.Value = value;
             textFilter.Operator = textComparisonOperators;
 
             // Act
-            var actualUsers = this._users.WithTextSearch( x, textFilter );
+            var actualUsers = _users.WithTextSearch(x, textFilter);
 
             // Assert
-            actualUsers.Should( ).BeEquivalentTo( expectedUsers );
+            actualUsers.Should().BeEquivalentTo(expectedUsers);
         }
 
         #endregion

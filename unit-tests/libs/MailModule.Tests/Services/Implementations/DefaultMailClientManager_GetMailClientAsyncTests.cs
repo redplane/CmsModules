@@ -24,16 +24,16 @@ namespace MailModule.Tests.Services.Implementations
         [SetUp]
         public void Setup()
         {
-            this._mailClientInterfaces = new List<IMailClient>();
+            _mailClientInterfaces = new List<IMailClient>();
             var googleMailClientMock = new Mock<IMailClient>();
             googleMailClientMock.Setup(c => c.DisplayName).Returns("google");
             googleMailClientMock.Setup(c => c.UniqueName).Returns("google");
-            this._mailClientInterfaces.Add(googleMailClientMock.Object);
+            _mailClientInterfaces.Add(googleMailClientMock.Object);
 
             var yahooMailClientMock = new Mock<IMailClient>();
             yahooMailClientMock.Setup(c => c.DisplayName).Returns("yahoo");
             yahooMailClientMock.Setup(c => c.UniqueName).Returns("yahoo");
-            this._mailClientInterfaces.Add(yahooMailClientMock.Object);
+            _mailClientInterfaces.Add(yahooMailClientMock.Object);
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace MailModule.Tests.Services.Implementations
         public async Task GetMailClientAsync_SendWrongValidUniqueName_ShouldReturnNull()
         {
             // Arrange           
-            var defaultMailService = new DefaultMailClientManager(this._mailClientInterfaces);
+            var defaultMailService = new DefaultMailClientManager(_mailClientInterfaces);
 
             // Act
             var mailClient = await defaultMailService.GetMailClientAsync("uniqueName");
@@ -72,7 +72,7 @@ namespace MailModule.Tests.Services.Implementations
         public async Task GetMailClientAsync_SendRightValidUniqueName_ShouldReturnMailClient()
         {
             // Arrange           
-            var defaultMailService = new DefaultMailClientManager(this._mailClientInterfaces);
+            var defaultMailService = new DefaultMailClientManager(_mailClientInterfaces);
 
             // Act
             var mailClient = await defaultMailService.GetMailClientAsync("google");

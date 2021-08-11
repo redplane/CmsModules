@@ -48,7 +48,8 @@ namespace MailModule.Services.Implementations
             return Task.FromResult(_selectedMailService);
         }
 
-        public virtual Task MarkMailClientAsActiveAsync(string uniqueName, CancellationToken cancellationToken = default)
+        public virtual Task MarkMailClientAsActiveAsync(string uniqueName,
+            CancellationToken cancellationToken = default)
         {
             var mailService = _mailServices.FirstOrDefault(x => x.UniqueName == uniqueName);
             if (mailService == null)

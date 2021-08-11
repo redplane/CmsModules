@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MongoDB.Driver" Version="2.12.4" />
+        <PackageReference Include="MongoDB.Driver" Version="2.12.4"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DataMagic.Abstractions\DataMagic.Abstractions.csproj" />
+        <ProjectReference Include="..\DataMagic.Abstractions\DataMagic.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

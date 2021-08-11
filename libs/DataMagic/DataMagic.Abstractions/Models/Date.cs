@@ -3,13 +3,13 @@ using System;
 
 namespace DataMagic.Abstractions.Models
 {
-	/// <summary>
-	/// Date object which is used for retrieving information from front-end
-	/// </summary>
+    /// <summary>
+    /// Date object which is used for retrieving information from front-end
+    /// </summary>
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-	public class Date
+    public class Date
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-	{
+    {
         #region Properties
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
@@ -46,7 +46,6 @@ namespace DataMagic.Abstractions.Models
 
         protected Date()
         {
-
         }
 
         #endregion
@@ -103,10 +102,10 @@ namespace DataMagic.Abstractions.Models
         public override bool Equals(object? obj)
 #pragma warning restore 659
         {
-	        if (obj == null || !(obj is Date systemDate))
-		        return false;
+            if (obj == null || !(obj is Date systemDate))
+                return false;
 
-	        return systemDate.Year == Year && systemDate.Month == Month && systemDate.Day == Day;
+            return systemDate.Year == Year && systemDate.Month == Month && systemDate.Day == Day;
         }
 
         #endregion
@@ -131,7 +130,7 @@ namespace DataMagic.Abstractions.Models
         /// <returns></returns>
         protected virtual bool IsValidMonth(int month)
         {
-            return (0 < month && month < 13);
+            return 0 < month && month < 13;
         }
 
         /// <summary>
@@ -177,7 +176,7 @@ namespace DataMagic.Abstractions.Models
         /// <returns></returns>
         protected virtual bool Equals(Date other)
         {
-	        return Year == other.Year && Month == other.Month && Day == other.Day;
+            return Year == other.Year && Month == other.Month && Day == other.Day;
         }
 
         #endregion

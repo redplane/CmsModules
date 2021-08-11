@@ -8,9 +8,9 @@ namespace DataMagic.Abstractions.Interfaces
         #region Properties
 
         T[] Items { get; }
-        
+
         long TotalRecords { get; }
-        
+
         #endregion
 
         #region Methods
@@ -22,12 +22,12 @@ namespace DataMagic.Abstractions.Interfaces
         /// <returns></returns>
         T First();
 
-		/// <summary>
-		/// Get the first item from the search result asynchronously.
-		/// If item is not available, exception will be thrown.
-		/// </summary>
-		/// <returns></returns>
-		Task<T> FirstAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get the first item from the search result asynchronously.
+        /// If item is not available, exception will be thrown.
+        /// </summary>
+        /// <returns></returns>
+        Task<T> FirstAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the first item from the search result.

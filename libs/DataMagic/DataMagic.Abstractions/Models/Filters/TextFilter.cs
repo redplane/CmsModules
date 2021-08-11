@@ -2,20 +2,20 @@
 
 namespace DataMagic.Abstractions.Models.Filters
 {
-	public class TextFilter
-	{
-		#region Properties
+    public class TextFilter
+    {
+        #region Properties
 
-		/// <summary>
-		/// Text to be searched.
-		/// </summary>
-		public string Value { get; set; }
+        /// <summary>
+        /// Text to be searched.
+        /// </summary>
+        public string Value { get; set; }
 
-		/// <summary>
-		/// Operator which will be applied to text filter operation.
-		/// </summary>
-		public TextComparisonOperators Operator { get; set; }
+        /// <summary>
+        /// Operator which will be applied to text filter operation.
+        /// </summary>
+        public TextComparisonOperators Operator { get; set; }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -25,15 +25,15 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
 
             var fileProvider = toolProvider.GetService<IFileProvider>();
             var user = await fileProvider.ReadJsonFromFileAsync<User>(new[]
-                {"Resources", "MockItems", "574029cf370d7010a3a7a8f4be15ee01", "User.json"});
+                { "Resources", "MockItems", "574029cf370d7010a3a7a8f4be15ee01", "User.json" });
             var originalUser = await fileProvider.ReadJsonFromFileAsync<User>(new[]
-                {"Resources", "MockItems", "574029cf370d7010a3a7a8f4be15ee01", "User.json"});
-            
+                { "Resources", "MockItems", "574029cf370d7010a3a7a8f4be15ee01", "User.json" });
+
             var entityUpdateBuilder = new EntityUpdateBuilder<User>()
                 .Update(x => x.Name, new EditableField<string>())
                 .Update(x => x.Age, new EditableField<int>())
                 .Update(x => x.Balance, new EditableField<decimal>());
-            
+
             entityUpdateBuilder.Build(user);
             Assert.AreEqual(originalUser.Name, user.Name);
             Assert.AreEqual(originalUser.Age, user.Age);
@@ -51,8 +51,8 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
 
             var fileProvider = toolProvider.GetService<IFileProvider>();
             var user = await fileProvider.ReadJsonFromFileAsync<User>(new[]
-                {"Resources", "MockItems", "c4d37eb457d22c7645f8c7ed9a78c4e8", "User.json"});
-            
+                { "Resources", "MockItems", "c4d37eb457d22c7645f8c7ed9a78c4e8", "User.json" });
+
             // Add a new user into database.
             var users = serviceProvider.GetService<ILiteCollection<User>>();
             users.Insert(user);
@@ -61,16 +61,16 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
             var addedUserId = user.Id;
             var addedUser = users.Find(x => x.Id == addedUserId).FirstOrDefault();
             Assert.NotNull(addedUser);
-            
+
             var entityUpdateBuilder = new EntityUpdateBuilder<User>()
                 .Update(x => x.Name, new EditableField<string>("Changed name"))
                 .Update(x => x.Balance, new EditableField<decimal>(2500))
                 .Update(x => x.Age, new EditableField<int>(200));
-            
+
             // Do update on entity.
             entityUpdateBuilder.Build(user);
             users.Update(user);
-            
+
             // Get the edited user.
             var editedUser = users.Find(x => x.Id == addedUserId).FirstOrDefault();
             Assert.NotNull(editedUser);
@@ -78,7 +78,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
             Assert.AreEqual(2500, editedUser.Balance);
             Assert.AreEqual(200, editedUser.Age);
         }
-        
+
         #endregion
     }
 }

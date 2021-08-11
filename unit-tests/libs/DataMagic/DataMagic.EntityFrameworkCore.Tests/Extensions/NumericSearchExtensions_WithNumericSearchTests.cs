@@ -23,35 +23,35 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             get
             {
-                yield return new TestCaseData( NumericComparisonOperators.Equal, new List<Number>
-                    {
-                        new() { Id = 2, Int = 2, Float = ( float ) 7.3 },
-                        new() { Id = 3, Int = 2, Float = ( float ) 5.4 }
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(NumericComparisonOperators.Equal, new List<Number>
+                {
+                    new() { Id = 2, Int = 2, Float = (float)7.3 },
+                    new() { Id = 3, Int = 2, Float = (float)5.4 }
+                }.AsQueryable());
 
-                yield return new TestCaseData( NumericComparisonOperators.GreaterThan, new List<Number>
-                    {
-                        new() { Id = 4, Int = 3, Float = ( float ) 5.4 }
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(NumericComparisonOperators.GreaterThan, new List<Number>
+                {
+                    new() { Id = 4, Int = 3, Float = (float)5.4 }
+                }.AsQueryable());
 
-                yield return new TestCaseData( NumericComparisonOperators.SmallerThan, new List<Number>
-                    {
-                        new() { Id = 1, Int = 1, Float = ( float ) 2.6 },
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(NumericComparisonOperators.SmallerThan, new List<Number>
+                {
+                    new() { Id = 1, Int = 1, Float = (float)2.6 }
+                }.AsQueryable());
 
-                yield return new TestCaseData( NumericComparisonOperators.GreaterThanEqualTo, new List<Number>
-                    {
-                        new() { Id = 2, Int = 2, Float = ( float ) 7.3 },
-                        new() { Id = 3, Int = 2, Float = ( float ) 5.4 },
-                        new() { Id = 4, Int = 3, Float = ( float ) 5.4 }
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(NumericComparisonOperators.GreaterThanEqualTo, new List<Number>
+                {
+                    new() { Id = 2, Int = 2, Float = (float)7.3 },
+                    new() { Id = 3, Int = 2, Float = (float)5.4 },
+                    new() { Id = 4, Int = 3, Float = (float)5.4 }
+                }.AsQueryable());
 
-                yield return new TestCaseData( NumericComparisonOperators.SmallerThanEqualTo, new List<Number>
-                    {
-                        new() { Id = 1, Int = 1, Float = ( float ) 2.6 },
-                        new() { Id = 2, Int = 2, Float = ( float ) 7.3 },
-                        new() { Id = 3, Int = 2, Float = ( float ) 5.4 }
-                    }.AsQueryable( ) );
+                yield return new TestCaseData(NumericComparisonOperators.SmallerThanEqualTo, new List<Number>
+                {
+                    new() { Id = 1, Int = 1, Float = (float)2.6 },
+                    new() { Id = 2, Int = 2, Float = (float)7.3 },
+                    new() { Id = 3, Int = 2, Float = (float)5.4 }
+                }.AsQueryable());
             }
         }
 
@@ -70,108 +70,111 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         #region Public
 
         [SetUp]
-        public void Setup( )
+        public void Setup()
         {
-            this._connectionFactory = new ConnectionFactory( );
-            var dbContext = this._connectionFactory.CreateContextForSQLite( );
+            _connectionFactory = new ConnectionFactory();
+            var dbContext = _connectionFactory.CreateContextForSQLite();
             var numbers = new List<Number>
-                {
-                    new() { Id = 1, Int = 1, Float = ( float ) 2.6 },
-                    new() { Id = 2, Int = 2, Float = ( float ) 7.3 },
-                    new() { Id = 3, Int = 2, Float = ( float ) 5.4 },
-                    new() { Id = 4, Int = 3, Float = ( float ) 5.4 }
-                };
-            dbContext.Numbers.AddRange( numbers );
-            dbContext.SaveChanges( );
+            {
+                new() { Id = 1, Int = 1, Float = (float)2.6 },
+                new() { Id = 2, Int = 2, Float = (float)7.3 },
+                new() { Id = 3, Int = 2, Float = (float)5.4 },
+                new() { Id = 4, Int = 3, Float = (float)5.4 }
+            };
+            dbContext.Numbers.AddRange(numbers);
+            dbContext.SaveChanges();
 
-            this._numbers = dbContext.Numbers.AsQueryable( );
+            _numbers = dbContext.Numbers.AsQueryable();
         }
 
         [TearDown]
-        public void TearDown( )
+        public void TearDown()
         {
-            this._connectionFactory.Dispose( );
+            _connectionFactory.Dispose();
         }
 
         [Test]
-        public void WithNumericSearch_PassInvalidValueType_ShouldThrowException( )
+        public void WithNumericSearch_PassInvalidValueType_ShouldThrowException()
         {
             // Arrange
             Expression<Func<Number, string>> property = number => "number.Text";
-            var range = new NumericFilter<string>( "2", NumericComparisonOperators.Equal );
+            var range = new NumericFilter<string>("2", NumericComparisonOperators.Equal);
 
             // Act
-            Action actualResult = ( ) => this._numbers.WithNumericSearch( property, range );
+            Action actualResult = () => _numbers.WithNumericSearch(property, range);
 
             // Assert
-            actualResult.Should( ).ThrowExactly<Exception>( ).And.Message.Should( ).Be( "TValueType is not supported." );
+            actualResult.Should().ThrowExactly<Exception>().And.Message.Should().Be("TValueType is not supported.");
         }
 
         [Test]
-        public void WithNumericSearch_PassNullBodyOfProperty_ShouldThrowException( )
+        public void WithNumericSearch_PassNullBodyOfProperty_ShouldThrowException()
         {
             // Arrange
             Expression<Func<Number, int>> intField = number => 1;
-            var range = new NumericFilter<int>( 2, NumericComparisonOperators.Equal );
+            var range = new NumericFilter<int>(2, NumericComparisonOperators.Equal);
 
             // Act
-            Action actualResult = ( ) => this._numbers.WithNumericSearch( intField, range );
+            Action actualResult = () => _numbers.WithNumericSearch(intField, range);
 
             // Assert
-            actualResult.Should( ).ThrowExactly<ArgumentException>( ).And.Message.Should( ).Be( "Property expected (Parameter 'property')" );
+            actualResult.Should().ThrowExactly<ArgumentException>().And.Message.Should()
+                .Be("Property expected (Parameter 'property')");
         }
+
         [Test]
-        public void WithNumericSearch_PassNullProperty_ShouldReturnAllItems( )
+        public void WithNumericSearch_PassNullProperty_ShouldReturnAllItems()
         {
             // Arrange
-            var range = new NumericFilter<int>( 2, NumericComparisonOperators.Equal );
+            var range = new NumericFilter<int>(2, NumericComparisonOperators.Equal);
 
             // Act
-            var actualNumbers = this._numbers.WithNumericSearch( null, range );
+            var actualNumbers = _numbers.WithNumericSearch(null, range);
 
             // Assert
-            actualNumbers.Should( ).BeEquivalentTo( this._numbers );
+            actualNumbers.Should().BeEquivalentTo(_numbers);
         }
 
         [Test]
-        public void WithNumericSearch_PassNullRange_ShouldReturnAllItems( )
+        public void WithNumericSearch_PassNullRange_ShouldReturnAllItems()
         {
             // Arrange
             Expression<Func<Number, int>> intField = number => number.Int;
 
             // Act
-            var actualNumbers = this._numbers.WithNumericSearch( intField, null );
+            var actualNumbers = _numbers.WithNumericSearch(intField, null);
 
             // Assert
-            actualNumbers.Should( ).BeEquivalentTo( this._numbers );
+            actualNumbers.Should().BeEquivalentTo(_numbers);
         }
 
-        [TestCaseSource( nameof( ValidParamsTestCaseData ) )]
-        public void WithNumericSearch_PassValidParams_ShouldReturnMatchedItems( NumericComparisonOperators numericComparisonOperators, IQueryable<Number> expectedNumbers )
+        [TestCaseSource(nameof(ValidParamsTestCaseData))]
+        public void WithNumericSearch_PassValidParams_ShouldReturnMatchedItems(
+            NumericComparisonOperators numericComparisonOperators, IQueryable<Number> expectedNumbers)
         {
             // Arrange
             Expression<Func<Number, int>> property = number => number.Int;
-            var range = new NumericFilter<int>( 2, numericComparisonOperators );
+            var range = new NumericFilter<int>(2, numericComparisonOperators);
 
             // Act
-            var actualNumbers = this._numbers.WithNumericSearch( property, range );
+            var actualNumbers = _numbers.WithNumericSearch(property, range);
 
             // Assert
-            actualNumbers.Should( ).BeEquivalentTo( expectedNumbers );
+            actualNumbers.Should().BeEquivalentTo(expectedNumbers);
         }
 
         [Test]
-        public void WithNumericSearch_PassWrongOperator_ThrowException( )
+        public void WithNumericSearch_PassWrongOperator_ThrowException()
         {
             // Arrange
             Expression<Func<Number, int>> property = number => number.Int;
-            var range = new NumericFilter<int>( 2, NumericComparisonOperators.None );
+            var range = new NumericFilter<int>(2, NumericComparisonOperators.None);
 
             // Act
-            Action result = ( ) => this._numbers.WithNumericSearch( property, range );
+            Action result = () => _numbers.WithNumericSearch(property, range);
 
             // Assert
-            result.Should( ).ThrowExactly<ArgumentException>( ).And.Message.Should( ).Be( "Not supported comparison mode" );
+            result.Should().ThrowExactly<ArgumentException>().And.Message.Should().Be("Not supported comparison mode");
         }
 
         #endregion

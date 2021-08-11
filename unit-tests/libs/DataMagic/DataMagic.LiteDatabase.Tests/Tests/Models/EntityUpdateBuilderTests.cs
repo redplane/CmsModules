@@ -20,9 +20,9 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
         private readonly IServiceCollection _tools;
 
         private readonly LinkedList<IDisposable> _disposables;
-        
+
         #endregion
-        
+
         #region Constructor
 
         public FieldUpdateBuilderTests()
@@ -33,7 +33,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
         }
 
         #endregion
-        
+
         #region Installation & uninstallation
 
         [SetUp]
@@ -44,7 +44,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
 
             // Tool registration.
             _tools.AddSingleton<IFileProvider, FileProvider>();
-            
+
             var liteDatabase = new LiteDB.LiteDatabase(new MemoryStream());
             _disposables.AddLast(liteDatabase);
             _services.AddSingleton<ILiteDatabase>(_ =>
@@ -66,12 +66,12 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
         {
             _services.Clear();
             _tools.Clear();
-            
+
             foreach (var disposable in _disposables)
                 disposable.Dispose();
             _disposables.Clear();
         }
-        
+
         #endregion
     }
 }

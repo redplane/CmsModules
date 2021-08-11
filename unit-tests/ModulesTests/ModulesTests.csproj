@@ -7,19 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="4.9.4" />
-        <PackageReference Include="HttpMultipartParser" Version="3.1.0" />
-        <PackageReference Include="Moq" Version="4.13.1" />
-        <PackageReference Include="netDumbster" Version="2.0.0.5" />
-        <PackageReference Include="nunit" Version="3.12.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+        <PackageReference Include="Autofac" Version="4.9.4"/>
+        <PackageReference Include="HttpMultipartParser" Version="3.1.0"/>
+        <PackageReference Include="Moq" Version="4.13.1"/>
+        <PackageReference Include="netDumbster" Version="2.0.0.5"/>
+        <PackageReference Include="nunit" Version="3.12.0"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="3.13.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\examples\CmsModulesManagement\CmsModules.ManagementUi.csproj" />
-      <ProjectReference Include="..\..\examples\CmsModulesShared\CmsModules.Shares.csproj" />
-      <ProjectReference Include="..\..\libs\MailModule\MailModule.csproj" />
+        <ProjectReference Include="..\..\examples\CmsModulesManagement\CmsModules.ManagementUi.csproj"/>
+        <ProjectReference Include="..\..\examples\CmsModulesShared\CmsModules.Shares.csproj"/>
+        <ProjectReference Include="..\..\libs\MailModule\MailModule.csproj"/>
     </ItemGroup>
 
 </Project>
