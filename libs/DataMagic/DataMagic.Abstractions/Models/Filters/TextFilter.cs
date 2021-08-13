@@ -14,7 +14,7 @@ namespace DataMagic.Abstractions.Models.Filters
         /// <summary>
         /// Operator which will be applied to text filter operation.
         /// </summary>
-        public TextComparisonOperators Operator { get; set; }
+        public TextFilterModes Mode { get; set; }
 
         #endregion
     }

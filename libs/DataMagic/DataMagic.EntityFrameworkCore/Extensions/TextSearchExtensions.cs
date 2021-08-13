@@ -48,9 +48,9 @@ namespace DataMagic.EntityFrameworkCore.Extensions
                 new[] { typeof(DbFunctions), typeof(string), typeof(string) },
                 null)!;
 
-            switch (filter.Operator)
+            switch (filter.Mode)
             {
-                case TextComparisonOperators.StartWith:
+                case TextFilterModes.StartWith:
                     var startsWithPattern = Expression.Constant($"{filter.Value}%", typeof(string));
                     var startWithExpressionCall = Expression
                         .Call(sqlLikeExpression!, Expression.Property(null, typeof(EF), nameof(EF.Functions)),
@@ -59,7 +59,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
                     expression = Expression.OrElse(Expression.Constant(false), startWithExpressionCall);
                     break;
 
-                case TextComparisonOperators.EndWith:
+                case TextFilterModes.EndWith:
                     var endsWithPattern = Expression.Constant($"%{filter.Value}", typeof(string));
                     var endsWithExpressionCall = Expression
                         .Call(sqlLikeExpression!, Expression.Property(null, typeof(EF), nameof(EF.Functions)),
@@ -68,7 +68,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
                     expression = Expression.OrElse(Expression.Constant(false), endsWithExpressionCall);
                     break;
 
-                case TextComparisonOperators.Contains:
+                case TextFilterModes.Contains:
                     var likePattern = Expression.Constant($"%{filter.Value}%", typeof(string));
                     var likeExpressionCall = Expression
                         .Call(sqlLikeExpression!, Expression.Property(null, typeof(EF), nameof(EF.Functions)),
@@ -77,7 +77,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
                     expression = Expression.OrElse(Expression.Constant(false), likeExpressionCall);
                     break;
 
-                case TextComparisonOperators.Equal:
+                case TextFilterModes.Equal:
                     var textExpression = Expression.Constant(filter.Value, typeof(string));
                     expression = Expression.Equal(property.Body, textExpression);
                     break;

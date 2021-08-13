@@ -1,6 +1,6 @@
 ﻿namespace DataMagic.Abstractions.Enums.Operators
 {
-    public enum TextComparisonOperators
+    public enum TextFilterModes
     {
         Equal,
         EqualIgnoreCase,

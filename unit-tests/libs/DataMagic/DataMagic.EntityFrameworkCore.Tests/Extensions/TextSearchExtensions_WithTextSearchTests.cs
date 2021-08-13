@@ -24,7 +24,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             get
             {
-                yield return new TestCaseData(TextComparisonOperators.StartWith, "N", new List<User>
+                yield return new TestCaseData(TextFilterModes.StartWith, "N", new List<User>
                 {
                     new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                     new()
@@ -49,12 +49,12 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     }
                 }.AsQueryable());
 
-                yield return new TestCaseData(TextComparisonOperators.EndWith, "1", new List<User>
+                yield return new TestCaseData(TextFilterModes.EndWith, "1", new List<User>
                 {
                     new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null }
                 }.AsQueryable());
 
-                yield return new TestCaseData(TextComparisonOperators.Contains, "5", new List<User>
+                yield return new TestCaseData(TextFilterModes.Contains, "5", new List<User>
                 {
                     new()
                     {
@@ -63,7 +63,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     }
                 }.AsQueryable());
 
-                yield return new TestCaseData(TextComparisonOperators.Equal, "Name3", new List<User>
+                yield return new TestCaseData(TextFilterModes.Equal, "Name3", new List<User>
                 {
                     new()
                     {
@@ -72,7 +72,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
                     }
                 }.AsQueryable());
 
-                yield return new TestCaseData(TextComparisonOperators.None, "Name3", new List<User>
+                yield return new TestCaseData(TextFilterModes.None, "Name3", new List<User>
                 {
                     new()
                     {
@@ -173,7 +173,7 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             Expression<Func<User, string>> x = user => user.Name;
             var textFilter = new TextFilter();
             textFilter.Value = filterValue;
-            textFilter.Operator = TextComparisonOperators.Equal;
+            textFilter.Mode = TextFilterModes.Equal;
 
             // Act
             var actualUsers = _users.WithTextSearch(x, textFilter);
@@ -194,13 +194,13 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
 
         [TestCaseSource(nameof(UserNameMatchOperatorTestCaseData))]
         public void WithTextSearch_PassValidParams_ShouldReturnMatchItems(
-            TextComparisonOperators textComparisonOperators, string value, IQueryable<User> expectedUsers)
+            TextFilterModes textFilterModes, string value, IQueryable<User> expectedUsers)
         {
             // Arrange
             Expression<Func<User, string>> x = user => user.Name;
             var textFilter = new TextFilter();
             textFilter.Value = value;
-            textFilter.Operator = textComparisonOperators;
+            textFilter.Mode = textFilterModes;
 
             // Act
             var actualUsers = _users.WithTextSearch(x, textFilter);
