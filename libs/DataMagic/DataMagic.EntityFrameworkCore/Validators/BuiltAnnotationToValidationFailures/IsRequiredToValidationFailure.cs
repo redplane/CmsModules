@@ -1,10 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using DataMagic.EntityFrameworkCore.Interfaces;
 using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataMagic.EntityFrameworkCore.Validators.BuiltAnnotationToValidationFailures
 {

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DataMagic.Abstractions.Enums;
 using DataMagic.Abstractions.Enums.Operators;
 using DataMagic.Abstractions.Models.Filters;
 

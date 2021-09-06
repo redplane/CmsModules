@@ -1,5 +1,4 @@
 ﻿using System;
-using DataMagic.Abstractions.Enums;
 using DataMagic.Abstractions.Enums.Operators;
 
 namespace DataMagic.Abstractions.Models.Filters
@@ -9,14 +8,14 @@ namespace DataMagic.Abstractions.Models.Filters
         #region Properties
 
         /// <summary>
-        /// Value to filter.
+        ///     Value to filter.
         /// </summary>
-        public DateTime? Value { get; private set; }
+        public DateTime? Value { get; }
 
         /// <summary>
-        /// Operator to apply in the comparison.
+        ///     Operator to apply in the comparison.
         /// </summary>
-        public DateTimeComparisonOperators Operator { get; private set; }
+        public DateTimeComparisonOperators Operator { get; }
 
         #endregion
 

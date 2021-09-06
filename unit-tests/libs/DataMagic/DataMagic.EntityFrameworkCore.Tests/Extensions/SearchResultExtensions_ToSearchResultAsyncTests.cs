@@ -16,21 +16,12 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
     // ReSharper disable once InconsistentNaming
     public class SearchResultExtensions_ToSearchResultAsyncTests
     {
-        #region Private
-
-        private IQueryable<User> _users;
-        private ConnectionFactory _connectionFactory;
-
-        #endregion
-
-        #region Public
-
         [SetUp]
         public void Setup()
         {
             _connectionFactory = new ConnectionFactory();
             var dbContext = _connectionFactory.CreateContextForSQLite();
-            var users = new List<User>()
+            var users = new List<User>
             {
                 new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
                 new()
@@ -65,6 +56,9 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             _connectionFactory.Dispose();
         }
+
+        private IQueryable<User> _users;
+        private ConnectionFactory _connectionFactory;
 
         [Test]
         public async Task ToSearchResultAsync_PassFalseOfShouldItemsCountedAndQueried_ShouldReturnEmpty()
@@ -112,7 +106,5 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             actualUsers.Items.Length.Should().Be(2);
             actualUsers.TotalRecords.Should().Be(5);
         }
-
-        #endregion
     }
 }

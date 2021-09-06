@@ -12,7 +12,7 @@ namespace CmsModules.TestDependencies.Providers.Implementations
         #region Methods
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="paths"></param>
@@ -33,7 +33,7 @@ namespace CmsModules.TestDependencies.Providers.Implementations
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace CmsModules.TestDependencies.Providers.Implementations
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>

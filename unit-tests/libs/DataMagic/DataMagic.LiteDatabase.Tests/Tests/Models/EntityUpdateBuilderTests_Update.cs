@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
 using CmsModules.TestDependencies.Providers.Interfaces;
 using DataMagic.Abstractions.Models;
 using DataMagic.LiteDatabase.Models;
@@ -13,10 +12,8 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
 {
     public partial class FieldUpdateBuilderTests
     {
-        #region Methods
-
         /// <summary>
-        /// Test code: 574029cf370d7010a3a7a8f4be15ee01
+        ///     Test code: 574029cf370d7010a3a7a8f4be15ee01
         /// </summary>
         [Test]
         public virtual async Task Update_FieldIsMarkedNotChanged_Expects_NothingIsDone()
@@ -41,7 +38,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
         }
 
         /// <summary>
-        /// Test code: c4d37eb457d22c7645f8c7ed9a78c4e8
+        ///     Test code: c4d37eb457d22c7645f8c7ed9a78c4e8
         /// </summary>
         [Test]
         public virtual async Task Update_FieldIsMarkedAsChanged_Expects_EntityIsUpdated()
@@ -78,7 +75,5 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
             Assert.AreEqual(2500, editedUser.Balance);
             Assert.AreEqual(200, editedUser.Age);
         }
-
-        #endregion
     }
 }

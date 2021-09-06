@@ -12,14 +12,6 @@ namespace MailModule.Tests.Services.Implementations
     [TestFixture]
     public class DefaultMailClientManager_GetMailClientsAsyncTests
     {
-        #region Properties
-
-        private List<IMailClient> _mailClientInterfaces;
-
-        #endregion
-
-        #region Setup
-
         [SetUp]
         public void Setup()
         {
@@ -33,9 +25,7 @@ namespace MailModule.Tests.Services.Implementations
             _mailClientInterfaces.Add(yahooMailClientMock.Object);
         }
 
-        #endregion
-
-        #region Methods
+        private List<IMailClient> _mailClientInterfaces;
 
         [Test]
         public async Task GetMailClientsAsync_ShouldReturnAllMailClients()
@@ -50,7 +40,5 @@ namespace MailModule.Tests.Services.Implementations
             mailClients.Length.Should().Be(2);
             mailClients.Any(c => c.DisplayName == "google").Should().BeTrue();
         }
-
-        #endregion
     }
 }

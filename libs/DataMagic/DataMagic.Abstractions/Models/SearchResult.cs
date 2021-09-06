@@ -29,12 +29,12 @@ namespace DataMagic.Abstractions.Models
         /// <summary>
         ///     <inheritdoc />
         /// </summary>
-        public T[] Items { get; private set; }
+        public T[] Items { get; }
 
         /// <summary>
-        /// Total records.
+        ///     Total records.
         /// </summary>
-        public long TotalRecords { get; private set; }
+        public long TotalRecords { get; }
 
         #endregion
 

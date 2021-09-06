@@ -5,7 +5,7 @@
         #region Properties
 
         /// <summary>
-        /// Kind of pager request.
+        ///     Kind of pager request.
         /// </summary>
         string Kind { get; }
 
@@ -14,25 +14,25 @@
         #region Methods
 
         /// <summary>
-        /// Whether items should be returned.
+        ///     Whether items should be returned.
         /// </summary>
         /// <returns></returns>
         bool ShouldItemsQueried();
 
         /// <summary>
-        /// Whether items should be 
+        ///     Whether items should be
         /// </summary>
         /// <returns></returns>
         bool ShouldItemsCounted();
 
         /// <summary>
-        /// Get the number of records which should be skipped.
+        ///     Get the number of records which should be skipped.
         /// </summary>
         /// <returns></returns>
         long GetSkippedRecords();
 
         /// <summary>
-        /// Total records to be taken.
+        ///     Total records to be taken.
         /// </summary>
         /// <returns></returns>
         long GetTotalRecords();

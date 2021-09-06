@@ -9,7 +9,7 @@ namespace CorsModule.Services.Interfaces
         #region Methods
 
         /// <summary>
-        /// Mark a cors policy as active asynchronously.
+        ///     Mark a cors policy as active asynchronously.
         /// </summary>
         /// <param name="corsPolicy"></param>
         /// <param name="cancellationToken"></param>
@@ -17,7 +17,7 @@ namespace CorsModule.Services.Interfaces
         Task MarkCorsPolicyAsActiveAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Add cors policy into system asynchronously.
+        ///     Add cors policy into system asynchronously.
         /// </summary>
         /// <param name="corsPolicy"></param>
         /// <param name="cancellationToken"></param>
@@ -25,7 +25,7 @@ namespace CorsModule.Services.Interfaces
         Task<ICorsPolicy> AddCorsPolicyAsync(ICorsPolicy corsPolicy, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete cors policy asynchronously.
+        ///     Delete cors policy asynchronously.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"></param>
@@ -33,13 +33,13 @@ namespace CorsModule.Services.Interfaces
         Task DeleteCorsPolicyAsync(string name, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get cors policy asynchronously.
+        ///     Get cors policy asynchronously.
         /// </summary>
         /// <returns></returns>
         Task<ICorsPolicy[]> GetInUseCorsPoliciesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get cors policy by using unique name asynchronously.
+        ///     Get cors policy by using unique name asynchronously.
         /// </summary>
         /// <param name="uniqueName"></param>
         /// <param name="cancellationToken"></param>
@@ -47,7 +47,7 @@ namespace CorsModule.Services.Interfaces
         Task<ICorsPolicy> GetCorsPolicyAsync(string uniqueName, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get cors policy asynchronously.
+        ///     Get cors policy asynchronously.
         /// </summary>
         /// <param name="skip"></param>
         /// <param name="take"></param>

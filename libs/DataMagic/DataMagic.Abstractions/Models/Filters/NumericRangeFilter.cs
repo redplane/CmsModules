@@ -2,27 +2,27 @@
 {
     public class NumericRangeFilter<TFrom, TTo>
     {
-        #region Properties
+        #region Constructor
 
-        /// <summary>
-        /// From which value the comparison is done.
-        /// </summary>
-        public NumericFilter<TFrom> From { get; private set; }
-
-        /// <summary>
-        /// To which value the comparison is done.
-        /// </summary>
-        public NumericFilter<TTo> To { get; private set; }
+        public NumericRangeFilter(NumericFilter<TFrom> from, NumericFilter<TTo> to)
+        {
+            From = from;
+            To = to;
+        }
 
         #endregion
 
-        #region Constructor
+        #region Properties
 
-        public NumericRangeFilter(NumericFilter<TFrom> @from, NumericFilter<TTo> to)
-        {
-            From = @from;
-            To = to;
-        }
+        /// <summary>
+        ///     From which value the comparison is done.
+        /// </summary>
+        public NumericFilter<TFrom> From { get; }
+
+        /// <summary>
+        ///     To which value the comparison is done.
+        /// </summary>
+        public NumericFilter<TTo> To { get; }
 
         #endregion
     }

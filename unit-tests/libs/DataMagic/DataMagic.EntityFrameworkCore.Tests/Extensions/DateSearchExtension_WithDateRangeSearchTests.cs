@@ -17,7 +17,46 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
     [TestFixture]
     public class DateSearchExtension_WithDateRangeSearchTests
     {
-        #region - Public
+        [SetUp]
+        public void Setup()
+        {
+            _connectionFactory = new ConnectionFactory();
+            var dbContext = _connectionFactory.CreateContextForSQLite();
+            var users = new List<User>
+            {
+                new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
+                new()
+                {
+                    Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
+                    DeathTime = Convert.ToDateTime("1-1-2076")
+                },
+                new()
+                {
+                    Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
+                    DeathTime = Convert.ToDateTime("1-1-2096")
+                },
+                new()
+                {
+                    Id = 4, Name = "Name4", Birthday = Convert.ToDateTime("1-1-2017"),
+                    DeathTime = Convert.ToDateTime("1-1-2086")
+                },
+                new()
+                {
+                    Id = 5, Name = "Name5", Birthday = Convert.ToDateTime("1-1-2018"),
+                    DeathTime = Convert.ToDateTime("1-1-2086")
+                }
+            };
+            dbContext.Users.AddRange(users);
+            dbContext.SaveChanges();
+
+            _users = dbContext.Users.AsQueryable();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _connectionFactory.Dispose();
+        }
 
         public static IEnumerable<TestCaseData> UserBirthdayWithOperatorTestCaseData
         {
@@ -438,58 +477,9 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             }
         }
 
-        #endregion
-
-        #region Private
-
         private ConnectionFactory _connectionFactory;
 
         private IQueryable<User> _users;
-
-        #endregion
-
-        #region Installation & uninstallation
-
-        [SetUp]
-        public void Setup()
-        {
-            _connectionFactory = new ConnectionFactory();
-            var dbContext = _connectionFactory.CreateContextForSQLite();
-            var users = new List<User>
-            {
-                new() { Id = 1, Name = "Name1", Birthday = Convert.ToDateTime("1-1-2015"), DeathTime = null },
-                new()
-                {
-                    Id = 2, Name = "Name2", Birthday = Convert.ToDateTime("1-1-2016"),
-                    DeathTime = Convert.ToDateTime("1-1-2076")
-                },
-                new()
-                {
-                    Id = 3, Name = "Name3", Birthday = Convert.ToDateTime("1-1-2016"),
-                    DeathTime = Convert.ToDateTime("1-1-2096")
-                },
-                new()
-                {
-                    Id = 4, Name = "Name4", Birthday = Convert.ToDateTime("1-1-2017"),
-                    DeathTime = Convert.ToDateTime("1-1-2086")
-                },
-                new()
-                {
-                    Id = 5, Name = "Name5", Birthday = Convert.ToDateTime("1-1-2018"),
-                    DeathTime = Convert.ToDateTime("1-1-2086")
-                }
-            };
-            dbContext.Users.AddRange(users);
-            dbContext.SaveChanges();
-
-            _users = dbContext.Users.AsQueryable();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _connectionFactory.Dispose();
-        }
 
         [Test]
         public void WithDateRangeSearch_PassNullFilter_ShouldReturnAllItems()
@@ -531,7 +521,5 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             // Assert
             actualUsers.Should().BeEquivalentTo(expectedUsers);
         }
-
-        #endregion
     }
 }

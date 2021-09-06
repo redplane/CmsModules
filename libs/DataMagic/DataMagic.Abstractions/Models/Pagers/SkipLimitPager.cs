@@ -9,12 +9,12 @@ namespace DataMagic.Abstractions.Models.Pagers
         #region Properties
 
         /// <summary>
-        /// Whether items should be queried or not.
+        ///     Whether items should be queried or not.
         /// </summary>
         private readonly bool _shouldItemsQueried;
 
         /// <summary>
-        /// Whether items should be counted or not.
+        ///     Whether items should be counted or not.
         /// </summary>
         private readonly bool _shouldItemsCounted;
 
@@ -22,17 +22,17 @@ namespace DataMagic.Abstractions.Models.Pagers
 
         #region Accessors
 
-        public string Kind { get; private set; }
+        public string Kind { get; }
 
         /// <summary>
-        /// Hos many records should be skipped.
+        ///     Hos many records should be skipped.
         /// </summary>
-        public long SkippedRecords { get; private set; }
+        public long SkippedRecords { get; }
 
         /// <summary>
-        /// The number of records to be taken.
+        ///     The number of records to be taken.
         /// </summary>
-        public long TotalRecords { get; private set; }
+        public long TotalRecords { get; }
 
         #endregion
 
@@ -51,6 +51,9 @@ namespace DataMagic.Abstractions.Models.Pagers
             if (totalRecords < 0)
                 throw new ArgumentException("Cannot be smaller than 0", nameof(totalRecords));
 
+            _shouldItemsQueried = true;
+            _shouldItemsCounted = true;
+            
             SkippedRecords = skippedRecords;
             TotalRecords = totalRecords;
         }
@@ -67,7 +70,7 @@ namespace DataMagic.Abstractions.Models.Pagers
         #region Methods
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <returns></returns>
         public virtual bool ShouldItemsQueried()
@@ -79,7 +82,7 @@ namespace DataMagic.Abstractions.Models.Pagers
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <returns></returns>
         public virtual bool ShouldItemsCounted()
@@ -88,7 +91,7 @@ namespace DataMagic.Abstractions.Models.Pagers
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <returns></returns>
         public virtual long GetSkippedRecords()
@@ -97,7 +100,7 @@ namespace DataMagic.Abstractions.Models.Pagers
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <returns></returns>
         public virtual long GetTotalRecords()

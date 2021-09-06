@@ -14,15 +14,6 @@ namespace MailModule.Tests.Services.Implementations
 {
     public class DefaultSmtpMailClient_SendMailAsyncTests
     {
-        #region Properties
-
-        private Mock<IMailClientSetting> _mailClientSettingMock;
-        private Mock<DefaultSmtpMailClient> _defaultSmtpMailClientMock;
-        private Mock<IMailAddress> _mailAddressMock;
-        private Mock<IMailContent> _mailContentMock;
-
-        #endregion
-
         #region Setup
 
         [SetUp]
@@ -50,6 +41,15 @@ namespace MailModule.Tests.Services.Implementations
             _mailContentMock.Setup(c => c.Subject).Returns("subject");
             _mailContentMock.Setup(c => c.Content).Returns("content");
         }
+
+        #endregion
+
+        #region Properties
+
+        private Mock<IMailClientSetting> _mailClientSettingMock;
+        private Mock<DefaultSmtpMailClient> _defaultSmtpMailClientMock;
+        private Mock<IMailAddress> _mailAddressMock;
+        private Mock<IMailContent> _mailContentMock;
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace MailModule.Tests.Services.Implementations
         {
             // Arrange
             _defaultSmtpMailClientMock.Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
@@ -119,7 +119,7 @@ namespace MailModule.Tests.Services.Implementations
         {
             // Arrange
             _defaultSmtpMailClientMock.Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
@@ -137,7 +137,7 @@ namespace MailModule.Tests.Services.Implementations
         {
             // Arrange 
             _defaultSmtpMailClientMock.Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             // Act
             Func<Task> result = async () => await _defaultSmtpMailClientMock.Object.SendMailAsync("sender",
@@ -154,7 +154,7 @@ namespace MailModule.Tests.Services.Implementations
             // Arrange 
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
@@ -177,7 +177,7 @@ namespace MailModule.Tests.Services.Implementations
             var attachment = new Attachment(Assembly.GetEntryAssembly()?.Location ?? string.Empty);
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
@@ -247,7 +247,7 @@ namespace MailModule.Tests.Services.Implementations
             var attachment = new Attachment(Assembly.GetEntryAssembly()?.Location ?? string.Empty);
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetSenderAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<IMailAddress>(_mailAddressMock.Object));
+                .Returns(Task.FromResult(_mailAddressMock.Object));
 
             _defaultSmtpMailClientMock
                 .Setup(c => c.GetMailContentAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))

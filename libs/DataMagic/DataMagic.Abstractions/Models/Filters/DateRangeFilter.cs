@@ -2,27 +2,27 @@
 {
     public class DateRangeFilter
     {
-        #region Properties
+        #region Constructor
 
-        /// <summary>
-        /// From when the data will be filtered.
-        /// </summary>
-        public DateFilter From { get; private set; }
-
-        /// <summary>
-        /// To when the data will be filtered.
-        /// </summary>
-        public DateFilter To { get; private set; }
+        public DateRangeFilter(DateFilter from, DateFilter to)
+        {
+            From = from;
+            To = to;
+        }
 
         #endregion
 
-        #region Constructor
+        #region Properties
 
-        public DateRangeFilter(DateFilter @from, DateFilter to)
-        {
-            From = @from;
-            To = to;
-        }
+        /// <summary>
+        ///     From when the data will be filtered.
+        /// </summary>
+        public DateFilter From { get; }
+
+        /// <summary>
+        ///     To when the data will be filtered.
+        /// </summary>
+        public DateFilter To { get; }
 
         #endregion
     }

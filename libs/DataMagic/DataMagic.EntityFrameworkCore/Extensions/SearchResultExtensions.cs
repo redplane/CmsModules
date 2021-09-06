@@ -13,7 +13,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
         #region Methods
 
         /// <summary>
-        /// Do pagination on IQueryable list.
+        ///     Do pagination on IQueryable list.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
@@ -51,7 +51,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
         }
 
         /// <summary>
-        /// Do pagination on IEnumerable
+        ///     Do pagination on IEnumerable
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>

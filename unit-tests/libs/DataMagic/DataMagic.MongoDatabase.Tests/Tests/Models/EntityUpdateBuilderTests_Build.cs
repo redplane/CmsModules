@@ -12,8 +12,6 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
 {
     public partial class EntityUpdateBuilderTests
     {
-        #region Methods
-
         [Test]
         public virtual void Build_NoFieldIsUpdated_Returns_Null()
         {
@@ -26,7 +24,7 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
         }
 
         /// <summary>
-        /// Test code: 62bbccd2607f708023a35326355adc39
+        ///     Test code: 62bbccd2607f708023a35326355adc39
         /// </summary>
         [Test]
         public virtual async Task Build_FieldsAreUpdated_Expects_EntityWillBeUpdatedSuccessfully()
@@ -51,7 +49,7 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
 
             var updateDefinition = entityUpdateBuilder.Build();
             var editedUser = await users.FindOneAndUpdateAsync<User>(x => x.Id == user.Id, updateDefinition,
-                new FindOneAndUpdateOptions<User>()
+                new FindOneAndUpdateOptions<User>
                 {
                     ReturnDocument = ReturnDocument.After
                 }, CancellationToken.None);
@@ -60,7 +58,5 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
             Assert.AreEqual(2500, editedUser.Balance);
             Assert.AreEqual("Changed name", editedUser.Name);
         }
-
-        #endregion
     }
 }

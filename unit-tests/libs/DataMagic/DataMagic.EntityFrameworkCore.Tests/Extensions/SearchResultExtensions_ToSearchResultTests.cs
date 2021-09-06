@@ -15,16 +15,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
     // ReSharper disable once InconsistentNaming
     public class SearchResultExtensions_ToSearchResultTests
     {
-        #region Private
-
-        private ConnectionFactory _connectionFactory;
-
-        private IEnumerable<User> _users;
-
-        #endregion
-
-        #region Public
-
         [SetUp]
         public void Setup()
         {
@@ -65,6 +55,10 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             _connectionFactory.Dispose();
         }
+
+        private ConnectionFactory _connectionFactory;
+
+        private IEnumerable<User> _users;
 
         [Test]
         public void ToSearchResult_PassFalseOfShouldItemsCountedAndQueried_ShouldReturnEmpty()
@@ -122,7 +116,5 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             actualUsers.Items.Length.Should().Be(2);
             actualUsers.TotalRecords.Should().Be(5);
         }
-
-        #endregion
     }
 }
