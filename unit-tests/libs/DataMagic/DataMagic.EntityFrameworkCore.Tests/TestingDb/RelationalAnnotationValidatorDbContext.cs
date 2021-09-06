@@ -5,17 +5,17 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 {
     public class RelationalAnnotationValidatorDbContext : DbContext
     {
-        #region Properties
-
-        public virtual DbSet<Student> Students { get; set; }
-
-        #endregion
-
         #region Constructor
 
         public RelationalAnnotationValidatorDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        #endregion
+
+        #region Properties
+
+        public virtual DbSet<Student> Students { get; set; }
 
         #endregion
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DataMagic.Abstractions.Enums;
 using DataMagic.Abstractions.Enums.Operators;
 using DataMagic.Abstractions.Models.Filters;
 
@@ -72,7 +71,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
         }
 
         /// <summary>
-        /// Do date time search
+        ///     Do date time search
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
@@ -130,7 +129,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
         }
 
         /// <summary>
-        /// Do date time search
+        ///     Do date time search
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
@@ -153,7 +152,7 @@ namespace DataMagic.EntityFrameworkCore.Extensions
         }
 
         /// <summary>
-        /// Do date time search
+        ///     Do date time search
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>

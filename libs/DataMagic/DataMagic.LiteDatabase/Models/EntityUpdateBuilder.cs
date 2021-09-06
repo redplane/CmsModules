@@ -26,7 +26,7 @@ namespace DataMagic.LiteDatabase.Models
         #region Methods
 
         /// <summary>
-        /// Update property base on editable field.
+        ///     Update property base on editable field.
         /// </summary>
         /// <param name="field"></param>
         /// <param name="model"></param>
@@ -47,7 +47,7 @@ namespace DataMagic.LiteDatabase.Models
         }
 
         /// <summary>
-        /// Build the update definition.
+        ///     Build the update definition.
         /// </summary>
         /// <returns></returns>
         public virtual void Build(T entity)
@@ -65,7 +65,7 @@ namespace DataMagic.LiteDatabase.Models
         }
 
         /// <summary>
-        /// Get the number of updated fields.
+        ///     Get the number of updated fields.
         /// </summary>
         /// <returns></returns>
         public virtual int CountUpdatedFields()

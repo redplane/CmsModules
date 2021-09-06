@@ -1,7 +1,6 @@
 using System.Linq;
 using DataMagic.EntityFrameworkCore.Interfaces;
 using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DataMagic.EntityFrameworkCore.Validators.BuiltAnnotationToValidationFailures
@@ -10,14 +9,14 @@ namespace DataMagic.EntityFrameworkCore.Validators.BuiltAnnotationToValidationFa
     {
         #region Properties
 
-        private int _maxLength = 0;
+        private readonly int _maxLength = 0;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="property"></param>
         /// <param name="value"></param>
@@ -46,7 +45,7 @@ namespace DataMagic.EntityFrameworkCore.Validators.BuiltAnnotationToValidationFa
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="property"></param>
         /// <param name="value"></param>

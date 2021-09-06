@@ -7,9 +7,11 @@ namespace DataMagic.Abstractions.Models
         #region Properties
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         public T Value { get; private set; }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
         public bool HasModified { get; private set; }
 
         #endregion

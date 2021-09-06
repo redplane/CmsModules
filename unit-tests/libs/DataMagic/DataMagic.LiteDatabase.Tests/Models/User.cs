@@ -4,6 +4,15 @@ namespace DataMagic.LiteDatabase.Tests.Models
 {
     public class User
     {
+        #region Constructor
+
+        public User(Guid id)
+        {
+            Id = id;
+        }
+
+        #endregion
+
         #region Properties
 
         // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
@@ -14,15 +23,6 @@ namespace DataMagic.LiteDatabase.Tests.Models
         public int Age { get; set; }
 
         public decimal Balance { get; set; }
-
-        #endregion
-
-        #region Constructor
-
-        public User(Guid id)
-        {
-            Id = id;
-        }
 
         #endregion
     }

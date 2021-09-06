@@ -13,29 +13,6 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
     [TestFixture]
     public partial class EntityUpdateBuilderTests
     {
-        #region Properties
-
-        private readonly LinkedList<IDisposable> _disposables;
-
-        private readonly IServiceCollection _services;
-
-        private readonly IServiceCollection _tools;
-
-        #endregion
-
-        #region Constructor
-
-        public EntityUpdateBuilderTests()
-        {
-            _disposables = new LinkedList<IDisposable>();
-            _services = new ServiceCollection();
-            _tools = new ServiceCollection();
-        }
-
-        #endregion
-
-        #region Methods
-
         [SetUp]
         public virtual void SetUp()
         {
@@ -46,12 +23,12 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
             _disposables.AddLast(mongoDbRunner);
 
             _services.AddScoped<IMongoClient>(_ => new MongoClient(mongoDbRunner.ConnectionString));
-            _services.AddScoped<IMongoDatabase>(provider =>
+            _services.AddScoped(provider =>
             {
                 var mongoClient = provider.GetService<IMongoClient>();
                 return mongoClient.GetDatabase(nameof(EntityUpdateBuilderTests));
             });
-            _services.AddScoped<IMongoCollection<User>>(provider =>
+            _services.AddScoped(provider =>
             {
                 var database = provider.GetService<IMongoDatabase>();
                 return database.GetCollection<User>("Users");
@@ -60,6 +37,17 @@ namespace DataMagic.MongoDatabase.Tests.Tests.Models
             _tools.AddScoped<IFileProvider, FileProvider>();
         }
 
-        #endregion
+        private readonly LinkedList<IDisposable> _disposables;
+
+        private readonly IServiceCollection _services;
+
+        private readonly IServiceCollection _tools;
+
+        public EntityUpdateBuilderTests()
+        {
+            _disposables = new LinkedList<IDisposable>();
+            _services = new ServiceCollection();
+            _tools = new ServiceCollection();
+        }
     }
 }

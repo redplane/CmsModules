@@ -1,4 +1,3 @@
-using System;
 using DataMagic.EntityFrameworkCore.Interfaces;
 using DataMagic.EntityFrameworkCore.Tests.Models;
 using DataMagic.EntityFrameworkCore.Tests.TestingDb;
@@ -13,23 +12,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.Validators
     [TestFixture]
     public partial class RelationalAnnotationValidatorTests
     {
-        #region Properties
-
-        private readonly IServiceCollection _services;
-
-        #endregion
-
-        #region Constructor
-
-        public RelationalAnnotationValidatorTests()
-        {
-            _services = new ServiceCollection();
-        }
-
-        #endregion
-
-        #region Installation & Uninstallation
-
         [SetUp]
         public void SetUp()
         {
@@ -61,6 +43,11 @@ namespace DataMagic.EntityFrameworkCore.Tests.Validators
             _services.Clear();
         }
 
-        #endregion
+        private readonly IServiceCollection _services;
+
+        public RelationalAnnotationValidatorTests()
+        {
+            _services = new ServiceCollection();
+        }
     }
 }

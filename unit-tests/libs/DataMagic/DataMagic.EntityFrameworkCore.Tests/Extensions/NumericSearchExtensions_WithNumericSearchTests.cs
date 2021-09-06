@@ -15,9 +15,29 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
     // ReSharper disable once InconsistentNaming
     public class NumericSearchExtensions_WithNumericSearchTests
     {
-        #region Static
+        [SetUp]
+        public void Setup()
+        {
+            _connectionFactory = new ConnectionFactory();
+            var dbContext = _connectionFactory.CreateContextForSQLite();
+            var numbers = new List<Number>
+            {
+                new() { Id = 1, Int = 1, Float = (float)2.6 },
+                new() { Id = 2, Int = 2, Float = (float)7.3 },
+                new() { Id = 3, Int = 2, Float = (float)5.4 },
+                new() { Id = 4, Int = 3, Float = (float)5.4 }
+            };
+            dbContext.Numbers.AddRange(numbers);
+            dbContext.SaveChanges();
 
-        #region - Public
+            _numbers = dbContext.Numbers.AsQueryable();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _connectionFactory.Dispose();
+        }
 
         public static IEnumerable<TestCaseData> ValidParamsTestCaseData
         {
@@ -55,43 +75,9 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             }
         }
 
-        #endregion
-
-        #endregion
-
-        #region Private
-
         private ConnectionFactory _connectionFactory;
 
         private IQueryable<Number> _numbers;
-
-        #endregion
-
-        #region Public
-
-        [SetUp]
-        public void Setup()
-        {
-            _connectionFactory = new ConnectionFactory();
-            var dbContext = _connectionFactory.CreateContextForSQLite();
-            var numbers = new List<Number>
-            {
-                new() { Id = 1, Int = 1, Float = (float)2.6 },
-                new() { Id = 2, Int = 2, Float = (float)7.3 },
-                new() { Id = 3, Int = 2, Float = (float)5.4 },
-                new() { Id = 4, Int = 3, Float = (float)5.4 }
-            };
-            dbContext.Numbers.AddRange(numbers);
-            dbContext.SaveChanges();
-
-            _numbers = dbContext.Numbers.AsQueryable();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _connectionFactory.Dispose();
-        }
 
         [Test]
         public void WithNumericSearch_PassInvalidValueType_ShouldThrowException()
@@ -176,7 +162,5 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             // Assert
             result.Should().ThrowExactly<ArgumentException>().And.Message.Should().Be("Not supported comparison mode");
         }
-
-        #endregion
     }
 }

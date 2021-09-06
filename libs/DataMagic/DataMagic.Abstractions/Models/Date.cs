@@ -4,7 +4,7 @@ using System;
 namespace DataMagic.Abstractions.Models
 {
     /// <summary>
-    /// Date object which is used for retrieving information from front-end
+    ///     Date object which is used for retrieving information from front-end
     /// </summary>
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class Date
@@ -53,7 +53,7 @@ namespace DataMagic.Abstractions.Models
         #region Methods
 
         /// <summary>
-        /// Convert to date time with unspecified kind.
+        ///     Convert to date time with unspecified kind.
         /// </summary>
         /// <returns></returns>
         public DateTime ToDateTime()
@@ -63,7 +63,7 @@ namespace DataMagic.Abstractions.Models
         }
 
         /// <summary>
-        /// Convert to date time with specific hour
+        ///     Convert to date time with specific hour
         /// </summary>
         /// <param name="hour"></param>
         /// <param name="minute"></param>
@@ -85,7 +85,7 @@ namespace DataMagic.Abstractions.Models
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -95,7 +95,7 @@ namespace DataMagic.Abstractions.Models
 
 #pragma warning disable 659
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -113,7 +113,7 @@ namespace DataMagic.Abstractions.Models
         #region Internal methods
 
         /// <summary>
-        /// Whether value of year is valid or not.
+        ///     Whether value of year is valid or not.
         /// </summary>
         /// <returns></returns>
         protected virtual bool IsValidYear(int year)
@@ -124,7 +124,7 @@ namespace DataMagic.Abstractions.Models
         }
 
         /// <summary>
-        /// Whether month is valid or not.
+        ///     Whether month is valid or not.
         /// </summary>
         /// <param name="month"></param>
         /// <returns></returns>
@@ -134,7 +134,7 @@ namespace DataMagic.Abstractions.Models
         }
 
         /// <summary>
-        /// Whether date is valid or not.
+        ///     Whether date is valid or not.
         /// </summary>
         /// <param name="year"></param>
         /// <param name="month"></param>
@@ -170,7 +170,7 @@ namespace DataMagic.Abstractions.Models
         }
 
         /// <summary>
-        /// Compare with another date object
+        ///     Compare with another date object
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>

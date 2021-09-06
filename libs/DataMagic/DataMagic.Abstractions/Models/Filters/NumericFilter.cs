@@ -1,26 +1,11 @@
 ﻿using System;
 using System.Linq;
-using DataMagic.Abstractions.Enums;
 using DataMagic.Abstractions.Enums.Operators;
 
 namespace DataMagic.Abstractions.Models.Filters
 {
     public class NumericFilter<T>
     {
-        #region Properties
-
-        /// <summary>
-        /// Numeric value to be searched for.
-        /// </summary>
-        public T Value { get; private set; }
-
-        /// <summary>
-        /// Numeric comparision mode.
-        /// </summary>
-        public NumericComparisonOperators Operator { get; private set; }
-
-        #endregion
-
         #region Constructors
 
         public NumericFilter(T value, NumericComparisonOperators @operator)
@@ -54,6 +39,20 @@ namespace DataMagic.Abstractions.Models.Filters
 
             return validTypes;
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Numeric value to be searched for.
+        /// </summary>
+        public T Value { get; }
+
+        /// <summary>
+        ///     Numeric comparision mode.
+        /// </summary>
+        public NumericComparisonOperators Operator { get; }
 
         #endregion
     }

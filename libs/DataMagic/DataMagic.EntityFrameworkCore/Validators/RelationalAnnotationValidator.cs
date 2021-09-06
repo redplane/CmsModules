@@ -12,14 +12,6 @@ namespace DataMagic.EntityFrameworkCore.Validators
 {
     public class RelationalAnnotationValidator<TEntity> : AbstractValidator<TEntity> where TEntity : class
     {
-        #region Properties
-
-        private readonly DbContext _dbContext;
-
-        private readonly IEnumerable<IRelationalEntityValidator> _entityValidators;
-
-        #endregion
-
         #region Constructor
 
         public RelationalAnnotationValidator(DbContext dbContext,
@@ -31,10 +23,18 @@ namespace DataMagic.EntityFrameworkCore.Validators
 
         #endregion
 
+        #region Properties
+
+        private readonly DbContext _dbContext;
+
+        private readonly IEnumerable<IRelationalEntityValidator> _entityValidators;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -87,7 +87,7 @@ namespace DataMagic.EntityFrameworkCore.Validators
         }
 
         /// <summary>
-        /// <inheritdoc />
+        ///     <inheritdoc />
         /// </summary>
         /// <param name="context"></param>
         /// <param name="cancellation"></param>

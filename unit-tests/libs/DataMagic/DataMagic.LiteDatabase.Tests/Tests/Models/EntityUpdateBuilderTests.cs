@@ -13,29 +13,6 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
     [TestFixture]
     public partial class FieldUpdateBuilderTests
     {
-        #region Properties
-
-        private readonly IServiceCollection _services;
-
-        private readonly IServiceCollection _tools;
-
-        private readonly LinkedList<IDisposable> _disposables;
-
-        #endregion
-
-        #region Constructor
-
-        public FieldUpdateBuilderTests()
-        {
-            _services = new ServiceCollection();
-            _tools = new ServiceCollection();
-            _disposables = new LinkedList<IDisposable>();
-        }
-
-        #endregion
-
-        #region Installation & uninstallation
-
         [SetUp]
         public void SetUp()
         {
@@ -54,7 +31,7 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
                 return liteDatabase;
             });
 
-            _services.AddScoped<ILiteCollection<User>>(provider =>
+            _services.AddScoped(provider =>
             {
                 var liteDatabase = provider.GetService<ILiteDatabase>();
                 return liteDatabase.GetCollection<User>();
@@ -72,6 +49,17 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Models
             _disposables.Clear();
         }
 
-        #endregion
+        private readonly IServiceCollection _services;
+
+        private readonly IServiceCollection _tools;
+
+        private readonly LinkedList<IDisposable> _disposables;
+
+        public FieldUpdateBuilderTests()
+        {
+            _services = new ServiceCollection();
+            _tools = new ServiceCollection();
+            _disposables = new LinkedList<IDisposable>();
+        }
     }
 }

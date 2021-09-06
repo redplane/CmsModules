@@ -12,26 +12,6 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
     [TestFixture]
     public partial class SearchResultExtensionsTests : IUnitTest
     {
-        #region Properties
-
-        private readonly IServiceCollection _services;
-
-        private readonly IServiceCollection _tools;
-
-        #endregion
-
-        #region Constructor
-
-        public SearchResultExtensionsTests()
-        {
-            _services = new ServiceCollection();
-            _tools = new ServiceCollection();
-        }
-
-        #endregion
-
-        #region Installation & Uninstallation
-
         [SetUp]
         public void SetUp()
         {
@@ -56,6 +36,14 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
             // Do nothing/
         }
 
-        #endregion
+        private readonly IServiceCollection _services;
+
+        private readonly IServiceCollection _tools;
+
+        public SearchResultExtensionsTests()
+        {
+            _services = new ServiceCollection();
+            _tools = new ServiceCollection();
+        }
     }
 }

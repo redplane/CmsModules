@@ -14,16 +14,6 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
     // ReSharper disable once InconsistentNaming
     public class SortingExtensions_WithPropertySortTests
     {
-        #region Private
-
-        private ConnectionFactory _connectionFactory;
-
-        private IQueryable<User> _users;
-
-        #endregion
-
-        #region Public
-
         [SetUp]
         public void Setup()
         {
@@ -64,6 +54,10 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
         {
             _connectionFactory.Dispose();
         }
+
+        private ConnectionFactory _connectionFactory;
+
+        private IQueryable<User> _users;
 
         [Test]
         public void WithPropertySort_PassAscendingSortOfId_ShouldReturnAscendingItems()
@@ -107,7 +101,5 @@ namespace DataMagic.EntityFrameworkCore.Tests.Extensions
             actualUsers.Should().NotBeInDescendingOrder(deathDayExpression);
             actualUsers.Count().Should().Be(_users.Count());
         }
-
-        #endregion
     }
 }

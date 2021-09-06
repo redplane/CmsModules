@@ -7,7 +7,7 @@ namespace CmsModules.TestDependencies.Providers.Interfaces
         #region Methods
 
         /// <summary>
-        /// Load data from a text file & serialize it to object.
+        ///     Load data from a text file & serialize it to object.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="paths"></param>
@@ -15,14 +15,14 @@ namespace CmsModules.TestDependencies.Providers.Interfaces
         Task<T> ReadJsonFromFileAsync<T>(string[] paths);
 
         /// <summary>
-        /// Load forgery data from a file.
+        ///     Load forgery data from a file.
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
         Task<string> ReadTextFromFileAsync(string[] paths);
 
         /// <summary>
-        /// Load binary data from path.
+        ///     Load binary data from path.
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>

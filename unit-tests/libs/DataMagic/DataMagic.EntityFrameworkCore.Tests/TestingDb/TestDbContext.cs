@@ -1,6 +1,4 @@
-﻿using System;
-using DataMagic.Abstractions.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
 {
@@ -15,12 +13,12 @@ namespace DataMagic.EntityFrameworkCore.Tests.TestingDb
         {
         }
 
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Number> Numbers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestDbContext).Assembly);
         }
-
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Number> Numbers { get; set; }
     }
 }

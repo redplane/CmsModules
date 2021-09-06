@@ -13,16 +13,14 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 {
     public partial class SearchResultExtensionsTests
     {
-        #region Methods
-
         /// <summary>
         ///     Test code: bb119e69ac0a918112c19712ec0b2dac
-        /// Pre-condition:
-        /// - Items exist in database
-        /// Actions:
-        /// - Call ToSearchResult with pager is null
-        /// Expects:
-        /// - All data will be returned.
+        ///     Pre-condition:
+        ///     - Items exist in database
+        ///     Actions:
+        ///     - Call ToSearchResult with pager is null
+        ///     Expects:
+        ///     - All data will be returned.
         /// </summary>
         [Test]
         public virtual async Task ToSearchResult_PagerIsNull_Expects_AllDataWillBeReturned()
@@ -65,12 +63,12 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
 
         /// <summary>
         ///     Test code: f2be8e62c29ed26c2bdbb59ca283296e
-        /// Pre-condition:
-        /// - Items exist in database
-        /// Actions
-        /// - Call ToSearchResult with pager which contains page & records to be taken.
-        /// Expects:
-        /// - Specified records will be returned.
+        ///     Pre-condition:
+        ///     - Items exist in database
+        ///     Actions
+        ///     - Call ToSearchResult with pager which contains page & records to be taken.
+        ///     Expects:
+        ///     - Specified records will be returned.
         /// </summary>
         [Test]
         public virtual async Task ToSearchResult_PagerIsDefine_Expects_OnlyTakeTheSpecifiedRecords()
@@ -119,13 +117,13 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
         }
 
         /// <summary>
-        /// Test code: c043b10c63d180e9c888d2886630758f
-        /// Pre-condition:
-        /// - Items are available in database
-        /// Action:
-        /// - Call ToSearchResult with ShouldItemsCounter is false
-        /// Expects:
-        /// - Total record in SearchResult instance will be 0
+        ///     Test code: c043b10c63d180e9c888d2886630758f
+        ///     Pre-condition:
+        ///     - Items are available in database
+        ///     Action:
+        ///     - Call ToSearchResult with ShouldItemsCounter is false
+        ///     Expects:
+        ///     - Total record in SearchResult instance will be 0
         /// </summary>
         [Test]
         public virtual async Task ToSearchResult_ShouldItemsCountedSetToFalse_TotalRecordWillBeZero()
@@ -173,13 +171,13 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
         }
 
         /// <summary>
-        /// Test code: e27036c3430a0b1a8e87a06e4682df7f
-        /// Pre-condition:
-        /// - Items are available in database
-        /// Action:
-        /// - Call ToSearchResult with ShouldItemsQueried is false
-        /// Expects:
-        /// - Items returned to outer component is empty.
+        ///     Test code: e27036c3430a0b1a8e87a06e4682df7f
+        ///     Pre-condition:
+        ///     - Items are available in database
+        ///     Action:
+        ///     - Call ToSearchResult with ShouldItemsQueried is false
+        ///     Expects:
+        ///     - Items returned to outer component is empty.
         /// </summary>
         [Test]
         public virtual async Task ToSearchResult_ShouldItemsQueriedSetToFalse_ItemsWillBeEmpty()
@@ -216,7 +214,5 @@ namespace DataMagic.LiteDatabase.Tests.Tests.Extensions
                 serviceProvider?.Dispose();
             }
         }
-
-        #endregion
     }
 }
