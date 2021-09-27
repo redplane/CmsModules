@@ -180,5 +180,75 @@ namespace DataMagic.Abstractions.Models
         }
 
         #endregion
+
+        #region Operator override
+
+        #region >= & <=
+
+        public static bool operator >=(Date source, Date target)
+        {
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime >= targetDateTime;
+        }
+
+        public static bool operator <=(Date source, Date target)
+        {
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime <= targetDateTime;
+        }
+
+        #endregion
+
+        #region == & !=
+
+        public static bool operator ==(Date source, Date target)
+        {
+            if (source == null || target == null)
+                return false;
+
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime == targetDateTime;
+        }
+
+        public static bool operator !=(Date source, Date target)
+        {
+            if (source == null || target == null)
+                return false;
+
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime != targetDateTime;
+        }
+
+        #endregion
+
+        #region > & <
+
+        public static bool operator >(Date source, Date target)
+        {
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime > targetDateTime;
+        }
+
+        public static bool operator <(Date source, Date target)
+        {
+            var sourceDateTime = new DateTime(source.Year, source.Month, source.Day);
+            var targetDateTime = new DateTime(target.Year, target.Month, target.Day);
+
+            return sourceDateTime < targetDateTime;
+        }
+
+        #endregion
+
+        #endregion
     }
 }
