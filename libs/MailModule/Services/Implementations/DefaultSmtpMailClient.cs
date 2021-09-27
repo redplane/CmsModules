@@ -187,16 +187,20 @@ namespace MailModule.Services.Implementations
 
             // Blind carbon copies.
             foreach (var blindCarbonCopy in clonedBlindCarbonCopies)
+            {
                 smtpMail.Bcc.Add(new MailAddress(blindCarbonCopy.Address,
                     blindCarbonCopy.DisplayName));
+            }
 
             smtpMail.Subject = await RenderContentAsync(subject, additionalSubjectData);
             smtpMail.Body = await RenderContentAsync(content, additionalContentData);
             smtpMail.IsBodyHtml = isHtml;
 
             if (attachments != null && attachments.Length > 0)
+            {
                 foreach (var attachment in attachments)
                     smtpMail.Attachments.Add(attachment);
+            }
 
             return smtpMail;
         }

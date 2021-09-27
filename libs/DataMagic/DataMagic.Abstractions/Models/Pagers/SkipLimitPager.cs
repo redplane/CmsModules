@@ -53,7 +53,7 @@ namespace DataMagic.Abstractions.Models.Pagers
 
             _shouldItemsQueried = true;
             _shouldItemsCounted = true;
-            
+
             SkippedRecords = skippedRecords;
             TotalRecords = totalRecords;
         }

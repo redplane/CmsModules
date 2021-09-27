@@ -42,9 +42,11 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 
             // Do pagination with one extra item.
             if (pager.ShouldItemsQueried())
+            {
                 items = await source.Skip((int)pager.GetSkippedRecords())
                     .Take((int)pager.GetTotalRecords())
                     .ToListAsync(cancellationToken);
+            }
 
             // Initialize pager result.
             return new SearchResult<T>(items, totalRecords);
@@ -76,9 +78,11 @@ namespace DataMagic.EntityFrameworkCore.Extensions
 
             // Do pagination with one extra item.
             if (pager.ShouldItemsQueried())
+            {
                 items = enumerable.Skip((int)pager.GetSkippedRecords())
                     .Take((int)pager.GetTotalRecords())
                     .ToArray();
+            }
 
             return new SearchResult<T>(items, totalRecords);
         }
