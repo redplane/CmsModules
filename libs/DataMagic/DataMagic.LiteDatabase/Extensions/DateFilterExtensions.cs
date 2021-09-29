@@ -30,7 +30,7 @@ namespace DataMagic.LiteDatabase.Extensions
             switch (dateFilter.Operator)
             {
                 case DateComparisonOperators.SmallerThan:
-                    expression = Expression.Equal(left, right);
+                    expression = Expression.LessThan(left, right);
                     break;
 
                 case DateComparisonOperators.SmallerThanEqualTo:

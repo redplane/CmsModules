@@ -31,7 +31,7 @@ namespace DataMagic.LiteDatabase.Extensions
             switch (dateTimeFilter.Operator)
             {
                 case DateTimeComparisonOperators.SmallerThan:
-                    expression = Expression.Equal(left, right);
+                    expression = Expression.LessThan(left, right);
                     break;
 
                 case DateTimeComparisonOperators.SmallerThanEqualTo:
