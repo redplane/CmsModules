@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29418.71
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{563D3067-27BF-477C-9F8A-1BDEF6FAA277}"
 EndProject
@@ -10,12 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", "{821DD67B-DA31-480A-97FD-DEF4440D5F69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModulesTests", "unit-tests\ModulesTests\ModulesTests.csproj", "{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModules.Shares", "examples\CmsModulesShared\CmsModules.Shares.csproj", "{58EDA8B0-B787-4783-B53B-774CC159340D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModules.ManagementUi", "examples\CmsModulesManagement\CmsModules.ManagementUi.csproj", "{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsModule", "libs\CorsModule\CorsModule.csproj", "{87927845-5F09-4497-B200-9A405A83E3E4}"
 EndProject
@@ -40,15 +34,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.LiteDatabase", "libs\DataMagic\DataMagic.LiteDatabase\DataMagic.LiteDatabase.csproj", "{A8D6EF00-D452-46EB-A359-F92866697A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.LiteDatabase", "libs\DataMagic\DataMagic.LiteDatabase\DataMagic.LiteDatabase.csproj", "{A8D6EF00-D452-46EB-A359-F92866697A98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.MongoDatabase", "libs\DataMagic\DataMagic.MongoDatabase\DataMagic.MongoDatabase.csproj", "{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.MongoDatabase", "libs\DataMagic\DataMagic.MongoDatabase\DataMagic.MongoDatabase.csproj", "{8CEE3103-F4BF-4D96-85A4-0561280CD2DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.LiteDatabase.Tests", "unit-tests\libs\DataMagic\DataMagic.LiteDatabase.Tests\DataMagic.LiteDatabase.Tests.csproj", "{940C4747-DC34-43C9-A4F1-BA38A448CFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.LiteDatabase.Tests", "unit-tests\libs\DataMagic\DataMagic.LiteDatabase.Tests\DataMagic.LiteDatabase.Tests.csproj", "{940C4747-DC34-43C9-A4F1-BA38A448CFF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmsModules.TestDependencies", "unit-tests\libs\CmsModules.TestDependencies\CmsModules.TestDependencies.csproj", "{5D7A700F-A803-4059-AF8A-02B11DEF0137}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsModules.TestDependencies", "unit-tests\libs\CmsModules.TestDependencies\CmsModules.TestDependencies.csproj", "{5D7A700F-A803-4059-AF8A-02B11DEF0137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMagic.MongoDatabase.Tests", "unit-tests\libs\DataMagic\DataMagic.MongoDatabase.Tests\DataMagic.MongoDatabase.Tests.csproj", "{D489E923-596E-4531-966A-5E2EE986EA01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMagic.MongoDatabase.Tests", "unit-tests\libs\DataMagic\DataMagic.MongoDatabase.Tests\DataMagic.MongoDatabase.Tests.csproj", "{D489E923-596E-4531-966A-5E2EE986EA01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,14 +58,6 @@ Global
 		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58EDA8B0-B787-4783-B53B-774CC159340D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58EDA8B0-B787-4783-B53B-774CC159340D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58EDA8B0-B787-4783-B53B-774CC159340D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58EDA8B0-B787-4783-B53B-774CC159340D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87927845-5F09-4497-B200-9A405A83E3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -123,8 +109,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{82569763-0C4B-41E1-9EC9-CC048607AED9} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
 		{6ADD0790-B69A-43F7-BE98-C1D2416BD8AC} = {821DD67B-DA31-480A-97FD-DEF4440D5F69}
-		{58EDA8B0-B787-4783-B53B-774CC159340D} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
-		{76B85362-F172-4FE2-BFD5-E4DA01BED1C5} = {E9F69A2F-65B6-4FF0-9CEB-7181F3C40D04}
 		{87927845-5F09-4497-B200-9A405A83E3E4} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
 		{1A31B342-C5A7-4D35-8314-E540FC44B7F3} = {563D3067-27BF-477C-9F8A-1BDEF6FAA277}
 		{8CD458A6-C814-412C-923E-61DF752AD760} = {1A31B342-C5A7-4D35-8314-E540FC44B7F3}
